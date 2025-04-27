@@ -637,13 +637,29 @@ section {
   border: 0;
 }
 
+.faq .accordion-item {
+  margin-bottom: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(1, 41, 112, 0.1);
+  box-shadow: 0 5px 15px rgba(1, 41, 112, 0.05);
+  transition: all 0.3s ease;
+}
+
+.faq .accordion-item:hover {
+  box-shadow: 0 10px 30px rgba(1, 41, 112, 0.1);
+  transform: translateY(-2px);
+}
+
 .faq .accordion-button {
-  padding: 15px 15px 20px 0;
+  padding: 20px;
   font-weight: 600;
   border: 0;
   font-size: 18px;
   color: #444444;
   text-align: left;
+  background-color: #fff;
+  transition: all 0.3s ease;
 }
 
 .faq .accordion-button:focus {
@@ -651,14 +667,153 @@ section {
 }
 
 .faq .accordion-button:not(.collapsed) {
-  background: none;
+  background: rgba(65, 84, 241, 0.05);
   color: #4154f1;
   border-bottom: 0;
 }
 
 .faq .accordion-body {
-  padding: 0 0 25px 0;
+  padding: 0 20px 20px;
   border: 0;
+  background: rgba(65, 84, 241, 0.03);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Custom styling for the FAQ accordion */
+.faq .accordion-button i {
+  font-size: 22px;
+  transition: all 0.3s ease;
+}
+
+.faq .accordion-button:not(.collapsed) i {
+  transform: rotate(45deg);
+}
+
+.faq .accordion-button span {
+  transition: all 0.3s ease;
+}
+
+.timeline {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.timeline:before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #4154f1;
+  border-radius: 4px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+  padding-left: 60px;
+}
+
+.timeline-number {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  background: #4154f1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  z-index: 1;
+}
+
+.timeline-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content h4 {
+  margin-top: 0;
+  color: #012970;
+  font-weight: 700;
+}
+
+.feature-box {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.feature-box i {
+  font-size: 24px;
+  color: #4154f1;
+  margin-right: 15px;
+}
+
+.feature-box h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #012970;
+  font-weight: 700;
+}
+
+.stat-box {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.stat-box h2 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #4154f1;
+  margin-bottom: 10px;
+}
+
+.stat-box p {
+  font-size: 16px;
+  color: #444;
+  margin: 0;
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+  font-size: 38px;
+  color: #4154f1;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-weight: 700;
+  color: #012970;
+}
+
+.section-bg {
+  background-color: #f6f9ff;
 }
 
 /*--------------------------------------------------------------

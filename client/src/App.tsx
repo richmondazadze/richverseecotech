@@ -10,6 +10,8 @@ import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import RenewableEnergyPage from "./pages/RenewableEnergyPage";
 import SoftwareDevPage from "./pages/SoftwareDevPage";
+import DigitalMarketingPage from "./pages/DigitalMarketingPage";
+import CybersecurityPage from "./pages/CybersecurityPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import ContactPage from "./pages/ContactPage";
@@ -35,6 +37,8 @@ function Router() {
         <Route path="/" component={HomePage} />
         <Route path="/renergy" component={RenewableEnergyPage} />
         <Route path="/softwaredev" component={SoftwareDevPage} />
+        <Route path="/dmarketing" component={DigitalMarketingPage} />
+        <Route path="/cybersecurity" component={CybersecurityPage} />
         <Route path="/blog" component={BlogPage} />
         <Route path="/blog/:slug" component={BlogPostPage} />
         <Route path="/contact" component={ContactPage} />

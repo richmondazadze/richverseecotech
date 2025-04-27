@@ -3,22 +3,25 @@ import { Link } from 'wouter';
 import Breadcrumbs from '../components/Breadcrumbs';
 import BlogList from '../components/blog/BlogList';
 import { 
-  getAllBlogPosts, 
   getAllCategories, 
   getAllTags, 
   getRecentBlogPosts, 
   searchBlogPosts, 
+  getBlogPostsByTag,
   BlogPost, 
   BlogCategory, 
   BlogTag 
 } from '../services/blogService';
 
-interface BlogPageProps {
-  initialPosts?: BlogPost[];
-  title?: string;
+interface BlogTagPageProps {
+  params: {
+    tag: string;
+  };
 }
 
-const BlogPage = ({ initialPosts, title = 'Blog' }: BlogPageProps) => {
+const BlogTagPage = ({ params }: BlogTagPageProps) => {
+  const tagName = params.tag.replace(/-/g, ' ');
+  
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [categories, setCategories] = useState<BlogCategory[]>([]);
   const [tags, setTags] = useState<BlogTag[]>([]);
@@ -32,18 +35,19 @@ const BlogPage = ({ initialPosts, title = 'Blog' }: BlogPageProps) => {
     }
 
     // Load blog data
-    setBlogPosts(initialPosts || getAllBlogPosts());
+    const posts = getBlogPostsByTag(tagName);
+    setBlogPosts(posts);
     setCategories(getAllCategories());
     setTags(getAllTags());
     setRecentPosts(getRecentBlogPosts(4));
-  }, [initialPosts]);
+  }, [tagName]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       setBlogPosts(searchBlogPosts(searchQuery));
     } else {
-      setBlogPosts(initialPosts || getAllBlogPosts());
+      setBlogPosts(getBlogPostsByTag(tagName));
     }
   };
 
@@ -53,23 +57,21 @@ const BlogPage = ({ initialPosts, title = 'Blog' }: BlogPageProps) => {
       <Breadcrumbs
         items={[
           { name: 'Home', path: '/' },
-          { name: title === 'Blog' ? title : { Blog: '/blog', [title]: '' }['Blog'] },
-          ...(title !== 'Blog' ? [{ name: title }] : [])
+          { name: 'Blog', path: '/blog' },
+          { name: `Tag: ${tagName}` }
         ]}
       />
 
       <section id="blog" className="blog">
         <div className="container" data-aos="fade-up">
-          {title !== 'Blog' && (
-            <div className="row mb-5">
-              <div className="col-12">
-                <h2 className="text-center">{title}</h2>
-                {initialPosts && initialPosts.length === 0 && (
-                  <p className="text-center mt-3">No posts found for this category or tag.</p>
-                )}
-              </div>
+          <div className="row mb-5">
+            <div className="col-12">
+              <h2 className="text-center">Tag: {tagName}</h2>
+              {blogPosts.length === 0 && (
+                <p className="text-center mt-3">No posts found for this tag.</p>
+              )}
             </div>
-          )}
+          </div>
           
           <div className="row">
             <div className="col-lg-8">
@@ -125,7 +127,7 @@ const BlogPage = ({ initialPosts, title = 'Blog' }: BlogPageProps) => {
                 <div className="sidebar-item tags">
                   <ul>
                     {tags.map((tag) => (
-                      <li key={tag.slug}>
+                      <li key={tag.slug} className={tag.name === tagName ? 'active' : ''}>
                         <Link href={`/blog/tag/${tag.slug}`}>{tag.name}</Link>
                       </li>
                     ))}
@@ -144,4 +146,4 @@ const BlogPage = ({ initialPosts, title = 'Blog' }: BlogPageProps) => {
   );
 };
 
-export default BlogPage;
+export default BlogTagPage;

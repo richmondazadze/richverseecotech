@@ -14,6 +14,8 @@ import DigitalMarketingPage from "./pages/DigitalMarketingPage";
 import CybersecurityPage from "./pages/CybersecurityPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
+import BlogCategoryPage from "./pages/BlogCategoryPage";
+import BlogTagPage from "./pages/BlogTagPage";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "@/pages/not-found";
 
@@ -40,6 +42,8 @@ function Router() {
         <Route path="/dmarketing" component={DigitalMarketingPage} />
         <Route path="/cybersecurity" component={CybersecurityPage} />
         <Route path="/blog" component={BlogPage} />
+        <Route path="/blog/category/:category" component={BlogCategoryPage} />
+        <Route path="/blog/tag/:tag" component={BlogTagPage} />
         <Route path="/blog/:slug" component={BlogPostPage} />
         <Route path="/contact" component={ContactPage} />
         <Route component={NotFound} />

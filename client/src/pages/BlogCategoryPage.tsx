@@ -3,22 +3,25 @@ import { Link } from 'wouter';
 import Breadcrumbs from '../components/Breadcrumbs';
 import BlogList from '../components/blog/BlogList';
 import { 
-  getAllBlogPosts, 
   getAllCategories, 
   getAllTags, 
   getRecentBlogPosts, 
   searchBlogPosts, 
+  getBlogPostsByCategory,
   BlogPost, 
   BlogCategory, 
   BlogTag 
 } from '../services/blogService';
 
-interface BlogPageProps {
-  initialPosts?: BlogPost[];
-  title?: string;
+interface BlogCategoryPageProps {
+  params: {
+    category: string;
+  };
 }
 
-const BlogPage = ({ initialPosts, title = 'Blog' }: BlogPageProps) => {
+const BlogCategoryPage = ({ params }: BlogCategoryPageProps) => {
+  const categoryName = params.category.replace(/-/g, ' ');
+  
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [categories, setCategories] = useState<BlogCategory[]>([]);
   const [tags, setTags] = useState<BlogTag[]>([]);
@@ -32,18 +35,19 @@ const BlogPage = ({ initialPosts, title = 'Blog' }: BlogPageProps) => {
     }
 
     // Load blog data
-    setBlogPosts(initialPosts || getAllBlogPosts());
+    const posts = getBlogPostsByCategory(categoryName);
+    setBlogPosts(posts);
     setCategories(getAllCategories());
     setTags(getAllTags());
     setRecentPosts(getRecentBlogPosts(4));
-  }, [initialPosts]);
+  }, [categoryName]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       setBlogPosts(searchBlogPosts(searchQuery));
     } else {
-      setBlogPosts(initialPosts || getAllBlogPosts());
+      setBlogPosts(getBlogPostsByCategory(categoryName));
     }
   };
 
@@ -53,23 +57,21 @@ const BlogPage = ({ initialPosts, title = 'Blog' }: BlogPageProps) => {
       <Breadcrumbs
         items={[
           { name: 'Home', path: '/' },
-          { name: title === 'Blog' ? title : { Blog: '/blog', [title]: '' }['Blog'] },
-          ...(title !== 'Blog' ? [{ name: title }] : [])
+          { name: 'Blog', path: '/blog' },
+          { name: `Category: ${categoryName}` }
         ]}
       />
 
       <section id="blog" className="blog">
         <div className="container" data-aos="fade-up">
-          {title !== 'Blog' && (
-            <div className="row mb-5">
-              <div className="col-12">
-                <h2 className="text-center">{title}</h2>
-                {initialPosts && initialPosts.length === 0 && (
-                  <p className="text-center mt-3">No posts found for this category or tag.</p>
-                )}
-              </div>
+          <div className="row mb-5">
+            <div className="col-12">
+              <h2 className="text-center">Category: {categoryName}</h2>
+              {blogPosts.length === 0 && (
+                <p className="text-center mt-3">No posts found for this category.</p>
+              )}
             </div>
-          )}
+          </div>
           
           <div className="row">
             <div className="col-lg-8">
@@ -97,7 +99,7 @@ const BlogPage = ({ initialPosts, title = 'Blog' }: BlogPageProps) => {
                 <div className="sidebar-item categories">
                   <ul>
                     {categories.map((category) => (
-                      <li key={category.slug}>
+                      <li key={category.slug} className={category.name === categoryName ? 'active' : ''}>
                         <Link href={`/blog/category/${category.slug}`}>
                           {category.name} <span>({category.count})</span>
                         </Link>
@@ -144,4 +146,4 @@ const BlogPage = ({ initialPosts, title = 'Blog' }: BlogPageProps) => {
   );
 };
 
-export default BlogPage;
+export default BlogCategoryPage;

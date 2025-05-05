@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="#FFF7ED" opacity="0.5"/>
+  
+  <!-- Central Circle (Client) -->
+  <circle cx="100" cy="100" r="30" fill="#FDBA74" stroke="#F97316" stroke-width="4"/>
+  
+  <!-- Orbiting Elements -->
+  <g transform="rotate(0 100 100)">
+    <circle cx="100" cy="40" r="15" fill="#FB923C"/>
+    <path d="M100 60V85" stroke="#FB923C" stroke-width="3"/>
+  </g>
+  
+  <g transform="rotate(120 100 100)">
+    <circle cx="100" cy="40" r="15" fill="#FB923C"/>
+    <path d="M100 60V85" stroke="#FB923C" stroke-width="3"/>
+  </g>
+  
+  <g transform="rotate(240 100 100)">
+    <circle cx="100" cy="40" r="15" fill="#FB923C"/>
+    <path d="M100 60V85" stroke="#FB923C" stroke-width="3"/>
+  </g>
+  
+  <!-- Connection Arcs -->
+  <path d="M70 100A30 30 0 0 1 130 100" stroke="#F97316" stroke-width="3" stroke-dasharray="4 4"/>
+  <path d="M130 100A30 30 0 0 1 70 100" stroke="#F97316" stroke-width="3" stroke-dasharray="4 4"/>
+  
+  <!-- Center Icon -->
+  <path d="M90 100L98 108L110 92" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg> 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="#EBF5FF" opacity="0.5"/>
+  
+  <!-- Tree Trunk -->
+  <path d="M90 160V110" stroke="#2563EB" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Circuit Board Lines -->
+  <path d="M90 110H140M140 110V130M140 130H120" stroke="#3B82F6" stroke-width="4" stroke-linecap="round"/>
+  <path d="M90 110H40M40 110V90M40 90H60" stroke="#3B82F6" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Tree Leaves/Technology -->
+  <path d="M100 40C60 40 40 70 40 100C60 100 80 90 100 90C120 90 140 100 160 100C160 70 140 40 100 40Z" fill="#93C5FD"/>
+  <path d="M90 60C70 60 60 75 60 90C70 90 80 85 90 85C100 85 110 90 120 90C120 75 110 60 90 60Z" fill="#60A5FA"/>
+  
+  <!-- Circuit Points -->
+  <circle cx="140" cy="130" r="4" fill="#2563EB"/>
+  <circle cx="40" cy="90" r="4" fill="#2563EB"/>
+  <circle cx="90" cy="110" r="6" fill="#1D4ED8"/>
+</svg> 

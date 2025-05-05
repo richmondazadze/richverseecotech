@@ -111,7 +111,7 @@ function Footerdemo() {
           <div className="flex flex-col justify-start items-start h-full gap-3">
             <h3 className="mb-2 text-lg font-bold text-primary">Contact</h3>
             <div className="flex flex-col gap-2 w-full">
-              <div className="flex flex-row items-start gap-6 w-full">
+              <div className="flex flex-col md:flex-row items-start gap-6 w-full">
                 {/* Austin, US */}
                 <div className="flex flex-col gap-1 flex-1 min-w-[120px]">
                   <div className="flex items-center gap-2 text-gray-700">
@@ -123,8 +123,8 @@ function Footerdemo() {
                     <span className="text-sm">+1 512 650 9818</span>
                   </div>
                 </div>
-                {/* Vertical Divider */}
-                <div className="h-10 w-px bg-gray-200 mx-2 self-center" />
+                {/* Divider: horizontal on mobile, vertical on md+ */}
+                <div className="w-full h-px bg-gray-200 my-2 md:my-0 md:w-px md:h-10 md:mx-2 md:self-center" />
                 {/* Accra, Ghana */}
                 <div className="flex flex-col gap-1 flex-1 min-w-[120px]">
                   <div className="flex items-center gap-2 text-gray-700">

@@ -20,7 +20,7 @@ const HomePage = () => {
         keywords="sustainable technology, eco-friendly digital solutions, web development, digital marketing, cybersecurity, renewable energy, business transformation"
       />
       {/* <Navbar /> */}
-      <main className="min-h-screen pt-24"> {/* pt-24 to offset fixed navbar */}
+      <main className="min-h-screen pt-12"> {/* pt-24 to offset fixed navbar */}
       {/* Hero Section */}
         <div className="md:block hidden">
           <HeroGeometric

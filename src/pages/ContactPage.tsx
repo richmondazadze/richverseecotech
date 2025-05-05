@@ -114,7 +114,7 @@ const ContactPage = () => {
   }, []);
 
   return (
-    <main className="min-h-screen font-sans bg-gradient-to-br from-blue-50 via-white to-blue-100 relative overflow-hidden pt-[80px] sm:pt-[80px]">
+    <main className="min-h-screen font-sans bg-gradient-to-br from-blue-50 via-white to-blue-100 relative overflow-hidden pt-[80px] sm:pt-[60px]">
       {/* Animated Background Canvas */}
       <canvas id="contact-bg-canvas" className="fixed inset-0 w-full h-full pointer-events-none z-0" />
       {/* Animated Gradient Blobs */}
@@ -173,10 +173,6 @@ const ContactPage = () => {
           <FAQAccordion items={contactFaqs} color="blue" />
         </motion.div>
       </section>
-      {/* Floating CTA for mobile */}
-      <motion.a href="#contact" whileTap={{ scale: 0.96 }} whileHover={{ scale: 1.04 }} className="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold px-6 py-3 rounded-full shadow-xl drop-shadow-lg hover:shadow-2xl transition-all duration-300 block md:hidden">
-        Contact Us
-      </motion.a>
       {/* Add space before footer */}
       <div className="h-12 md:h-20" />
     </main>

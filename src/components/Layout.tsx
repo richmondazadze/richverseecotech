@@ -14,7 +14,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen bg-background font-sans">
       <NavBar items={navItems} />
-      <main className="pt-4 md:pt-16"> {/* Reduced padding for seamless transition */}
+      <main className="pt-4 md:pt-16 sm:pt-0"> {/* Reduced padding for seamless transition */}
         {children}
       </main>
       <Footerdemo />

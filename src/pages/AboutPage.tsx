@@ -103,7 +103,7 @@ const aboutFaqs = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen font-sans bg-white relative overflow-hidden pt-[80px] sm:pt-[80px]">
+    <main className="min-h-screen font-sans bg-white relative overflow-hidden pt-[80px] sm:pt-[60px]">
       {/* Hero Section */}
       <section className="relative py-12 md:py-24 bg-gradient-to-br from-blue-100 via-blue-200 to-blue-400 flex flex-col items-center text-center px-4">
         <motion.h1

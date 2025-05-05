@@ -16,6 +16,34 @@ import { Facebook, Instagram, Linkedin, Moon, Send, Sun, Twitter, MapPin, Phone,
 
 function Footerdemo() {
   const [isChatOpen, setIsChatOpen] = React.useState(false)
+  const [newsletterEmail, setNewsletterEmail] = React.useState('');
+  const [newsletterLoading, setNewsletterLoading] = React.useState(false);
+  const [newsletterSuccess, setNewsletterSuccess] = React.useState(false);
+  const [newsletterError, setNewsletterError] = React.useState('');
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setNewsletterLoading(true);
+    setNewsletterError('');
+    setNewsletterSuccess(false);
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: newsletterEmail }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to subscribe');
+      }
+      setNewsletterSuccess(true);
+      setNewsletterEmail('');
+    } catch (err) {
+      setNewsletterError(err instanceof Error ? err.message : 'Failed to subscribe');
+    } finally {
+      setNewsletterLoading(false);
+    }
+  };
 
   return (
     <footer className="relative border-t bg-white text-gray-800 transition-colors duration-300 overflow-hidden">
@@ -28,20 +56,27 @@ function Footerdemo() {
             </div>
             <h3 className="text-xl md:text-3xl font-extrabold text-primary text-center mt-4">Join Our Newsletter</h3>
             <p className="text-gray-600 text-sm md:text-lg text-center max-w-md">Stay ahead with the latest updates, insights, and exclusive offers. No spam, ever.</p>
-            <form className="flex flex-col sm:flex-row w-full max-w-lg lg:max-w-xl gap-2 mt-2 items-center justify-center">
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row w-full max-w-lg lg:max-w-xl gap-2 mt-2 items-center justify-center">
               <Input
                 type="email"
                 placeholder="Your email address"
                 className="flex-1 rounded-full border border-gray-300 focus:ring-2 focus:ring-primary/40 focus:border-primary px-4 py-2 md:px-5 md:py-3 lg:px-8 lg:py-3 text-base lg:text-lg font-medium bg-white shadow-sm transition-all"
                 aria-label="Email address"
+                value={newsletterEmail}
+                onChange={e => setNewsletterEmail(e.target.value)}
+                required
+                disabled={newsletterLoading}
               />
               <Button
                 type="submit"
                 className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-2 md:py-3 font-semibold text-base shadow-md transition-all w-full sm:w-auto"
+                disabled={newsletterLoading}
               >
-                Subscribe
+                {newsletterLoading ? 'Subscribing...' : 'Subscribe'}
               </Button>
             </form>
+            {newsletterSuccess && <div className="text-green-600 text-center font-medium pt-2">Thank you for subscribing!</div>}
+            {newsletterError && <div className="text-red-600 text-center font-medium pt-2">{newsletterError}</div>}
           </div>
         </div>
         {/* Animated Divider */}

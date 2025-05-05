@@ -23,12 +23,25 @@ const ContactForm = () => {
     setIsLoading(true);
     setError('');
     setIsSuccess(false);
-    // Simulate async send
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
       setIsSuccess(true);
       setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
-    }, 1200);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to send message');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

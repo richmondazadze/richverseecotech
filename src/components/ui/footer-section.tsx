@@ -13,6 +13,7 @@ import {
   TooltipTrigger,
 } from "./tooltip"
 import { Facebook, Instagram, Linkedin, Moon, Send, Sun, Twitter, MapPin, Phone, Mail, Clock } from "lucide-react"
+import { toast } from 'sonner';
 
 function Footerdemo() {
   const [isChatOpen, setIsChatOpen] = React.useState(false)
@@ -36,9 +37,15 @@ function Footerdemo() {
       if (!response.ok) {
         throw new Error(data.error || 'Failed to subscribe');
       }
+      toast.success('Thank you for subscribing to our newsletter! You will receive updates soon.', {
+        style: { fontWeight: 'bold', fontSize: '1.1rem', boxShadow: '0 8px 32px 0 rgba(59,130,246,0.25)' }
+      });
       setNewsletterSuccess(true);
       setNewsletterEmail('');
     } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Failed to subscribe', {
+        style: { fontWeight: 'bold', fontSize: '1.1rem', boxShadow: '0 8px 32px 0 rgba(239,68,68,0.25)' }
+      });
       setNewsletterError(err instanceof Error ? err.message : 'Failed to subscribe');
     } finally {
       setNewsletterLoading(false);
@@ -75,8 +82,6 @@ function Footerdemo() {
                 {newsletterLoading ? 'Subscribing...' : 'Subscribe'}
               </Button>
             </form>
-            {newsletterSuccess && <div className="text-green-600 text-center font-medium pt-2">Thank you for subscribing!</div>}
-            {newsletterError && <div className="text-red-600 text-center font-medium pt-2">{newsletterError}</div>}
           </div>
         </div>
         {/* Animated Divider */}

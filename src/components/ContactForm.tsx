@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -10,8 +11,6 @@ const ContactForm = () => {
     message: '',
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -21,8 +20,6 @@ const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
-    setIsSuccess(false);
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -35,10 +32,14 @@ const ContactForm = () => {
       if (!response.ok) {
         throw new Error(data.error || 'Failed to send message');
       }
-      setIsSuccess(true);
+      toast.success('Your message has been sent! We appreciate your interest and will contact you soon.', {
+        style: { fontWeight: 'bold', fontSize: '1.1rem', boxShadow: '0 8px 32px 0 rgba(59,130,246,0.25)' }
+      });
       setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to send message');
+      toast.error(err instanceof Error ? err.message : 'Failed to send message', {
+        style: { fontWeight: 'bold', fontSize: '1.1rem', boxShadow: '0 8px 32px 0 rgba(239,68,68,0.25)' }
+      });
     } finally {
       setIsLoading(false);
     }
@@ -106,8 +107,6 @@ const ContactForm = () => {
       >
         {isLoading ? 'Sending...' : 'Send Message'}
       </button>
-      {isSuccess && <div className="text-green-600 text-center font-medium pt-2">Your message has been sent. Thank you!</div>}
-      {error && <div className="text-red-600 text-center font-medium pt-2">{error}</div>}
     </motion.form>
   );
 };

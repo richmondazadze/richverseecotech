@@ -33,22 +33,32 @@ const PrincipleCard = React.memo(function PrincipleCard({ icon, title, descripti
 
 // Memoized Card for Services
 interface ServiceCardProps {
-  icon: React.ReactNode;
   title: string;
   description: string;
   link: React.ReactNode;
   className?: string;
+  iconBgClass?: string;
+  iconColorClass?: string;
+  iconSvg: React.ReactNode;
 }
-const ServiceCard = React.memo(function ServiceCard({ icon, title, description, link, className }: ServiceCardProps) {
+const ServiceCard = React.memo(function ServiceCard({ title, description, link, className, iconBgClass, iconColorClass, iconSvg }: ServiceCardProps) {
   return (
     <motion.div
-      whileHover={{ y: -5 }}
+      whileHover={{ y: -8, transition: { duration: 0.2 } }}
       className={className}
     >
-      <div className="text-center">
-        {icon}
-        <h3 className="font-semibold text-gray-800">{title}</h3>
-        <p className="text-sm text-gray-600 mt-2">{description}</p>
+      <div className="relative z-10">
+        <div className="flex justify-center mb-6">
+          <motion.div
+            whileHover={{ rotate: 360 }}
+            transition={{ duration: 0.8 }}
+            className={`w-16 h-16 flex items-center justify-center rounded-xl ${iconBgClass} ${iconColorClass}`}
+          >
+            {iconSvg}
+          </motion.div>
+        </div>
+        <h3 className="text-2xl font-bold mb-4 text-center" style={{ color: iconColorClass?.includes('blue') ? '#1e40af' : iconColorClass?.includes('orange') ? '#c2410c' : iconColorClass?.includes('purple') ? '#7c3aed' : iconColorClass?.includes('green') ? '#15803d' : undefined }}>{title}</h3>
+        <p className="text-gray-600 text-center mb-6">{description}</p>
         {link}
       </div>
     </motion.div>
@@ -245,8 +255,12 @@ const HomePage = () => {
               {[
                 {
                   key: 'web-dev',
-                  icon: (
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  iconBgClass: 'bg-blue-100',
+                  iconColorClass: 'text-blue-600',
+                  iconSvg: (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
                   ),
                   title: 'Web Development',
                   description: 'Custom web solutions that drive growth and enhance user experience.',
@@ -264,8 +278,12 @@ const HomePage = () => {
                 },
                 {
                   key: 'digital-marketing',
-                  icon: (
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  iconBgClass: 'bg-orange-100',
+                  iconColorClass: 'text-orange-600',
+                  iconSvg: (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clipRule="evenodd" />
+                    </svg>
                   ),
                   title: 'Digital Marketing',
                   description: 'Strategic marketing solutions to boost your online presence and reach.',
@@ -283,8 +301,12 @@ const HomePage = () => {
                 },
                 {
                   key: 'cybersecurity',
-                  icon: (
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  iconBgClass: 'bg-purple-100',
+                  iconColorClass: 'text-purple-600',
+                  iconSvg: (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
                   ),
                   title: 'Cybersecurity',
                   description: 'Robust security solutions to protect your digital assets.',
@@ -302,8 +324,12 @@ const HomePage = () => {
                 },
                 {
                   key: 'renewable-energy',
-                  icon: (
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  iconBgClass: 'bg-green-100',
+                  iconColorClass: 'text-green-600',
+                  iconSvg: (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                    </svg>
                   ),
                   title: 'Renewable Energy',
                   description: 'Sustainable energy solutions for a greener future.',
@@ -320,7 +346,16 @@ const HomePage = () => {
                   className: "group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
                 }
               ].map(card => (
-                <ServiceCard key={card.key} icon={card.icon} title={card.title} description={card.description} link={card.link} className={card.className} />
+                <ServiceCard
+                  key={card.key}
+                  title={card.title}
+                  description={card.description}
+                  link={card.link}
+                  className={card.className}
+                  iconBgClass={card.iconBgClass}
+                  iconColorClass={card.iconColorClass}
+                  iconSvg={card.iconSvg}
+                />
               ))}
             </div>
           </div>

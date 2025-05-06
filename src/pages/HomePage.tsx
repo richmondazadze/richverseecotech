@@ -11,6 +11,50 @@ import TechEcosystem from '../components/ui/TechEcosystem';
 import SEO from '../components/SEO';
 import { HeroMobile } from '../components/ui/HeroMobile';
 
+// Memoized Card for Guiding Principles
+interface PrincipleCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  className?: string;
+}
+const PrincipleCard = React.memo(function PrincipleCard({ icon, title, description, className }: PrincipleCardProps) {
+  return (
+    <motion.div
+      whileHover={{ y: -8, transition: { duration: 0.2 } }}
+      className={className}
+    >
+      {icon}
+      <h3 className="text-2xl font-bold text-blue-900 mb-4 text-center">{title}</h3>
+      <p className="text-gray-600 text-center leading-relaxed">{description}</p>
+    </motion.div>
+  );
+});
+
+// Memoized Card for Services
+interface ServiceCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  link: React.ReactNode;
+  className?: string;
+}
+const ServiceCard = React.memo(function ServiceCard({ icon, title, description, link, className }: ServiceCardProps) {
+  return (
+    <motion.div
+      whileHover={{ y: -5 }}
+      className={className}
+    >
+      <div className="text-center">
+        {icon}
+        <h3 className="font-semibold text-gray-800">{title}</h3>
+        <p className="text-sm text-gray-600 mt-2">{description}</p>
+        {link}
+      </div>
+    </motion.div>
+  );
+});
+
 const HomePage = () => {
   return (
     <>
@@ -74,85 +118,54 @@ const HomePage = () => {
               </motion.p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Sustainable Innovation */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                className="bg-gradient-to-br from-white to-blue-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="flex justify-center mb-6">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-blue-200 rounded-full blur-lg opacity-20"></div>
-                    <img 
-                      src="/assets/img/values/sustainable-innovation.svg" 
-                      alt="Sustainable Innovation" 
-                      className="w-48 h-48 object-contain relative z-10"
-                    />
-                  </div>
-                </div>
-                <h3 className="text-2xl font-bold text-blue-900 mb-4 text-center">
-                  Sustainable Innovation
-                </h3>
-                <p className="text-gray-600 text-center leading-relaxed">
-                  We create solutions that not only solve today's challenges but also protect tomorrow's resources, ensuring a positive environmental impact.
-                </p>
-              </motion.div>
-
-              {/* Future-Ready Solutions */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                className="bg-gradient-to-br from-white to-blue-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="flex justify-center mb-6">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-blue-200 rounded-full blur-lg opacity-20"></div>
-                    <img 
-                      src="/assets/img/values/future-ready.svg" 
-                      alt="Future-Ready Solutions" 
-                      className="w-48 h-48 object-contain relative z-10"
-                    />
-                  </div>
-                </div>
-                <h3 className="text-2xl font-bold text-blue-900 mb-4 text-center">
-                  Future-Ready Solutions
-                </h3>
-                <p className="text-gray-600 text-center leading-relaxed">
-                  Our technologies adapt and scale with your growth, incorporating AI and sustainable practices for long-term success.
-                </p>
-              </motion.div>
-
-              {/* Global Impact */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                className="bg-gradient-to-br from-white to-blue-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="flex justify-center mb-6">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-blue-200 rounded-full blur-lg opacity-20"></div>
-                    <img 
-                      src="/assets/img/values/global-impact.svg" 
-                      alt="Global Impact" 
-                      className="w-48 h-48 object-contain relative z-10"
-                    />
-                  </div>
-                </div>
-                <h3 className="text-2xl font-bold text-blue-900 mb-4 text-center">
-                  Global Impact
-                </h3>
-                <p className="text-gray-600 text-center leading-relaxed">
-                  We're committed to creating positive change worldwide through eco-friendly digital solutions and responsible innovation.
-                </p>
-              </motion.div>
-                </div>
-              </div>
+              {[
+                {
+                  key: 'sustainable',
+                  icon: (
+                    <div className="flex justify-center mb-6">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-blue-200 rounded-full blur-lg opacity-20"></div>
+                        <img src="/assets/img/values/sustainable-innovation.svg" alt="Sustainable Innovation" className="w-48 h-48 object-contain relative z-10" />
+                      </div>
+                    </div>
+                  ),
+                  title: 'Sustainable Innovation',
+                  description: `We create solutions that not only solve today's challenges but also protect tomorrow's resources, ensuring a positive environmental impact.`,
+                  className: "bg-gradient-to-br from-white to-blue-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                },
+                {
+                  key: 'future-ready',
+                  icon: (
+                    <div className="flex justify-center mb-6">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-blue-200 rounded-full blur-lg opacity-20"></div>
+                        <img src="/assets/img/values/future-ready.svg" alt="Future-Ready Solutions" className="w-48 h-48 object-contain relative z-10" />
+                      </div>
+                    </div>
+                  ),
+                  title: 'Future-Ready Solutions',
+                  description: 'Our technologies adapt and scale with your growth, incorporating AI and sustainable practices for long-term success.',
+                  className: "bg-gradient-to-br from-white to-blue-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                },
+                {
+                  key: 'global-impact',
+                  icon: (
+                    <div className="flex justify-center mb-6">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-blue-200 rounded-full blur-lg opacity-20"></div>
+                        <img src="/assets/img/values/global-impact.svg" alt="Global Impact" className="w-48 h-48 object-contain relative z-10" />
+                      </div>
+                    </div>
+                  ),
+                  title: 'Global Impact',
+                  description: `We're committed to creating positive change worldwide through eco-friendly digital solutions and responsible innovation.`,
+                  className: "bg-gradient-to-br from-white to-blue-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                }
+              ].map(card => (
+                <PrincipleCard key={card.key} icon={card.icon} title={card.title} description={card.description} className={card.className} />
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* Services Section */}
@@ -229,156 +242,89 @@ const HomePage = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Web Development Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                transition={{ duration: 0.6 }}
-                className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative z-10">
-                  <div className="flex justify-center mb-6">
-                    <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.8 }}
-                      className="w-16 h-16 flex items-center justify-center rounded-xl bg-blue-100 text-blue-600"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </motion.div>
-                  </div>
-                  <h3 className="text-2xl font-bold text-blue-900 mb-4 text-center">Web Development</h3>
-                  <p className="text-gray-600 text-center mb-6">Custom web solutions that drive growth and enhance user experience.</p>
-                  <div className="text-center">
-                    <Link
-                      to="/services/web-development"
-                      className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-200"
-                    >
-                      Learn More
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Digital Marketing Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative z-10">
-                  <div className="flex justify-center mb-6">
-                    <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.8 }}
-                      className="w-16 h-16 flex items-center justify-center rounded-xl bg-orange-100 text-orange-600"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clipRule="evenodd" />
-                      </svg>
-                    </motion.div>
-                  </div>
-                  <h3 className="text-2xl font-bold text-orange-900 mb-4 text-center">Digital Marketing</h3>
-                  <p className="text-gray-600 text-center mb-6">Strategic marketing solutions to boost your online presence and reach.</p>
-                  <div className="text-center">
-                    <Link
-                      to="/services/digital-marketing"
-                      className="inline-flex items-center gap-2 text-orange-600 font-semibold hover:text-orange-800 transition-colors duration-200"
-                    >
-                      Learn More
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Cybersecurity Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative z-10">
-                  <div className="flex justify-center mb-6">
-                    <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.8 }}
-                      className="w-16 h-16 flex items-center justify-center rounded-xl bg-purple-100 text-purple-600"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                    </motion.div>
-              </div>
-                  <h3 className="text-2xl font-bold text-purple-900 mb-4 text-center">Cybersecurity</h3>
-                  <p className="text-gray-600 text-center mb-6">Robust security solutions to protect your digital assets.</p>
-                  <div className="text-center">
-                    <Link
-                      to="/services/cybersecurity"
-                      className="inline-flex items-center gap-2 text-purple-600 font-semibold hover:text-purple-800 transition-colors duration-200"
-                    >
-                      Learn More
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Renewable Energy Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative z-10">
-                  <div className="flex justify-center mb-6">
-                    <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.8 }}
-                      className="w-16 h-16 flex items-center justify-center rounded-xl bg-green-100 text-green-600"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                      </svg>
-                    </motion.div>
-                  </div>
-                  <h3 className="text-2xl font-bold text-green-900 mb-4 text-center">Renewable Energy</h3>
-                  <p className="text-gray-600 text-center mb-6">Sustainable energy solutions for a greener future.</p>
-                  <div className="text-center">
-                    <Link
-                      to="/services/renewable-energy"
-                      className="inline-flex items-center gap-2 text-green-600 font-semibold hover:text-green-800 transition-colors duration-200"
-                    >
-                      Learn More
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
+              {[
+                {
+                  key: 'web-dev',
+                  icon: (
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  ),
+                  title: 'Web Development',
+                  description: 'Custom web solutions that drive growth and enhance user experience.',
+                  link: (
+                    <div className="text-center">
+                      <Link to="/services/web-development" className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-200">
+                        Learn More
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    </div>
+                  ),
+                  className: "group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                },
+                {
+                  key: 'digital-marketing',
+                  icon: (
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  ),
+                  title: 'Digital Marketing',
+                  description: 'Strategic marketing solutions to boost your online presence and reach.',
+                  link: (
+                    <div className="text-center">
+                      <Link to="/services/digital-marketing" className="inline-flex items-center gap-2 text-orange-600 font-semibold hover:text-orange-800 transition-colors duration-200">
+                        Learn More
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    </div>
+                  ),
+                  className: "group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                },
+                {
+                  key: 'cybersecurity',
+                  icon: (
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  ),
+                  title: 'Cybersecurity',
+                  description: 'Robust security solutions to protect your digital assets.',
+                  link: (
+                    <div className="text-center">
+                      <Link to="/services/cybersecurity" className="inline-flex items-center gap-2 text-purple-600 font-semibold hover:text-purple-800 transition-colors duration-200">
+                        Learn More
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    </div>
+                  ),
+                  className: "group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                },
+                {
+                  key: 'renewable-energy',
+                  icon: (
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  ),
+                  title: 'Renewable Energy',
+                  description: 'Sustainable energy solutions for a greener future.',
+                  link: (
+                    <div className="text-center">
+                      <Link to="/services/renewable-energy" className="inline-flex items-center gap-2 text-green-600 font-semibold hover:text-green-800 transition-colors duration-200">
+                        Learn More
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    </div>
+                  ),
+                  className: "group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                }
+              ].map(card => (
+                <ServiceCard key={card.key} icon={card.icon} title={card.title} description={card.description} link={card.link} className={card.className} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
         {/* Technology Ecosystem Section */}
         <section className="py-16 relative overflow-hidden bg-gradient-to-b from-white to-blue-50/30">

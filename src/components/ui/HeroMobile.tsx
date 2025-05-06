@@ -94,12 +94,12 @@ export const HeroMobile = ({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center text-center">
+      <div className="relative z-20 container mx-auto px-4 flex flex-col items-center justify-center text-center">
         <motion.span
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="inline-block px-4 py-1.5 mb-5 text-base font-semibold bg-blue-200 text-blue-800 rounded-full shadow"
+          className="inline-block px-4 py-1.5 mb-5 text-base font-semibold bg-blue-700 text-white rounded-full shadow"
         >
           {badge}
         </motion.span>
@@ -108,7 +108,8 @@ export const HeroMobile = ({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="font-extrabold mb-2 tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-blue-500 to-blue-400 text-3xl sm:text-4xl drop-shadow-lg"
+          className="font-extrabold mb-2 tracking-tight leading-tight text-blue-900 text-3xl sm:text-4xl drop-shadow-lg"
+          style={{ textShadow: '0 2px 8px rgba(0,0,0,0.10)' }}
         >
           {title1}
         </motion.h1>
@@ -117,7 +118,8 @@ export const HeroMobile = ({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="font-bold mb-4 tracking-tight text-gray-900 text-xl sm:text-2xl drop-shadow"
+          className="font-bold mb-4 tracking-tight text-blue-700 text-xl sm:text-2xl drop-shadow"
+          style={{ textShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
         >
           {title2}
         </motion.h2>
@@ -126,7 +128,7 @@ export const HeroMobile = ({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.3 }}
-          className="text-base sm:text-lg mb-8 leading-relaxed font-normal tracking-wide max-w-xs text-gray-700"
+          className="text-base sm:text-lg mb-8 leading-relaxed font-normal tracking-wide max-w-xs text-blue-800"
         >
           {description}
         </motion.p>
@@ -136,7 +138,7 @@ export const HeroMobile = ({
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.4 }}
           href={ctaHref}
-          className="inline-flex items-center gap-2 px-7 py-3 sm:px-8 sm:py-3.5 rounded-full bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 text-white font-extrabold text-lg sm:text-xl shadow-xl hover:shadow-2xl hover:from-blue-700 hover:to-blue-600 transition-all duration-300 relative overflow-hidden group"
+          className="inline-flex items-center gap-2 px-7 py-3 sm:px-8 sm:py-3.5 rounded-full bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 text-white font-extrabold text-lg sm:text-xl shadow-xl hover:shadow-2xl hover:from-blue-800 hover:to-blue-700 transition-all duration-300 relative overflow-hidden group"
         >
           <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 blur-lg z-0" />
           <span className="relative z-10 flex items-center">

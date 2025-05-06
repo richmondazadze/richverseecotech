@@ -58,6 +58,7 @@ const SEO = ({
       {/* Additional Meta Tags */}
       <meta name="robots" content="index, follow" />
       <meta name="googlebot" content="index, follow" />
+      <meta name="google-site-verification" content="p7qlpkuzlHWTl692dm1aqBBD0aJZ6wats91hZa6QrWQ" />
       <meta name="theme-color" content="#3B82F6" />
       <meta name="msapplication-TileColor" content="#3B82F6" />
       

@@ -80,8 +80,8 @@ const HomePage = () => {
         <div className="md:block hidden">
           <HeroGeometric
             badge="RichverseEcoTech"
-            title1="Innovation Meets Sustainability"
-            title2="Advanced Solutions for Tomorrow's Challenges"
+            title1="We Build What Moves You Forward"
+            title2="Tech. Security. Growth. Impact."
             description="Discover how our innovative solutions empower your business to thrive in the digital age."
             ctaLabel="Get Started"
             ctaHref="/contact"
@@ -91,8 +91,8 @@ const HomePage = () => {
         <div className="md:hidden block">
           <HeroMobile
             badge="Welcome to RichverseEcoTech"
-            title1="Innovation Meets Sustainability"
-            title2="Advanced Solutions for Tomorrow's Challenges"
+            title1="We Build What Moves You Forward"
+            title2="Tech. Security. Growth. Impact."
             description="Transform your business with our eco-friendly technology solutions. We combine innovation with sustainability to create a better digital future."
             ctaLabel="Get Started"
             ctaHref="/contact"

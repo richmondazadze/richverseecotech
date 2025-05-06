@@ -11,6 +11,7 @@ interface TeamMember {
   name: string;
   role: string;
   bio: string;
+  avatar: string;
 }
 
 interface TimelineEvent {
@@ -34,29 +35,33 @@ const team: TeamMember[] = [
   {
     name: "Richmond Azadze",
     role: "Founder & Chief Executive Officer",
-    bio: "Guiding RichverseEcoTech's mission to accelerate sustainable growth through advanced digital innovation, while shaping a smarter, greener future."
+    bio: "Guiding RichverseEcoTech's mission to accelerate sustainable growth through advanced digital innovation, while shaping a smarter, greener future.",
+    avatar: "https://source.boringavatars.com/beam/120/Richmond?colors=2563eb,3b82f6,60a5fa,93c5fd,bfdbfe"
   },
   {
     name: "Raphael Asomani",
     role: "Chief Technology Officer",
-    bio: "Driving the development of eco-driven platforms by integrating scalable cloud solutions, AI technologies, and sustainable tech architectures."
+    bio: "Driving the development of eco-driven platforms by integrating scalable cloud solutions, AI technologies, and sustainable tech architectures.",
+    avatar: "https://source.boringavatars.com/beam/120/Raphael?colors=2563eb,3b82f6,60a5fa,93c5fd,bfdbfe"
   },
   {
     name: "Bernard Blay",
     role: "Head of Cybersecurity",
-    bio: "Ensuring the security, privacy, and resilience of all digital ecosystems built by RichverseEcoTech, protecting innovation while empowering sustainable digital trust."
+    bio: "Ensuring the security, privacy, and resilience of all digital ecosystems built by RichverseEcoTech, protecting innovation while empowering sustainable digital trust.",
+    avatar: "https://source.boringavatars.com/beam/120/Bernard?colors=2563eb,3b82f6,60a5fa,93c5fd,bfdbfe"
   },
   {
     name: "Emmanuel Donkor",
     role: "Head of Business Development",
-    bio: "Expanding strategic alliances, building lasting partnerships, and unlocking new growth opportunities to deliver RichverseEcoTech's impact to businesses globally."
+    bio: "Expanding strategic alliances, building lasting partnerships, and unlocking new growth opportunities to deliver RichverseEcoTech's impact to businesses globally.",
+    avatar: "https://source.boringavatars.com/beam/120/Emmanuel?colors=2563eb,3b82f6,60a5fa,93c5fd,bfdbfe"
   }
 ];
 
 const timeline: TimelineEvent[] = [
   { year: "2018", event: "RichverseEcoTech founded with a vision for sustainable digital innovation." },
   { year: "2019", event: "Launched our first AI-powered analytics platform." },
-  { year: "2020", event: "Expanded services to include cybersecurity and renewable energy solutions." },
+  { year: "応20", event: "Expanded services to include cybersecurity and renewable energy solutions." },
   { year: "2021", event: "Recognized as a top tech innovator in Africa." },
   { year: "2022", event: "Helped 100+ businesses achieve digital transformation." },
   { year: "2023", event: "Awarded for excellence in sustainable technology solutions." },
@@ -897,8 +902,17 @@ const AboutPage: React.FC = () => {
                       {/* Avatar with glow effect */}
                       <div className="relative mb-6">
                         <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-                        <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center text-lg sm:text-xl font-semibold text-blue-900">
-                          {member.name.split(' ').map(n => n[0]).join('')}
+                        <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-white">
+                          <img 
+                            src={member.avatar} 
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=2563eb&color=fff&size=200`;
+                            }}
+                          />
                         </div>
                       </div>
 

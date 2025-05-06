@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Link, useLocation } from "react-router-dom"
 import { LucideIcon, Menu } from "lucide-react"
 import { cn } from "../../lib/utils"
@@ -111,50 +111,58 @@ export function NavBar({ items, className }: NavBarProps) {
         </button>
       </div>
       {/* Mobile Nav Dropdown */}
-      {isMobile && menuOpen && (
-        <div className="md:hidden absolute right-4 left-auto top-[80px] w-[92vw] max-w-xs bg-background/95 border border-border shadow-2xl rounded-2xl py-3 px-2 z-40 animate-fade-in flex flex-col items-center gap-1">
-          {items.map((item) => {
-            const Icon = item.icon
-            const isActive = activeTab === item.name
-            return (
-              <motion.div
-                key={item.name}
-                whileTap={{ scale: 1.12 }}
-                whileHover={{ scale: 1.06 }}
-                className="w-full flex justify-center"
-              >
-                <Link
-                  to={item.url}
-                  onClick={() => {
-                    setActiveTab(item.name)
-                    setMenuOpen(false)
-                  }}
-                  className={cn(
-                    "relative flex items-center gap-2 justify-center cursor-pointer text-base font-semibold p-2 rounded-full transition-colors w-11/12",
-                    "text-foreground/80 hover:text-primary",
-                    isActive ? "bg-gradient-to-r from-blue-500 via-blue-600 to-blue-400 text-white shadow-lg" : undefined,
-                  )}
+      <AnimatePresence>
+        {isMobile && menuOpen && (
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 200, damping: 30 }}
+            className="md:hidden fixed top-[80px] right-0 w-[70vw] max-w-xs h-auto max-h-[90vh] bg-background/95 border border-border shadow-2xl rounded-l-2xl py-3 px-2 z-40 animate-fade-in flex flex-col items-start gap-1 overflow-y-auto"
+          >
+            {items.map((item) => {
+              const Icon = item.icon
+              const isActive = activeTab === item.name
+              return (
+                <motion.div
+                  key={item.name}
+                  whileTap={{ scale: 1.12 }}
+                  whileHover={{ scale: 1.06 }}
+                  className="w-full flex justify-start"
                 >
-                  <Icon size={22} strokeWidth={2.2} />
-                  <span>{item.name}</span>
-                  {isActive && (
-                    <motion.div
-                      layoutId="lamp-mobile"
-                      className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-400 via-blue-500 to-blue-400 rounded-full -z-10 opacity-90"
-                      initial={false}
-                      transition={{
-                        type: "spring",
-                        stiffness: 350,
-                        damping: 22,
-                      }}
-                    />
-                  )}
-                </Link>
-              </motion.div>
-            )
-          })}
-        </div>
-      )}
+                  <Link
+                    to={item.url}
+                    onClick={() => {
+                      setActiveTab(item.name)
+                      setMenuOpen(false)
+                    }}
+                    className={cn(
+                      "relative flex items-center gap-2 cursor-pointer text-base font-semibold p-2 rounded-full transition-colors w-full text-left",
+                      "text-foreground/80 hover:text-primary",
+                      isActive ? "bg-gradient-to-r from-blue-500 via-blue-600 to-blue-400 text-white shadow-lg" : undefined,
+                    )}
+                  >
+                    <Icon size={22} strokeWidth={2.2} />
+                    <span>{item.name}</span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="lamp-mobile"
+                        className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-400 via-blue-500 to-blue-400 rounded-full -z-10 opacity-90"
+                        initial={false}
+                        transition={{
+                          type: "spring",
+                          stiffness: 350,
+                          damping: 22,
+                        }}
+                      />
+                    )}
+                  </Link>
+                </motion.div>
+              )
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   )
 } 

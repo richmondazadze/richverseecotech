@@ -82,7 +82,7 @@ const HomePage = () => {
             badge="RichverseEcoTech"
             title1="We Build What Moves You Forward"
             title2="Tech. Security. Growth. Impact."
-            description="Discover how our innovative solutions empower your business to thrive in the digital age."
+            description="Smart, scalable solutions—built for modern business"
             ctaLabel="Get Started"
             ctaHref="/contact"
             bgClass="bg-gradient-to-br from-blue-100 via-blue-200 to-blue-400"
@@ -93,7 +93,7 @@ const HomePage = () => {
             badge="Welcome to RichverseEcoTech"
             title1="We Build What Moves You Forward"
             title2="Tech. Security. Growth. Impact."
-            description="Transform your business with our eco-friendly technology solutions. We combine innovation with sustainability to create a better digital future."
+            description="We design and deliver digital solutions that elevate your brand, protect your assets, and fuel your growth."
             ctaLabel="Get Started"
             ctaHref="/contact"
           />

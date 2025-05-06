@@ -72,6 +72,7 @@ const HomePage = () => {
         title="RichverseEcoTech"
         description="Transform your business with RichverseEcoTech's innovative solutions. We offer cutting-edge web development, digital marketing, cybersecurity, and renewable energy services."
         keywords="sustainable technology, eco-friendly digital solutions, web development, digital marketing, cybersecurity, renewable energy, business transformation"
+        url="https://richverseecotech.com/"
       />
       {/* <Navbar /> */}
       <main className="min-h-screen pt-12 lg:pt-24"> {/* pt-24 to offset fixed navbar */}
@@ -135,7 +136,7 @@ const HomePage = () => {
                     <div className="flex justify-center mb-6">
                       <div className="relative">
                         <div className="absolute inset-0 bg-blue-200 rounded-full blur-lg opacity-20"></div>
-                        <img src="/assets/img/values/sustainable-innovation.svg" alt="Sustainable Innovation" className="w-48 h-48 object-contain relative z-10" />
+                        <img src="/assets/img/values/sustainable-innovation.svg" alt="Sustainable Innovation" loading="lazy" className="w-48 h-48 object-contain relative z-10" />
                       </div>
                     </div>
                   ),
@@ -149,7 +150,7 @@ const HomePage = () => {
                     <div className="flex justify-center mb-6">
                       <div className="relative">
                         <div className="absolute inset-0 bg-blue-200 rounded-full blur-lg opacity-20"></div>
-                        <img src="/assets/img/values/future-ready.svg" alt="Future-Ready Solutions" className="w-48 h-48 object-contain relative z-10" />
+                        <img src="/assets/img/values/future-ready.svg" alt="Future-Ready Solutions" loading="lazy" className="w-48 h-48 object-contain relative z-10" />
                       </div>
                     </div>
                   ),
@@ -163,7 +164,7 @@ const HomePage = () => {
                     <div className="flex justify-center mb-6">
                       <div className="relative">
                         <div className="absolute inset-0 bg-blue-200 rounded-full blur-lg opacity-20"></div>
-                        <img src="/assets/img/values/global-impact.svg" alt="Global Impact" className="w-48 h-48 object-contain relative z-10" />
+                        <img src="/assets/img/values/global-impact.svg" alt="Global Impact" loading="lazy" className="w-48 h-48 object-contain relative z-10" />
                       </div>
                     </div>
                   ),

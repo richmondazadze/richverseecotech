@@ -8,6 +8,7 @@ interface SEOProps {
   image?: string;
   url?: string;
   type?: string;
+  breadcrumbs?: { name: string; url: string }[];
 }
 
 const SEO = ({
@@ -16,9 +17,22 @@ const SEO = ({
   keywords = 'sustainable technology, web development, digital marketing, cybersecurity, renewable energy, eco-friendly solutions',
   image = '/assets/img/og-image.jpg',
   url = 'https://richverseecotech.com',
-  type = 'website'
+  type = 'website',
+  breadcrumbs
 }: SEOProps) => {
   const siteTitle = title === 'RichverseEcoTech' ? title : `${title} | RichverseEcoTech`;
+
+  // Breadcrumbs JSON-LD
+  const breadcrumbsJsonLd = breadcrumbs && breadcrumbs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((item, idx) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "name": item.name,
+      "item": item.url
+    }))
+  } : null;
 
   return (
     <Helmet>
@@ -62,28 +76,42 @@ const SEO = ({
       <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
       <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#3B82F6" />
       
-      {/* Structured Data */}
+      {/* Structured Data: Organization, WebSite, Breadcrumbs */}
       <script type="application/ld+json">
-        {`
-          {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "RichverseEcoTech",
-            "url": "https://richverseecotech.com",
-            "logo": "https://richverseecotech.com/assets/img/logo.png",
-            "description": "${description}",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "US"
-            },
-            "sameAs": [
-              "https://twitter.com/richve_ecotech",
-              "https://www.linkedin.com/company/richverseecotech",
-              "https://www.facebook.com/richverseecotech"
-            ]
-          }
-        `}
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "RichverseEcoTech",
+          "url": "https://richverseecotech.com",
+          "logo": "https://richverseecotech.com/assets/img/logo.png",
+          "description": description,
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US"
+          },
+          "sameAs": [
+            "https://twitter.com/richve_ecotech",
+            "https://www.linkedin.com/company/richverseecotech",
+            "https://www.facebook.com/richverseecotech"
+          ]
+        })}
       </script>
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "RichverseEcoTech",
+          "url": "https://richverseecotech.com",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://richverseecotech.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        })}
+      </script>
+      {breadcrumbsJsonLd && (
+        <script type="application/ld+json">{JSON.stringify(breadcrumbsJsonLd)}</script>
+      )}
     </Helmet>
   );
 };

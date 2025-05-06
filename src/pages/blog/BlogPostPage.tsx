@@ -104,6 +104,56 @@ const BlogPostPage = () => {
     );
   }
 
+  // JSON-LD for BlogPosting and Breadcrumbs
+  const blogPostingJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "image": post.image,
+    "author": {
+      "@type": "Organization",
+      "name": "RichverseEcoTech"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "RichverseEcoTech",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://richverseecotech.com/assets/img/logo.png"
+      }
+    },
+    "datePublished": post.date,
+    "description": post.summary,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://richverseecotech.com/blog/${post.slug}`
+    }
+  };
+  const breadcrumbsJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://richverseecotech.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://richverseecotech.com/blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": post.title,
+        "item": `https://richverseecotech.com/blog/${post.slug}`
+      }
+    ]
+  };
+
   return (
     <main className="min-h-screen bg-white font-sans pt-[80px]">
       {/* Reading Progress Bar */}
@@ -131,6 +181,9 @@ const BlogPostPage = () => {
         <meta name="twitter:title" content={post.title + ' | RichverseEcoTech Blog'} />
         <meta name="twitter:description" content={post.summary} />
         <meta name="twitter:image" content={post.image} />
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">{JSON.stringify(blogPostingJsonLd)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbsJsonLd)}</script>
       </Helmet>
       {/* Breadcrumbs */}
       <div className="sm:static sticky top-0 z-30 bg-white/90 backdrop-blur shadow-sm mt-0 sm:mt-4 mb-3 sm:mb-6">
@@ -363,7 +416,12 @@ const BlogPostPage = () => {
                     viewport={{ once: true }}
                     className="flex gap-3 items-center hover:bg-blue-100 rounded-lg p-2 transition-colors duration-200"
                   >
-                    <img src={recentPost.image} alt={recentPost.title} className="w-14 h-14 object-cover rounded-lg" loading="lazy" />
+                    <img
+                      src={recentPost.image}
+                      alt={recentPost.title}
+                      className="w-14 h-14 object-cover rounded-lg"
+                      loading="lazy"
+                    />
                     <div>
                       <Link to={`/blog/${recentPost.slug}`} className="font-semibold text-blue-800 hover:underline line-clamp-2 transition-colors duration-200">{recentPost.title}</Link>
                       <div className="text-xs text-gray-500">{recentPost.date}</div>

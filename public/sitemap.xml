@@ -42,4 +42,34 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://richverseecotech.com/blog</loc>
+    <lastmod>2024-04-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://richverseecotech.com/blog/exploring_ocean_energy</loc>
+    <lastmod>2024-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://richverseecotech.com/blog/digital-marketing-power-2024</loc>
+    <lastmod>2024-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://richverseecotech.com/blog/social-media-analytics-marketing-success-2024</loc>
+    <lastmod>2024-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://richverseecotech.com/blog/phishing_attacks</loc>
+    <lastmod>2024-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset> 

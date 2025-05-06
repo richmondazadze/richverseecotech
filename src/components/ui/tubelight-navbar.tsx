@@ -54,7 +54,7 @@ export function NavBar({ items, className }: NavBarProps) {
       <div className="container mx-auto flex items-center justify-between px-4 py-4 min-h-[80px]">
         {/* Company Name with Responsive Gradient and 3D Font */}
         <Link to="/" className="flex items-center gap-2 font-extrabold text-2xl sm:text-3xl md:text-4xl tracking-tight select-none" style={{ fontFamily: 'Orbitron, Poppins, Montserrat, sans-serif' }}>
-          <img src="/assets/img/logo.svg" alt="RichverseEcoTech Logo" className="w-11 h-11 object-contain" />
+          <img src="/assets/img/logo.svg" alt="RichverseEcoTech Logo" loading="lazy" className="w-11 h-11 object-contain" />
           <span className="bg-gradient-to-r from-blue-400 via-blue-600 to-blue-400 text-transparent bg-clip-text drop-shadow-lg text-lg sm:text-2xl md:text-4xl">RichverseEcoTech</span>
         </Link>
         {/* Desktop Nav */}

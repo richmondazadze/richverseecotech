@@ -42,7 +42,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     await resend.emails.send({
       from: 'RichverseEcoTech <contact@richverseecotech.com>',
       to: email,
-      subject: 'Thank you for contacting RichverseEcoTech',
+      subject: 'Thanks for contacting RichverseEcoTech',
       html: `
         <div style="font-family: 'Nunito', Arial, sans-serif; background: #f4f8fb; padding: 0; margin: 0;">
           <table width="100%" cellpadding="0" cellspacing="0" style="background: #f4f8fb; padding: 0; margin: 0;">

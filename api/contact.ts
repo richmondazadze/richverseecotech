@@ -48,7 +48,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           <table width="100%" cellpadding="0" cellspacing="0" style="background: #f4f8fb; padding: 0; margin: 0;">
             <tr>
               <td align="center">
-                <table width="600" cellpadding="0" cellspacing="0" style="background: #fff; border-radius: 16px; box-shadow: 0 4px 32px rgba(59,130,246,0.08); margin: 40px 0;">
+                <table width="600" cellpadding="0" cellspacing="0" style="background: #fff; border-radius: 16px; box-shadow: 0 4px 32px rgba(59,130,246,0.08); margin: 40px 0; width: 100%; max-width: 600px;">
                   <tr>
                     <td align="center" style="padding: 40px 0 20px 0;">
                       <img src="https://richverseecotech.com/assets/img/logo.svg" alt="RichverseEcoTech Logo" width="64" height="64" style="display: block; margin: 0 auto 12px auto;" />
@@ -56,7 +56,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     </td>
                   </tr>
                   <tr>
-                    <td style="padding: 0 40px 24px 40px;">
+                    <td style="padding: 0 24px 24px 24px; padding-left: max(5vw, 24px); padding-right: max(5vw, 24px);">
                       <h2 style="font-size: 1.5rem; color: #2563eb; margin-bottom: 12px; font-family: 'Nunito', Arial, sans-serif;">Thank You for Contacting Us</h2>
                       <p style="font-size: 1.1rem; color: #1e293b; margin-bottom: 18px;">Dear ${name},</p>
                       <p style="font-size: 1rem; color: #334155; margin-bottom: 18px;">Thank you for reaching out to <span style="color: #2563eb; font-weight: bold;">RichverseEcoTech</span>. We have received your message and our team will review your inquiry as soon as possible.</p>

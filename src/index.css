@@ -1701,3 +1701,9 @@ section {
     animation: marquee 40s linear infinite;
   }
 }
+
+/* Ensure the toast container doesn't affect document flow */
+html, body {
+  overflow-x: hidden;
+  position: relative;
+}

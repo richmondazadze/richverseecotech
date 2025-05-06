@@ -17,7 +17,7 @@ const infoCards = [
     icon: <Phone className="w-8 h-8 text-blue-500 drop-shadow" />, title: 'Call Us',
     content: (
       <>
-        +1 512 650 9818<br />+233 2017 68623
+        +1 512 650 9818<br />+233 5416 20190
       </>
     )
   },

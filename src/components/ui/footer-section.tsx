@@ -12,8 +12,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./tooltip"
-import { Facebook, Instagram, Linkedin, Moon, Send, Sun, Twitter, MapPin, Phone, Mail, Clock } from "lucide-react"
-import { toast } from 'sonner';
+import { Facebook, Instagram, Linkedin, Moon, Send, Sun, Twitter, MapPin, Phone, Mail, Clock, MessageCircleCode } from "lucide-react"
+import toast from 'react-hot-toast';
 
 function Footerdemo() {
   const [isChatOpen, setIsChatOpen] = React.useState(false)
@@ -53,7 +53,7 @@ function Footerdemo() {
   };
 
   return (
-    <footer className="relative border-t bg-white text-gray-800 transition-colors duration-300 overflow-hidden">
+    <footer className="relative border-t bg-white text-gray-800 transition-colors duration-300 overflow-hidden mb-4">
       <div className="container mx-auto px-4 py-10 md:px-6 lg:px-8">
         {/* Newsletter Section - visually striking card, full width */}
         <div className="flex flex-col items-center w-full mb-8">
@@ -164,7 +164,7 @@ function Footerdemo() {
                   </div>
                 </div>
                 {/* Divider: horizontal on mobile, vertical on md+ */}
-                <div className="w-full h-px bg-gray-200 my-2 md:my-0 md:w-px md:h-10 md:mx-2 md:self-center" />
+                <div className="w-full h-px bg-gray-200 my-1 md:my-0 md:w-px md:h-10 md:mx-2 md:self-center" />
                 {/* Accra, Ghana */}
                 <div className="flex flex-col gap-1 flex-1 min-w-[120px]">
                   <div className="flex items-center gap-2 text-gray-700">
@@ -173,8 +173,13 @@ function Footerdemo() {
                   </div>
                   <div className="flex items-center gap-2 text-gray-700">
                     <Phone className="w-5 h-5 text-blue-500" />
+                    <span className="text-sm">+233 54 162 0190</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <MessageCircleCode className="w-5 h-5 text-blue-500" />
                     <span className="text-sm">+233 2017 68623</span>
                   </div>
+                  
                 </div>
               </div>
               <hr className="my-2 w-full border-gray-200" />

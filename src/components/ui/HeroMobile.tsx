@@ -140,10 +140,10 @@ export const HeroMobile = ({
         >
           <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 blur-lg z-0" />
           <span className="relative z-10 flex items-center">
-            {ctaLabel}
+          {ctaLabel}
             <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
           </span>
         </motion.a>
       </div>

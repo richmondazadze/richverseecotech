@@ -7,7 +7,7 @@ import { HeroGeometric } from '../components/ui/shape-landing-hero';
 import { TestimonialsSection } from "../components/ui/testimonials-section";
 import ScrollToTopButton from '../components/ScrollToTopButton';
 import { motion } from 'framer-motion';
-import { TechEcosystem } from '../components/ui/TechEcosystem';
+import TechEcosystem from '../components/ui/TechEcosystem';
 import SEO from '../components/SEO';
 import { HeroMobile } from '../components/ui/HeroMobile';
 
@@ -392,7 +392,7 @@ const HomePage = () => {
               </p>
             </div>
 
-            <div className="relative h-[500px] mb-8">
+            <div className="relative mb-12">
               <TechEcosystem />
             </div>
 

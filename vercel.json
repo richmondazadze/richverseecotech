@@ -19,7 +19,7 @@
           "value": "www.richverseecotech.com"
         }
       ],
-      "destination": "https://richverseecotech.com/:1",
+      "destination": "https://richverseecotech.com/$1",
       "permanent": true
     }
   ],

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { cn } from "../../lib/utils"
 import { TestimonialCard, TestimonialAuthor } from "./testimonial-card"
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface TestimonialsSectionProps {
   title: string
@@ -19,6 +20,25 @@ export function TestimonialsSection({
   testimonials,
   className 
 }: TestimonialsSectionProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
+  let pauseTimeout: NodeJS.Timeout;
+
+  // Scroll by one card width
+  const scrollByCard = (direction: "left" | "right") => {
+    if (!scrollRef.current) return;
+    setIsPaused(true);
+    const card = scrollRef.current.querySelector("div > div"); // first card
+    const cardWidth = card ? (card as HTMLElement).offsetWidth : 300;
+    scrollRef.current.scrollBy({
+      left: direction === "left" ? -cardWidth : cardWidth,
+      behavior: "smooth"
+    });
+    // Resume marquee after 5 seconds
+    clearTimeout(pauseTimeout);
+    pauseTimeout = setTimeout(() => setIsPaused(false), 5000);
+  };
+
   return (
     <section className={cn(
       "bg-background text-foreground",
@@ -36,8 +56,31 @@ export function TestimonialsSection({
         </div>
 
         <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
-          <div className="group flex overflow-hidden p-2 [--gap:1rem] [gap:var(--gap)] flex-row [--duration:40s]">
-            <div className="flex shrink-0 justify-around [gap:var(--gap)] animate-marquee flex-row group-hover:[animation-play-state:running]">
+          {/* Left Button */}
+          <button
+            className="absolute left-2 top-1/2 z-20 -translate-y-1/2 bg-white/80 rounded-full p-2 shadow hover:bg-blue-100 transition"
+            onClick={() => scrollByCard("left")}
+            aria-label="Scroll testimonials left"
+            type="button"
+          >
+            <FaChevronLeft />
+          </button>
+          {/* Right Button */}
+          <button
+            className="absolute right-2 top-1/2 z-20 -translate-y-1/2 bg-white/80 rounded-full p-2 shadow hover:bg-blue-100 transition"
+            onClick={() => scrollByCard("right")}
+            aria-label="Scroll testimonials right"
+            type="button"
+          >
+            <FaChevronRight />
+          </button>
+          {/* Marquee/scrollable container */}
+          <div
+            ref={scrollRef}
+            className={`group flex overflow-x-auto no-scrollbar p-2 [--gap:1rem] [gap:var(--gap)] flex-row transition-all duration-500 ${isPaused ? "" : "animate-marquee"}`}
+            style={{ scrollBehavior: "smooth" }}
+          >
+            <div className="flex shrink-0 justify-around [gap:var(--gap)] flex-row">
               {[...Array(4)].map((_, setIndex) => (
                 testimonials.map((testimonial, i) => (
                   <TestimonialCard 

@@ -39,7 +39,7 @@ const team: TeamMember[] = [
     avatar: "https://source.boringavatars.com/beam/120/Richmond?colors=2563eb,3b82f6,60a5fa,93c5fd,bfdbfe"
   },
   {
-    name: "Raphael Asomani",
+    name: "Rapheal Asomani",
     role: "Chief Technology Officer",
     bio: "Driving the development of eco-driven platforms by integrating scalable cloud solutions, AI technologies, and sustainable tech architectures.",
     avatar: "https://source.boringavatars.com/beam/120/Raphael?colors=2563eb,3b82f6,60a5fa,93c5fd,bfdbfe"

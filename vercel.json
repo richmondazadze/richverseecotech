@@ -1,13 +1,29 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/robots.txt",
-      "destination": "/robots.txt"
+      "has": [
+        {
+          "type": "host",
+          "value": "www.richverseecotech.com"
+        }
+      ],
+      "destination": "https://richverseecotech.com/robots.txt",
+      "permanent": true
     },
     {
-      "source": "/sitemap.xml",
-      "destination": "/sitemap.xml"
-    },
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.richverseecotech.com"
+        }
+      ],
+      "destination": "https://richverseecotech.com/:1",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"

@@ -3,6 +3,9 @@ import { blogPosts, blogCategories } from '../data/blog';
 import { cssVars } from '../data/site';
 import Seo from '../components/Seo';
 import PageHead from '../components/PageHead';
+import JsonLd from '../components/JsonLd';
+import BlogImage from '../components/BlogImage';
+import { breadcrumbSchema } from '../data/structuredData';
 
 const slug = (s: string) => s.toLowerCase().replace(/\s+/g, '-');
 
@@ -32,6 +35,7 @@ export default function Blog() {
         description="Perspectives on sustainable technology, security, growth, and the systems shaping tomorrow."
         path={category ? `/blog/category/${category}` : tag ? `/blog/tag/${tag}` : '/blog'}
       />
+      <JsonLd data={breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Insights', path: '/blog' }])} />
       <div className="container">
         <PageHead
           eyebrow={tag ? '[ Tag ]' : category ? '[ Category ]' : '[ Insights ]'}
@@ -47,7 +51,7 @@ export default function Blog() {
         {featured && (
           <Link to={`/blog/${featured.slug}`} className="blog-featured reveal">
             <div className="blog-featured-media">
-              <img src={featured.image} alt={featured.title} loading="lazy" />
+              <BlogImage src={featured.image} alt={featured.title} />
             </div>
             <div className="blog-featured-body">
               <p className="blog-cat">[ {featured.category} ]</p>
@@ -82,7 +86,7 @@ export default function Blog() {
             {list.map((p, i) => (
               <Link to={`/blog/${p.slug}`} className="blog-card reveal" key={p.slug} style={cssVars({ '--d': `${(i % 3) * 70}ms` })}>
                 <div className="blog-card-media">
-                  <img src={p.image} alt={p.title} loading="lazy" />
+                  <BlogImage src={p.image} alt={p.title} />
                 </div>
                 <p className="blog-cat">[ {p.category} ]</p>
                 <h3 className="blog-card-title">{p.title}</h3>

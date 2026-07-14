@@ -5,6 +5,8 @@ import PageHead from '../components/PageHead';
 import FAQ from '../components/FAQ';
 import SectionHead from '../components/SectionHead';
 import SocialIcon from '../components/SocialIcon';
+import JsonLd from '../components/JsonLd';
+import { faqSchema, breadcrumbSchema } from '../data/structuredData';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -53,6 +55,10 @@ export default function Contact() {
         description="Reach out for partnerships, support, or a new project. We respond within one business day."
         path="/contact"
       />
+      <JsonLd data={[
+        breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]),
+        faqSchema(contactFaqs),
+      ]} />
       <div className="container">
         <PageHead
           eyebrow="[ Contact ]"

@@ -8,6 +8,8 @@ import Partners from '../components/Partners';
 import FAQ from '../components/FAQ';
 import SectionHead from '../components/SectionHead';
 import CTA from '../components/CTA';
+import JsonLd from '../components/JsonLd';
+import { faqSchema, breadcrumbSchema } from '../data/structuredData';
 
 export default function About() {
   return (
@@ -17,6 +19,10 @@ export default function About() {
         description="Richverseecotech combines innovation and sustainability to transform the digital world — empowering businesses to build a sustainable future."
         path="/about"
       />
+      <JsonLd data={[
+        breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }]),
+        faqSchema(aboutFaqs),
+      ]} />
       <div className="container">
         <PageHead
           eyebrow="[ About ]"

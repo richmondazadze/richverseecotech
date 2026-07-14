@@ -3,6 +3,8 @@ import Seo from '../components/Seo';
 import PageHead from '../components/PageHead';
 import ServiceTile from '../components/ServiceTile';
 import CTA from '../components/CTA';
+import JsonLd from '../components/JsonLd';
+import { servicesItemListSchema, breadcrumbSchema } from '../data/structuredData';
 
 export default function Services() {
   return (
@@ -12,6 +14,10 @@ export default function Services() {
         description="Web development, digital marketing, cybersecurity, and renewable energy — comprehensive solutions engineered to move your business forward."
         path="/services"
       />
+      <JsonLd data={[
+        servicesItemListSchema(),
+        breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }]),
+      ]} />
       <div className="container">
         <PageHead
           eyebrow="[ Services ]"

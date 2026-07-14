@@ -1,5 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "redirects": [
     { "source": "/blog/exploring_ocean_energy", "destination": "/blog/exploring-ocean-energy", "permanent": true },
     { "source": "/blog/digital-marketing-power-2024", "destination": "/blog/digital-marketing-power", "permanent": true },

@@ -3,6 +3,8 @@ import { cssVars, services } from '../data/site';
 import Seo from '../components/Seo';
 import NotFound from './NotFound';
 import CTA from '../components/CTA';
+import JsonLd from '../components/JsonLd';
+import { serviceSchema, breadcrumbSchema } from '../data/structuredData';
 
 export default function ServiceDetail() {
   const { slug } = useParams();
@@ -18,6 +20,14 @@ export default function ServiceDetail() {
         description={service.intro}
         path={`/services/${service.slug}`}
       />
+      <JsonLd data={[
+        serviceSchema(service),
+        breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: service.name, path: `/services/${service.slug}` },
+        ]),
+      ]} />
       <div className="container">
         {/* Hero */}
         <header className="service-hero">

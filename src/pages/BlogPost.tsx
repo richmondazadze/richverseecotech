@@ -4,6 +4,9 @@ import { cssVars } from '../data/site';
 import Seo from '../components/Seo';
 import NotFound from './NotFound';
 import CTA from '../components/CTA';
+import JsonLd from '../components/JsonLd';
+import BlogImage from '../components/BlogImage';
+import { articleSchema, breadcrumbSchema } from '../data/structuredData';
 
 const toSlug = (s: string) => s.toLowerCase().replace(/\s+/g, '-');
 
@@ -23,6 +26,15 @@ export default function BlogPost() {
         image={post.image}
         type="article"
       />
+      <JsonLd data={[
+        articleSchema(post),
+        breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Insights', path: '/blog' },
+          { name: post.category, path: `/blog/category/${toSlug(post.category)}` },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ]),
+      ]} />
       <article className="container article">
         <header className="article-head">
           <p className="eyebrow reveal">
@@ -40,7 +52,7 @@ export default function BlogPost() {
         </header>
 
         <div className="article-media reveal">
-          <img src={post.image} alt={post.title} />
+          <BlogImage src={post.image} alt={post.title} loading="eager" />
         </div>
 
         <div className="article-body reveal" dangerouslySetInnerHTML={{ __html: post.content }} />
@@ -62,7 +74,7 @@ export default function BlogPost() {
             {related.map((p) => (
               <Link to={`/blog/${p.slug}`} className="blog-card reveal" key={p.slug}>
                 <div className="blog-card-media">
-                  <img src={p.image} alt={p.title} loading="lazy" />
+                  <BlogImage src={p.image} alt={p.title} />
                 </div>
                 <p className="blog-cat">[ {p.category} ]</p>
                 <h3 className="blog-card-title">{p.title}</h3>

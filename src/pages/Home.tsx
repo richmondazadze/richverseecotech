@@ -9,6 +9,8 @@ import Stats from '../components/Stats';
 import Testimonials from '../components/Testimonials';
 import Partners from '../components/Partners';
 import CTA from '../components/CTA';
+import JsonLd from '../components/JsonLd';
+import { servicesItemListSchema } from '../data/structuredData';
 
 export default function Home() {
   return (
@@ -18,6 +20,7 @@ export default function Home() {
         description={brand.blurb}
         path="/"
       />
+      <JsonLd data={servicesItemListSchema()} />
       {/* HERO */}
       <section className="hero" id="top">
         <div className="mesh" aria-hidden="true">

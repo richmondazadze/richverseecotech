@@ -1,0 +1,20 @@
+# RichverseEcotech
+
+> Sustainable digital ecosystems where software, security, and renewable energy converge. We design and deliver digital solutions that elevate your brand, protect your assets, and fuel sustainable growth. Offices in Austin (United States) and Accra (Ghana); serving clients worldwide.
+
+## Services
+- [Web Development](https://richverseecotech.com/services/web-development): Custom web apps, e-commerce, mobile apps, UI/UX, and progressive web apps built to scale.
+- [Digital Marketing](https://richverseecotech.com/services/digital-marketing): SEO/SEM, social, email, content, and marketing automation that compounds growth.
+- [Cybersecurity](https://richverseecotech.com/services/cybersecurity): Risk assessment, penetration testing, managed security, compliance, and zero-trust architecture.
+- [Renewable Energy](https://richverseecotech.com/services/renewable-energy): Solar and wind systems, hybrid power, inverter installation, and sustainability consulting.
+
+## Company
+- [About](https://richverseecotech.com/about): Mission, vision, leadership team, values, and how we work.
+- [Contact](https://richverseecotech.com/contact): Start a project or partnership. Email: richverseecotech@gmail.com
+
+## Insights
+- [Blog](https://richverseecotech.com/blog): Perspectives on sustainable technology, security, growth, and the systems shaping tomorrow.
+
+## Policies
+- [Privacy Policy](https://richverseecotech.com/privacy)
+- [Terms of Service](https://richverseecotech.com/terms)

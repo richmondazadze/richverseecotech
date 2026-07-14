@@ -1,19 +1,9 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
+// Standalone "Organic Intelligence" redesign.
+// Runs on its own port so it never clashes with the parent app (5173).
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src"),
-    },
-  },
-  css: {
-    postcss: './postcss.config.js',
-  },
-  build: {
-    outDir: path.resolve(__dirname, "dist"),
-    emptyOutDir: true,
-  },
+  server: { port: 5273, open: true },
 });

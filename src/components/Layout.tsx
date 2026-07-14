@@ -1,25 +1,18 @@
-import React from 'react';
-import { NavBar } from './ui/tubelight-navbar';
-import { Footerdemo } from './ui/footer-section';
-import { Home, User, Briefcase, FileText, Mail } from 'lucide-react';
+import { Outlet } from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
-  const navItems = [
-    { name: 'Home', url: '/', icon: Home },
-    { name: 'About', url: '/about', icon: User },
-    { name: 'Services', url: '/services', icon: Briefcase },
-    { name: 'Blog', url: '/blog', icon: FileText },
-    { name: 'Contact', url: '/contact', icon: Mail },
-  ];
+export default function Layout() {
+  useScrollReveal();
   return (
-    <div className="min-h-screen bg-background font-sans">
-      <NavBar items={navItems} />
-      <main className="pt-4 md:pt-16 sm:pt-0"> {/* Reduced padding for seamless transition */}
-        {children}
+    <>
+      <a href="#main" className="skip-link">Skip to content</a>
+      <Header />
+      <main id="main">
+        <Outlet />
       </main>
-      <Footerdemo />
-    </div>
+      <Footer />
+    </>
   );
-};
-
-export default Layout; 
+}

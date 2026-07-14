@@ -1,72 +1,48 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
+    { "source": "/blog/exploring_ocean_energy", "destination": "/blog/exploring-ocean-energy", "permanent": true },
+    { "source": "/blog/digital-marketing-power-2024", "destination": "/blog/digital-marketing-power", "permanent": true },
+    { "source": "/blog/social-media-analytics-marketing-success-2024", "destination": "/blog/social-media-analytics", "permanent": true },
+    { "source": "/blog/phishing_attacks", "destination": "/blog/preventing-phishing-attacks", "permanent": true },
+    { "source": "/softwaredev", "destination": "/services", "permanent": true },
     {
       "source": "/robots.txt",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.richverseecotech.com"
-        }
-      ],
+      "has": [{ "type": "host", "value": "www.richverseecotech.com" }],
       "destination": "https://richverseecotech.com/robots.txt",
       "permanent": true
     },
     {
       "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.richverseecotech.com"
-        }
-      ],
+      "has": [{ "type": "host", "value": "www.richverseecotech.com" }],
       "destination": "https://richverseecotech.com/$1",
       "permanent": true
     }
   ],
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "headers": [
     {
       "source": "/assets/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
-      "source": "/(.*)\\.(js|css|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot)",
+      "source": "/(.*)\\.(js|css|jpg|jpeg|png|gif|ico|svg|webp|woff|woff2|ttf|eot)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, must-revalidate"
-        }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
       ]
     }
   ]

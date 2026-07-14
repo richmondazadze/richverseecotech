@@ -1,132 +1,91 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { nav } from '../data/site';
 
-const Header = () => {
-  const [isMobileNavActive, setIsMobileNavActive] = useState(false);
-  const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
-  const location = useLocation();
-  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+export default function Header() {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
 
+  // Close the mobile menu on route change
+  useEffect(() => setOpen(false), [pathname]);
+
+  // Solidify the header once the user scrolls past the hero crest
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsHeaderScrolled(true);
-      } else {
-        setIsHeaderScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const toggleMobileNav = () => {
-    setIsMobileNavActive(!isMobileNavActive);
-  };
-
-  const toggleSubmenu = (submenu: string) => {
-    if (activeSubmenu === submenu) {
-      setActiveSubmenu(null);
-    } else {
-      setActiveSubmenu(submenu);
-    }
-  };
-
-  const isActive = (path: string) => {
-    if (path === '/') {
-      return location.pathname === path;
-    }
-    return location.pathname.startsWith(path);
-  };
-
-  // Close mobile nav when clicking outside
+  // Lock scroll while the mobile menu is open
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (!target.closest('#navbar') && !target.closest('.mobile-nav-toggle')) {
-        setIsMobileNavActive(false);
-      }
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
     };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Close mobile nav when location changes
-  useEffect(() => {
-    setIsMobileNavActive(false);
-  }, [location]);
+  }, [open]);
 
   return (
-    <header id="header" className={`header fixed-top ${isHeaderScrolled ? 'header-scrolled' : ''}`}>
-      <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
-        <Link to="/" className="logo d-flex align-items-center">
-          <img src="/assets/img/logo.svg" alt="RichverseEcoTech" />
-          <span>RichverseEcoTech</span>
-        </Link>
+    <>
+      <header
+        className={
+          'site-header' + (scrolled ? ' is-scrolled' : '') + (open ? ' is-menu-open' : '')
+        }
+      >
+        <div className="header-inner">
+          <Link to="/" className="logo" aria-label="RichverseEcotech — home">
+            <img src="/logo.svg" alt="" className="logo-img" aria-hidden="true" />
+            <span className="logo-word">Richverse<span className="logo-mark">Ecotech</span></span>
+          </Link>
 
-        <i 
-          className={`bi ${isMobileNavActive ? 'bi-x' : 'bi-list'} mobile-nav-toggle`}
-          onClick={toggleMobileNav}
-        ></i>
+          <nav className="nav-center" aria-label="Primary">
+            {nav.map((l) => (
+              <NavLink
+                key={l.to}
+                to={l.to}
+                className={({ isActive }) => 'nav-link' + (isActive ? ' is-active' : '')}
+              >
+                {l.label}
+              </NavLink>
+            ))}
+          </nav>
 
-        <nav id="navbar" className={`navbar ${isMobileNavActive ? 'navbar-mobile' : ''}`}>
-          <ul>
-            <li>
-              <Link 
-                to="/"
-                className={`nav-link scrollto ${location.pathname === '/' ? 'active' : ''}`}
-              >
-                Home
-              </Link>
-            </li>
-            <li className="dropdown">
-              <a 
-                href="#"
-                className={location.pathname === '/services' ? 'active' : ''}
-                onClick={(e) => {
-                  e.preventDefault();
-                  toggleSubmenu('services');
-                }}
-              >
-                <span>Services</span> <i className="bi bi-chevron-down"></i>
-              </a>
-              <ul className={isMobileNavActive && activeSubmenu === 'services' ? 'dropdown-active' : ''}>
-                <li>
-                  <Link to="/services/web-development">Web and Mobile App Development</Link>
-                </li>
-                <li>
-                  <Link to="/services/digital-marketing">Digital Marketing Suite</Link>
-                </li>
-                <li>
-                  <Link to="/services/cybersecurity">Cybersecurity Solutions</Link>
-                </li>
-                <li>
-                  <Link to="/services/renewable-energy">Renewable Energy Solutions</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link 
-                to="/blog"
-                className={`nav-link scrollto ${isActive('/blog') ? 'active' : ''}`}
-              >
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/contact"
-                className={`nav-link scrollto ${isActive('/contact') ? 'active' : ''}`}
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
+          <div className="header-right">
+            <Link to="/contact" className="cta-pill">
+              <span className="status-dot" aria-hidden="true" />
+              <span className="cta-pill-label">Start a project</span>
+            </Link>
+            <button
+              className={'menu-toggle' + (open ? ' is-open' : '')}
+              aria-label="Toggle menu"
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+            >
+              <span /><span /><span />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile menu overlay */}
+      <div className={'mobile-menu' + (open ? ' is-open' : '')}>
+        <nav>
+          {nav.map((l, i) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              style={{ transitionDelay: `${i * 60 + 80}ms` }}
+              className={({ isActive }) => 'mobile-link' + (isActive ? ' is-active' : '')}
+            >
+              {l.label}
+            </NavLink>
+          ))}
+          <Link to="/contact" className="mobile-cta" style={{ transitionDelay: `${nav.length * 60 + 80}ms` }}>
+            Start a project
+          </Link>
         </nav>
       </div>
-    </header>
+    </>
   );
-};
-
-export default Header;
+}

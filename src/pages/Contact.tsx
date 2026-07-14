@@ -4,6 +4,7 @@ import Seo from '../components/Seo';
 import PageHead from '../components/PageHead';
 import FAQ from '../components/FAQ';
 import SectionHead from '../components/SectionHead';
+import SocialIcon from '../components/SocialIcon';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -87,9 +88,18 @@ export default function Contact() {
 
             <div className="contact-block">
               <p className="footer-label">[ Social ]</p>
-              <div className="contact-socials">
+              <div className="contact-socials social-icons">
                 {brand.socials.map((s) => (
-                  <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
+                  <a
+                    key={s.label}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="social-icon-link"
+                  >
+                    <SocialIcon label={s.label} />
+                  </a>
                 ))}
               </div>
             </div>

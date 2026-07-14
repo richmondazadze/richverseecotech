@@ -179,13 +179,6 @@ export const values = [
 ];
 
 /* --------------------------------------------------- Tech ecosystem */
-export const techEcosystem = [
-  { title: 'Cloud Infrastructure', body: 'AWS, Azure, GCP' },
-  { title: 'Development', body: 'React, Node.js, Python' },
-  { title: 'Analytics', body: 'Big Data, AI/ML, BI' },
-  { title: 'Security', body: 'Cybersecurity, DevSecOps' },
-];
-
 export const stack = [
   'TypeScript', 'React', 'Node', 'Python', 'AWS', 'Azure',
   'Google Cloud', 'PostgreSQL', 'Supabase', 'Vercel', 'OpenAI', 'Kubernetes',
@@ -216,26 +209,16 @@ export const partners = [
 export const testimonials = [
   { name: 'Olivia Chen', role: 'Product Lead', text: "Richverseecotech's eco-driven approach gave us a competitive edge. Their solutions are truly next-level." },
   { name: 'Michel Smith', role: 'Operations Director', text: 'We saw measurable growth and improved efficiency after partnering with Richverseecotech.' },
-  { name: 'Priya Singh', role: 'Founder', text: "The team's creativity and commitment to our vision made all the difference." },
+  { name: 'Theophilus Mensah', role: 'Founder, Good God Charity Foundation', text: 'Richverseecotech built our website with real care — it captures our mission beautifully and makes it effortless for supporters to find us and give. A team that truly listens.' },
   { name: 'Aisha Bello', role: 'Marketing Lead', text: 'From strategy to execution, Richverseecotech delivered results beyond our expectations.' },
 ];
 
 /* --------------------------------------------------------------- Team */
 export const team = [
   { name: 'Richmond Azadze', role: 'Founder & Chief Executive Officer', bio: "Guiding RichverseEcotech's mission to accelerate sustainable growth through advanced digital innovation.", avatar: '/team/richmond.svg', linkedin: 'https://www.linkedin.com/in/richmond-azadze/', x: 'https://x.com/__richhimself' },
-  { name: 'Rapheal Asomani', role: 'Chief Technology Officer', bio: 'Driving eco-driven platforms with scalable cloud, AI technologies, and sustainable tech architectures.', avatar: '/team/rapheal.svg' },
-  { name: 'Bernard Blay', role: 'Head of Cybersecurity', bio: 'Ensuring the security, privacy, and resilience of every digital ecosystem we build.', avatar: '/team/bernard.svg' },
-  { name: 'Emmanuel Donkor', role: 'Head of Business Development', bio: 'Building lasting partnerships and unlocking new growth opportunities for businesses globally.', avatar: '/team/emmanuel.svg' },
-];
-
-/* ------------------------------------------------------------ Timeline */
-export const timeline = [
-  { year: '2018', event: 'RichverseEcotech founded with a vision for sustainable digital innovation.' },
-  { year: '2019', event: 'Launched our first AI-powered analytics platform.' },
-  { year: '2020', event: 'Expanded into cybersecurity and renewable energy solutions.' },
-  { year: '2021', event: 'Recognized as a top tech innovator in Africa.' },
-  { year: '2022', event: 'Helped 100+ businesses achieve digital transformation.' },
-  { year: '2023', event: 'Awarded for excellence in sustainable technology solutions.' },
+  { name: 'Rapheal Asomani', role: 'Chief Technology Officer', bio: 'Driving eco-driven platforms with scalable cloud, AI technologies, and sustainable tech architectures.', avatar: '/team/rapheal.svg', linkedin: 'https://www.linkedin.com/in/younggem/' },
+  { name: 'Bernard Blay', role: 'Head of Cybersecurity', bio: 'Ensuring the security, privacy, and resilience of every digital ecosystem we build.', avatar: '/team/bernard.svg', linkedin: 'https://www.linkedin.com/in/bernard-blay-a65981317/' },
+  { name: 'Emmanuel Donkor', role: 'Head of Business Development', bio: 'Building lasting partnerships and unlocking new growth opportunities for businesses globally.', avatar: '/team/emmanuel.svg', linkedin: 'https://www.linkedin.com/in/emmanuel-donkor-4347bb287/' },
 ];
 
 /* ------------------------------------------------------- Mission/Vision */

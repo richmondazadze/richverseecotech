@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import { brand, cssVars, services, techEcosystem } from '../data/site';
+import { brand, cssVars, services } from '../data/site';
 import Seo from '../components/Seo';
 import SectionHead from '../components/SectionHead';
 import ServiceTile from '../components/ServiceTile';
 import ValueCards from '../components/ValueCards';
+import TechStack from '../components/TechStack';
 import Stats from '../components/Stats';
 import Testimonials from '../components/Testimonials';
 import Partners from '../components/Partners';
@@ -76,7 +77,7 @@ export default function Home() {
           intro="We blend cutting-edge technology with sustainable practice to create lasting impact."
           align="center"
         />
-        <ValueCards limit={3} />
+        <ValueCards limit={4} columns={4} />
       </section>
 
       {/* TECH ECOSYSTEM */}
@@ -87,15 +88,7 @@ export default function Home() {
           intro="Our stack integrates the latest innovations to deliver powerful, scalable solutions."
           align="center"
         />
-        <div className="tech-grid">
-          {techEcosystem.map((t, i) => (
-            <div className="tech-card reveal" key={t.title} style={cssVars({ '--d': `${i * 70}ms` })}>
-              <span className="tech-dot" aria-hidden="true" />
-              <h3 className="tech-title">{t.title}</h3>
-              <p className="tech-body">{t.body}</p>
-            </div>
-          ))}
-        </div>
+        <TechStack />
       </section>
 
       {/* IMPACT */}

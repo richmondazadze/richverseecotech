@@ -1,4 +1,4 @@
-import { aboutFaqs, cssVars, missionVision, timeline } from '../data/site';
+import { aboutFaqs, cssVars, missionVision, process } from '../data/site';
 import Seo from '../components/Seo';
 import PageHead from '../components/PageHead';
 import ValueCards from '../components/ValueCards';
@@ -14,14 +14,14 @@ export default function About() {
     <div className="page section-pad-top">
       <Seo
         title="About — Richverseecotech"
-        description="Richverseecotech combines innovation and sustainability to transform the digital world — empowering businesses for a sustainable future since 2018."
+        description="Richverseecotech combines innovation and sustainability to transform the digital world — empowering businesses to build a sustainable future."
         path="/about"
       />
       <div className="container">
         <PageHead
           eyebrow="[ About ]"
           title={<>A studio for <em>living</em> systems.</>}
-          intro="RichverseEcotech combines innovation and sustainability to transform the digital world — empowering businesses for a sustainable future since 2018."
+          intro="RichverseEcotech combines innovation and sustainability to transform the digital world — empowering businesses to build a sustainable future."
         />
 
         {/* Mission & Vision */}
@@ -46,15 +46,20 @@ export default function About() {
           <ValueCards />
         </section>
 
-        {/* Timeline */}
+        {/* How we work */}
         <section className="section-pad">
-          <SectionHead eyebrow="[ Our Journey ]" title={<>A story of <em>growth</em>.</>} />
-          <div className="timeline">
-            {timeline.map((t, i) => (
-              <div className="timeline-row reveal" key={t.year} style={cssVars({ '--d': `${i * 50}ms` })}>
-                <span className="timeline-year">{t.year}</span>
-                <span className="timeline-dot" aria-hidden="true" />
-                <p className="timeline-event">{t.event}</p>
+          <SectionHead
+            eyebrow="[ How We Work ]"
+            title={<>The way we <em>build</em>.</>}
+            intro="A living process — we sense, shape, grow, and sustain, shipping value continuously rather than in a single reveal."
+          />
+          <div className="process-grid">
+            {process.map((s, i) => (
+              <div className="process-card reveal" key={s.n} style={cssVars({ '--d': `${i * 80}ms` })}>
+                <span className="process-n">{s.n}</span>
+                <span className="meta-line" />
+                <h3 className="process-title">{s.title}</h3>
+                <p className="process-body">{s.body}</p>
               </div>
             ))}
           </div>

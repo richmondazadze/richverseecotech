@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { brand, nav, cssVars } from '../data/site';
+import SocialIcon from './SocialIcon';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -96,11 +97,20 @@ export default function Footer() {
               {brand.hours}
             </p>
             <p className="footer-label" style={{ marginTop: '1.5rem' }}>[ Social ]</p>
-            <p className="footer-text footer-socials">
+            <div className="social-icons">
               {brand.socials.map((s) => (
-                <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
+                <a
+                  key={s.label}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="social-icon-link"
+                >
+                  <SocialIcon label={s.label} />
+                </a>
               ))}
-            </p>
+            </div>
           </div>
         </div>
 

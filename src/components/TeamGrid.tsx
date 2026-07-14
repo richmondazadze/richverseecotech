@@ -1,4 +1,5 @@
 import { cssVars, team } from '../data/site';
+import SocialIcon from './SocialIcon';
 
 export default function TeamGrid() {
   return (
@@ -21,9 +22,17 @@ export default function TeamGrid() {
           <p className="team-role">{m.role}</p>
           <p className="team-bio">{m.bio}</p>
           {(m.linkedin || m.x) && (
-            <div className="team-socials">
-              {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
-              {m.x && <a href={m.x} target="_blank" rel="noopener noreferrer">X</a>}
+            <div className="team-socials social-icons">
+              {m.linkedin && (
+                <a href={m.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on LinkedIn`} className="social-icon-link">
+                  <SocialIcon label="LinkedIn" />
+                </a>
+              )}
+              {m.x && (
+                <a href={m.x} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on X`} className="social-icon-link">
+                  <SocialIcon label="X" />
+                </a>
+              )}
             </div>
           )}
         </div>

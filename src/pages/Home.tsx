@@ -41,12 +41,9 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Decorative concave transition into the next section (non-interactive) */}
         <div className="wave-container" aria-hidden="true">
           <div className="wave-curve" />
-          <Link to="/services" className="wave-button">
-            <span>Initialize</span>
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
-          </Link>
         </div>
       </section>
 

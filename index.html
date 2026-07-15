@@ -8,9 +8,10 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Fonts are self-hosted (see @font-face in index.css). Preload only the
+         two hero/LCP faces so the headline paints with zero swap flash. -->
+    <link rel="preload" href="/fonts/playfair-display-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/playfair-display-400-italic.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Without JS the scroll-reveal content stays hidden; force it visible. -->
     <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
     <!-- Per-route title, meta, canonical, Open Graph & JSON-LD are injected here at build time (prerender.js) and managed by react-helmet-async on the client. -->

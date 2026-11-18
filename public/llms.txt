@@ -1,18 +1,22 @@
-# RichverseEcotech
+# Richverse Ecotech
 
-> Sustainable digital ecosystems where software, security, and renewable energy converge. We design and deliver digital solutions that elevate your brand, protect your assets, and fuel sustainable growth. Offices in Austin (United States) and Accra (Ghana); serving clients worldwide.
+> A technology and energy studio for teams commissioning websites, campaigns, security reviews, or energy plans. Offices in Austin (United States) and Accra (Ghana); accepting project enquiries worldwide.
 
 ## Services
-- [Web Development](https://richverseecotech.com/services/web-development): Custom web apps, e-commerce, mobile apps, UI/UX, and progressive web apps built to scale.
-- [Digital Marketing](https://richverseecotech.com/services/digital-marketing): SEO/SEM, social, email, content, and marketing automation that compounds growth.
-- [Cybersecurity](https://richverseecotech.com/services/cybersecurity): Risk assessment, penetration testing, managed security, compliance, and zero-trust architecture.
-- [Renewable Energy](https://richverseecotech.com/services/renewable-energy): Solar and wind systems, hybrid power, inverter installation, and sustainability consulting.
+- [Web Development](https://richverseecotech.com/services/web-development): Websites, storefronts, and business applications with a journey map, acceptance checks, and handover.
+- [Digital Marketing](https://richverseecotech.com/services/digital-marketing): Channel planning, content, landing pages, and reporting on qualified enquiries.
+- [Cybersecurity](https://richverseecotech.com/services/cybersecurity): Defensive reviews of business risks and access controls, remediation ownership, and closure evidence.
+- [Renewable Energy](https://richverseecotech.com/services/renewable-energy): Load profiles, solar and storage comparisons, and site checks for business continuity.
 
 ## Company
-- [About](https://richverseecotech.com/about): Mission, vision, leadership team, values, and how we work.
+- [About](https://richverseecotech.com/about): Leadership, office contact details, and how we work.
 - [Contact](https://richverseecotech.com/contact): Start a project or partnership. Email: richverseecotech@gmail.com
 
+## Studio work
+- [Service-to-enquiry redesign](https://richverseecotech.com/work/richverse-studio-website): An in-house project with a working example.
+
 ## Insights
+- [Repair, migrate, or rebuild?](https://richverseecotech.com/blog/repair-migrate-or-rebuild): How to scope changes to an existing website.
 - [Blog](https://richverseecotech.com/blog): Perspectives on sustainable technology, security, growth, and the systems shaping tomorrow.
 
 ## Policies

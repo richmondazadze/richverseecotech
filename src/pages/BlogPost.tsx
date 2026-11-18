@@ -1,29 +1,28 @@
 import { Link, useParams } from 'react-router-dom';
-import { getPostBySlug, getRelatedPosts } from '../data/blog';
-import { cssVars } from '../data/site';
+import { archiveSlug as toSlug, formatArticleDate, getPostBySlug } from '../data/blog';
 import Seo from '../components/Seo';
 import NotFound from './NotFound';
-import CTA from '../components/CTA';
 import JsonLd from '../components/JsonLd';
 import BlogImage from '../components/BlogImage';
+import { services } from '../data/site';
+import Icon from '../components/Icon';
 import { articleSchema, breadcrumbSchema } from '../data/structuredData';
 
-const toSlug = (s: string) => s.toLowerCase().replace(/\s+/g, '-');
 
 export default function BlogPost() {
   const { slug } = useParams();
   const post = slug ? getPostBySlug(slug) : undefined;
   if (!post) return <NotFound />;
 
-  const related = getRelatedPosts(post.slug, post.category);
+  const service = services.find(s => s.name === post.category);
 
   return (
     <div className="page section-pad-top">
       <Seo
-        title={`${post.title} — Richverseecotech`}
+        title={`${post.title} — Richverse Ecotech`}
         description={post.summary}
         path={`/blog/${post.slug}`}
-        image={post.image}
+        image={post.image} imageAlt={post.imageAlt}
         type="article"
       />
       <JsonLd data={[
@@ -35,59 +34,32 @@ export default function BlogPost() {
           { name: post.title, path: `/blog/${post.slug}` },
         ]),
       ]} />
-      <article className="container article">
-        <header className="article-head">
-          <p className="eyebrow reveal">
+      <article className="container article" data-reading>
+        <header className="article-head" data-scroll-section="article-intro">
+          <p className="eyebrow">
             <Link to="/blog" className="crumb">Insights</Link> /{' '}
             <Link to={`/blog/category/${toSlug(post.category)}`} className="crumb">{post.category}</Link>
           </p>
-          <h1 className="article-title reveal" style={cssVars({ '--d': '80ms' })}>{post.title}</h1>
-          <div className="article-meta reveal" style={cssVars({ '--d': '140ms' })}>
-            <span>{post.author}</span>
+          <h1 className="article-title">{post.title}</h1>
+          <div className="article-meta">
+            <Link className="byline" to="/about">By {post.author}</Link>
             <span>·</span>
-            <span>{post.date}</span>
+            <span>Published <time dateTime={post.published}>{post.date}</time></span>
+            {post.revised && <><span aria-hidden="true">·</span><span>Updated <time dateTime={post.revised}>{formatArticleDate(post.revised)}</time></span></>}
             <span>·</span>
             <span>{post.readTime}</span>
           </div>
+          <p className="article-deck">{post.summary}</p>
         </header>
-
-        <div className="article-media reveal">
-          <BlogImage src={post.image} alt={post.title} loading="eager" />
+        <div className="article-media" data-scroll-section="article-art" data-depth-scene data-enter="plate">
+          <BlogImage src={post.image} alt={post.imageAlt || post.title} loading="eager" />
         </div>
 
-        <div className="article-body reveal" dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div className="article-body" data-scroll-section="reading" dangerouslySetInnerHTML={{ __html: post.content }} />
 
-        <div className="article-tags">
-          {post.tags.map((t) => (
-            <Link key={t} to={`/blog/tag/${toSlug(t)}`}>[ {t} ]</Link>
-          ))}
-        </div>
+        {service && <aside className="article-next" data-scroll-section="next-read"><p className="eyebrow">Put the ideas to work</p><h2>Thinking about {service.name.toLowerCase()}?</h2><p>{service.short}</p><Link to={`/services/${service.slug}`} className="studio-link">Explore our {service.name.toLowerCase()} services<Icon name="arrow-right" size={18} /></Link></aside>}
+
       </article>
-
-      {related.length > 0 && (
-        <section className="container section-pad">
-          <div className="section-head">
-            <p className="eyebrow reveal">[ Keep reading ]</p>
-            <h2 className="section-title reveal" style={cssVars({ '--d': '80ms' })}>Related <em>insights</em>.</h2>
-          </div>
-          <div className="blog-grid">
-            {related.map((p) => (
-              <Link to={`/blog/${p.slug}`} className="blog-card reveal" key={p.slug}>
-                <div className="blog-card-media">
-                  <BlogImage src={p.image} alt={p.title} />
-                </div>
-                <p className="blog-cat">[ {p.category} ]</p>
-                <h3 className="blog-card-title">{p.title}</h3>
-                <div className="blog-meta">
-                  <span>{p.date}</span><span>·</span><span>{p.readTime}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      <CTA title={<>Have a project in <em>mind</em>?</>} />
     </div>
   );
 }

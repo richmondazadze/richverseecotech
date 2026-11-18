@@ -1,121 +1,35 @@
+import EnquiryProof from '../components/EnquiryProof';
+import ChapterRule from '../components/ChapterRule';
 import { Link } from 'react-router-dom';
-import { brand, cssVars, services } from '../data/site';
+import { services } from '../data/site';
+import { stories, storyPath } from '../data/stories';
 import Seo from '../components/Seo';
 import SectionHead from '../components/SectionHead';
 import ServiceTile from '../components/ServiceTile';
-import ValueCards from '../components/ValueCards';
-import TechStack from '../components/TechStack';
-import Stats from '../components/Stats';
-import Testimonials from '../components/Testimonials';
 import Partners from '../components/Partners';
 import CTA from '../components/CTA';
 import JsonLd from '../components/JsonLd';
+import Icon from '../components/Icon';
+import PracticeCover from '../components/PracticeCover';
 import { servicesItemListSchema } from '../data/structuredData';
 
 export default function Home() {
-  return (
-    <>
-      <Seo
-        title="Richverseecotech — We build what moves you forward"
-        description={brand.blurb}
-        path="/"
-      />
-      <JsonLd data={servicesItemListSchema()} />
-      {/* HERO */}
-      <section className="hero" id="top">
-        <div className="mesh" aria-hidden="true">
-          <span className="mesh-blob mesh-a" />
-          <span className="mesh-blob mesh-b" />
-          <span className="mesh-blob mesh-c" />
-        </div>
-
-        <div className="hero-content">
-          <p className="eyebrow hero-eyebrow reveal">[ {brand.subtagline} ]</p>
-          <h1 className="hero-title">
-            <span className="reveal" style={cssVars({ '--d': '60ms' })}>We build what</span>
-            <span className="reveal" style={cssVars({ '--d': '140ms' })}><em>moves you</em></span>
-            <span className="reveal" style={cssVars({ '--d': '220ms' })}>forward</span>
-          </h1>
-          <p className="hero-sub reveal" style={cssVars({ '--d': '320ms' })}>
-            {brand.blurb}
-          </p>
-          <div className="hero-actions reveal" style={cssVars({ '--d': '400ms' })}>
-            <Link to="/contact" className="btn-primary">Get started</Link>
-            <Link to="/services" className="btn-ghost">Explore services</Link>
-          </div>
-        </div>
-
-        {/* Decorative concave transition into the next section (non-interactive) */}
-        <div className="wave-container" aria-hidden="true">
-          <div className="wave-curve" />
-        </div>
-      </section>
-
-      {/* TECH WE USE — logos of the platforms we build on */}
-      <section className="trust-bar section-pad-sm">
-        <p className="trust-label reveal">Technologies we build with</p>
-        <Partners />
-      </section>
-
-      {/* SERVICES */}
-      <section className="section-pad container">
-        <SectionHead
-          eyebrow="[ Our Services ]"
-          title={<>Comprehensive <em>solutions</em>.</>}
-          intro="Four disciplines, one philosophy — build systems that grow, adapt, and endure."
-          link={{ to: '/services', label: 'All services' }}
-        />
-        <div className="service-grid">
-          {services.map((s, i) => (
-            <ServiceTile key={s.slug} service={s} index={i} />
-          ))}
-        </div>
-      </section>
-
-      {/* PRINCIPLES / VALUES */}
-      <section className="section-pad container">
-        <SectionHead
-          eyebrow="[ Innovation & Sustainability ]"
-          title={<>Our commitment to <em>excellence</em>.</>}
-          intro="We blend cutting-edge technology with sustainable practice to create lasting impact."
-          align="center"
-        />
-        <ValueCards limit={4} columns={4} />
-      </section>
-
-      {/* TECH ECOSYSTEM */}
-      <section className="section-pad container">
-        <SectionHead
-          eyebrow="[ Technology Ecosystem ]"
-          title={<>Powered by <em>cutting-edge</em> tech.</>}
-          intro="Our stack integrates the latest innovations to deliver powerful, scalable solutions."
-          align="center"
-        />
-        <TechStack />
-      </section>
-
-      {/* IMPACT */}
-      <section className="stats-band section-pad container">
-        <SectionHead
-          eyebrow="[ Our Impact ]"
-          title={<>Measured by what we <em>create</em>.</>}
-          align="center"
-        />
-        <Stats />
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="section-pad container">
-        <SectionHead
-          eyebrow="[ Client Stories ]"
-          title={<>What our clients <em>say</em>.</>}
-          align="center"
-        />
-        <Testimonials />
-      </section>
-
-      {/* CTA */}
-      <CTA title={<>Ready to build something <em>alive</em>?</>} />
-    </>
-  );
+  const story = stories[0];
+  return <>
+    <Seo title="Richverse Ecotech | Technology & Energy Studio" description="Web development, digital marketing, cybersecurity and renewable energy. Meet the Richverse Ecotech studio in Austin and Accra and discuss your project." path="/" />
+    <JsonLd data={servicesItemListSchema()} />
+    <PracticeCover/>
+    <section className="container feature-spread" aria-labelledby="work-title">
+      <ChapterRule/>
+      <div className="feature-copy"><p className="eyebrow index-label">01 / In-house project</p><h2 id="work-title">{story.title}.</h2><p>{story.brief}</p><Link className="studio-link" to={storyPath(story.slug)}>Read the project story<Icon name="arrow-right" size={18}/></Link></div>
+      <EnquiryProof/>
+    </section>
+    <Partners />
+    <section id="expertise" className="section-pad container">
+      <SectionHead eyebrow="02 / Capabilities" title={<>Where we can <em>help.</em></>} intro="Choose the problem closest to yours. Each brief shows what we would make, the decisions you would own, and how to tell if the work is ready." link={{ to: '/services', label: 'Compare services' }} />
+      <div className="service-grid">{services.map(s => <ServiceTile key={s.slug} service={s} />)}</div>
+    </section>
+    <section className="container section-pad"><div className="studio-note"><ChapterRule/><p className="eyebrow">03 / The studio</p><div><h2>Who will work on your project?</h2><p>Meet the people who shape the brief, make the technical decisions and stay accountable for delivery.</p><Link to="/about" className="studio-link">Meet the team<Icon name="arrow-right" size={18}/></Link></div></div></section>
+    <CTA title={<>What are you <em>working on?</em></>} />
+  </>;
 }

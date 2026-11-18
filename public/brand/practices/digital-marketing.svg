@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="100" viewBox="0 0 144 100" fill="none" stroke="#353565" stroke-width="1.8" stroke-linejoin="round">
+  <rect width="144" height="100" fill="#e2e3f0" stroke="none" />
+  <path d="M18 14C61 14 64 50 103 50" />
+  <path d="M18 24C61 24 64 50 103 50" />
+  <path d="M18 34C61 34 64 50 103 50" />
+  <path d="M18 44C61 44 64 50 103 50" />
+  <path d="M18 54C61 54 64 50 103 50" />
+  <path d="M18 64C61 64 64 50 103 50" />
+  <path d="M18 74C61 74 64 50 103 50" />
+  <path d="M18 84C61 84 64 50 103 50" />
+  <path d="M104 19v62m-28-62v62" stroke-dasharray="2 4" stroke-width="1" opacity=".6" />
+  <path d="M103 50h23" />
+  <circle cx="126" cy="50" r="3" fill="#353565" stroke="none" />
+</svg>

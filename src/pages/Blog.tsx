@@ -1,13 +1,13 @@
 import { Link, useParams } from 'react-router-dom';
-import { blogPosts, blogCategories } from '../data/blog';
-import { cssVars } from '../data/site';
+import NotFound from './NotFound';
+import { archiveSlug as slug, blogPosts, blogCategories } from '../data/blog';
 import Seo from '../components/Seo';
 import PageHead from '../components/PageHead';
 import JsonLd from '../components/JsonLd';
+import Icon from '../components/Icon';
 import BlogImage from '../components/BlogImage';
 import { breadcrumbSchema } from '../data/structuredData';
 
-const slug = (s: string) => s.toLowerCase().replace(/\s+/g, '-');
 
 export default function Blog() {
   const { category, tag } = useParams();
@@ -25,52 +25,39 @@ export default function Blog() {
     : null;
 
   const isFiltered = Boolean(category || tag);
-  const featured = !isFiltered ? blogPosts.find((p) => p.featured) ?? blogPosts[0] : null;
+  const featured = isFiltered ? (filtered.length === 1 ? filtered[0] : null) : blogPosts.find(p => p.featured) ?? blogPosts[0];
   const list = featured ? filtered.filter((p) => p.slug !== featured.slug) : filtered;
+
+  if (isFiltered && !filtered.length) return <NotFound />;
 
   return (
     <div className="page section-pad-top">
       <Seo
-        title={activeLabel ? `${activeLabel} — Insights · Richverseecotech` : 'Insights — Richverseecotech'}
-        description="Perspectives on sustainable technology, security, growth, and the systems shaping tomorrow."
+        title={activeLabel ? `${activeLabel} ${tag ? "Topics" : "Articles"} | Richverse Ecotech` : 'Insights on Technology & Sustainability | Richverse Ecotech'}
+        noindex={Boolean(tag)}
+        description={activeLabel ? `Articles on ${activeLabel} from the Richverse Ecotech team.` : "Guides to web development, marketing measurement, security reviews, and energy planning from Richverse Ecotech."}
         path={category ? `/blog/category/${category}` : tag ? `/blog/tag/${tag}` : '/blog'}
       />
-      <JsonLd data={breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Insights', path: '/blog' }])} />
+      <JsonLd data={breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Insights', path: '/blog' }, ...(activeLabel ? [{ name: activeLabel, path: category ? `/blog/category/${category}` : `/blog/tag/${tag}` }] : [])])} />
       <div className="container">
         <PageHead
-          eyebrow={tag ? '[ Tag ]' : category ? '[ Category ]' : '[ Insights ]'}
-          title={activeLabel ? <><em>{activeLabel}</em>.</> : <>Notes on <em>what&rsquo;s next</em>.</>}
+          eyebrow={tag ? 'Topic archive' : category ? 'Discipline archive' : 'Studio journal'}
+          title={activeLabel ? <><em>{activeLabel}</em>.</> : <>Notes from <em>the studio.</em></>}
           intro={
             activeLabel
-              ? `Articles filed under ${activeLabel}.`
-              : 'Perspectives on sustainable technology, security, growth, and the systems shaping tomorrow.'
+              ? undefined
+              : 'Practical guides to websites, campaigns, security, and the energy decisions behind a business.'
           }
         />
 
-        {/* Featured (unfiltered only) */}
-        {featured && (
-          <Link to={`/blog/${featured.slug}`} className="blog-featured reveal">
-            <div className="blog-featured-media">
-              <BlogImage src={featured.image} alt={featured.title} />
-            </div>
-            <div className="blog-featured-body">
-              <p className="blog-cat">[ {featured.category} ]</p>
-              <h2 className="blog-featured-title">{featured.title}</h2>
-              <p className="blog-featured-sum">{featured.summary}</p>
-              <div className="blog-meta">
-                <span>{featured.date}</span><span>·</span><span>{featured.readTime}</span>
-              </div>
-            </div>
-          </Link>
-        )}
-
         {/* Category filters (deep-linkable) */}
-        <nav className="blog-filters reveal" aria-label="Blog categories">
-          <Link to="/blog" className={'chip' + (!isFiltered ? ' is-active' : '')}>All</Link>
+        <nav className="blog-filters" aria-label="Blog categories">
+          <Link to="/blog" aria-current={!isFiltered ? 'page' : undefined} className={'chip' + (!isFiltered ? ' is-active' : '')}>All</Link>
           {blogCategories.map((c) => (
             <Link
               key={c}
               to={`/blog/category/${slug(c)}`}
+              aria-current={category === slug(c) ? 'page' : undefined}
               className={'chip' + (category === slug(c) ? ' is-active' : '')}
             >
               {c}
@@ -78,21 +65,39 @@ export default function Blog() {
           ))}
         </nav>
 
+        {/* A lone archive result also gets the full editorial spread. */}
+        {featured && (
+          <Link to={`/blog/${featured.slug}`} className="blog-featured" data-scroll-section="feature">
+            <div className="blog-featured-media" data-depth-scene data-enter="plate">
+              <BlogImage src={featured.image} alt="" loading="eager" />
+            </div>
+            <div className="blog-featured-body">
+              <p className="blog-cat">{featured.category}</p>
+              <h2 className="blog-featured-title">{featured.title}</h2>
+              <p className="blog-featured-sum">{featured.summary}</p>
+              <div className="blog-meta">
+                <span>{featured.date}</span><span>·</span><span>{featured.readTime}</span>
+              </div>
+              <span className="feature-read">Read the guide<Icon name="arrow-right" size={16}/></span>
+            </div>
+          </Link>
+        )}
+
         {/* Grid */}
-        {list.length === 0 ? (
-          <p className="blog-empty">No articles here yet. <Link to="/blog" className="crumb">View all insights</Link>.</p>
-        ) : (
+        {list.length > 0 && (
           <div className="blog-grid">
-            {list.map((p, i) => (
-              <Link to={`/blog/${p.slug}`} className="blog-card reveal" key={p.slug} style={cssVars({ '--d': `${(i % 3) * 70}ms` })}>
-                <div className="blog-card-media">
-                  <BlogImage src={p.image} alt={p.title} />
+            {list.map((p) => (
+              <Link to={`/blog/${p.slug}`} className="blog-card" data-scroll-section="journal-card" key={p.slug}>
+                <div className="blog-card-media" data-depth-scene data-enter="plate">
+                  <BlogImage src={p.image} alt="" />
                 </div>
-                <p className="blog-cat">[ {p.category} ]</p>
-                <h3 className="blog-card-title">{p.title}</h3>
-                <p className="blog-card-sum">{p.summary}</p>
-                <div className="blog-meta">
-                  <span>{p.date}</span><span>·</span><span>{p.readTime}</span>
+                <div className="blog-card-body">
+                  <p className="blog-cat">{p.category}</p>
+                  <h2 className="blog-card-title">{p.title}</h2>
+                  <p className="blog-card-sum">{p.summary}</p>
+                  <div className="blog-meta">
+                    <span>{p.date}</span><span>·</span><span>{p.readTime}</span>
+                  </div>
                 </div>
               </Link>
             ))}

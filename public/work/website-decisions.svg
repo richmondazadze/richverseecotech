@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+<title>Website decisions: repair, migrate, rebuild</title>
+<rect width="1200" height="750" fill="#28263e"/>
+<g transform="translate(142 140)" font-family="Helvetica,Arial,sans-serif" fill="#f7f6fc">
+<text x="0" y="27" font-size="20" letter-spacing="3">RICHVERSE   /   WEB DEVELOPMENT</text>
+<g stroke="#a59fc9" fill="none" stroke-width="2"><path d="M0 62h916M0 444h916"/><path d="M77 244h94c63 0 45-113 119-113h91m-210 113h210m-210 0c63 0 45 113 119 113h91"/>
+</g><g stroke="#d6d1ff" stroke-width="4" fill="#28263e"><circle cx="65" cy="244" r="12"/><circle cx="381" cy="131" r="7"/><circle cx="381" cy="244" r="7"/><circle cx="381" cy="357" r="7"/></g>
+<g font-size="46"><text x="420" y="145">Repair</text><text x="420" y="258">Migrate</text><text x="420" y="371">Rebuild</text></g>
+<g font-size="24" fill="#d3cee7"><text x="650" y="143">One task</text><text x="650" y="256">The platform</text><text x="650" y="369">The workflow</text></g>
+</g></svg>

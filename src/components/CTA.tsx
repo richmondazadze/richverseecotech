@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ReactNode } from 'react';
-import { cssVars } from '../data/site';
+import Icon from './Icon';
+import ChapterRule from './ChapterRule';
 
 type Props = {
   title: ReactNode;
@@ -10,11 +11,9 @@ type Props = {
 
 export default function CTA({ title, buttonLabel = 'Start a project', to = '/contact' }: Props) {
   return (
-    <section className="cta-band section-pad">
-      <h2 className="cta-title reveal">{title}</h2>
-      <Link to={to} className="btn-primary reveal" style={cssVars({ '--d': '120ms' })}>
-        {buttonLabel}
-      </Link>
-    </section>
+    <section className="cta-section"><div className="container cta-band"><ChapterRule/>
+      <div><p className="eyebrow">A good place to begin</p><h2 className="cta-title">{title}</h2><p>A rough idea or an existing project is enough. Tell us what needs to change.</p></div>
+      <div className="cta-action"><Link to={to} className="btn-primary">{buttonLabel}<Icon name="arrow-right" size={20} /></Link><span>We aim to reply within one business day.</span></div>
+    </div></section>
   );
 }

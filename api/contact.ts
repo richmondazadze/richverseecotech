@@ -1,62 +1,45 @@
 import { Resend } from 'resend';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-// Where notifications are delivered, and the verified sender domain.
-const TO = process.env.CONTACT_TO || 'richverseecotech@gmail.com';
-const FROM = process.env.CONTACT_FROM || 'Richverseecotech <contact@richverseecotech.com>';
+import { field, validEmail, objectBody } from '../server/forms.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    res.setHeader('Allow', 'POST');
+    return res.status(405).json({ error: 'Method not allowed.' });
   }
-
+  const body = objectBody(req.body);
+  const name = field(body.name, 100);
+  const email = field(body.email, 254);
+  const message = field(body.message, 5000);
+  const subject = field(body.subject, 150, false);
+  if (name === null || email === null || message === null || subject === null || !validEmail(email) || /[\r\n]/.test(name + subject) || body.website) {
+    return res.status(400).json({ error: 'Please check your name, email, and message, then try again.' });
+  }
+  if (!process.env.RESEND_API_KEY) return res.status(503).json({ error: 'The form is temporarily unavailable. Please email us directly.' });
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const from = process.env.CONTACT_FROM || 'Richverse Ecotech <contact@richverseecotech.com>';
+  const to = process.env.CONTACT_TO || 'richverseecotech@gmail.com';
   try {
-    const { name, email, subject, message } = req.body ?? {};
-
-    if (!name || !email || !message) {
-      return res.status(400).json({ error: 'Name, email, and message are required.' });
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({ error: 'Please enter a valid email address.' });
-    }
-
-    // Notify the business
-    await resend.emails.send({
-      from: FROM,
-      to: TO,
-      replyTo: email,
+    const delivery = await resend.emails.send({
+      from, to, replyTo: email,
       subject: `New enquiry: ${subject || 'General enquiry'}`,
-      html: `
-        <h2>New contact form submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
-        <p><strong>Message:</strong></p>
-        <p>${String(message).replace(/\n/g, '<br/>')}</p>
-      `,
+      text: `New enquiry from ${name}\nEmail: ${email}\nService: ${subject || 'General enquiry'}\n\n${message}`,
     });
-
-    // Confirmation to the sender
-    await resend.emails.send({
-      from: FROM,
-      to: email,
-      subject: 'Thanks for contacting Richverseecotech',
-      html: `
-        <div style="font-family: Arial, sans-serif; color: #171717;">
-          <h2 style="color:#4338ca;">Thank you for reaching out</h2>
-          <p>Dear ${name},</p>
-          <p>We've received your message and our team will get back to you within one business day.</p>
-          <p>Warm regards,<br/>The Richverseecotech Team</p>
-        </div>
-      `,
-    });
-
-    return res.status(200).json({ message: 'Message sent successfully.' });
-  } catch (error) {
-    console.error('contact error:', error);
-    return res.status(500).json({ error: 'Failed to send message. Please email us directly.' });
+    // Resend returns provider errors in the response instead of always throwing.
+    if (delivery.error || !delivery.data?.id) {
+      console.error('Contact notification rejected by email provider.');
+      return res.status(502).json({ error: 'We couldn’t send your enquiry. Please try again or email us directly.' });
+    }
+    // An acknowledgement failure must not invite a duplicate business enquiry.
+    try {
+      await resend.emails.send({ from, to: email, subject: 'Thanks for contacting Richverse Ecotech', text: `Hi ${name},\n\nThank you for getting in touch. We aim to reply to your enquiry within one business day.\n\nRichverse Ecotech\n${to}` });
+    } catch {
+      console.warn('Contact acknowledgement could not be sent.');
+    }
+    return res.status(200).json({ message: 'Enquiry received.' });
+  } catch {
+    console.error('Contact notification failed.');
+    return res.status(502).json({ error: 'We couldn’t confirm delivery. Please email us to check before trying again.' });
   }
 }

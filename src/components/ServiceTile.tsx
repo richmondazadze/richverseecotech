@@ -1,24 +1,15 @@
 import { Link } from 'react-router-dom';
-import { cssVars, Service } from '../data/site';
+import { practice } from '../data/practice';
+import type { Service } from '../data/site';
+import Icon from './Icon';
 
-export default function ServiceTile({ service, index = 0 }: { service: Service; index?: number }) {
-  return (
-    <Link
-      to={`/services/${service.slug}`}
-      className="service-tile reveal"
-      style={cssVars({ '--tint': service.tint, '--accent': service.accent, '--d': `${(index % 2) * 80}ms` })}
-    >
-      <div className="service-orb" style={cssVars({ '--orb': service.orb })} />
-      <div className="service-tile-top">
-        <span className="service-index">{String(index + 1).padStart(2, '0')}</span>
-        <span className="service-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M8 7h9v9" /></svg>
-        </span>
-      </div>
-      <h3 className="service-name">{service.name}</h3>
-      <p className="service-desc">{service.short}</p>
-      <span className="meta-line" />
-      <span className="service-cta">Explore service</span>
-    </Link>
-  );
+export default function ServiceTile({ service, headingLevel = 3 }: { service: Service; headingLevel?: 2 | 3 }) {
+  const Heading = headingLevel === 2 ? 'h2' : 'h3';
+  const item = practice[service.slug];
+  return <Link to={'/services/' + service.slug} className="service-tile" data-scroll-section="capability" aria-label={'Explore ' + service.name}>
+    <img className="cap-media" data-enter="index" src={'/brand/practices/'+service.slug+'.svg'} width="144" height="100" alt="" loading="lazy"/>
+    <div className="cap-title"><span className="cap-label">{item.specialty}</span><Heading className="service-name">{service.name}</Heading></div>
+    <p className="service-desc">{item.indexCopy}</p>
+    <span className="service-arrow"><Icon name="arrow-right" size={22}/></span>
+  </Link>;
 }

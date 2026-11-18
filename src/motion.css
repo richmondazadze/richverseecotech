@@ -1,0 +1,94 @@
+/* One motion language: steady navigation, expressive content, native scrolling. */
+.nav-indicator { position: absolute; bottom: 3px; left: 0; height: 2px; background: var(--indigo); transition: transform 480ms var(--ease), width 480ms var(--ease), opacity 200ms; pointer-events: none; }
+.nav-link.is-active { color: var(--indigo); }
+.chip.is-active { background: var(--indigo); border-color: var(--indigo); }
+#compact-nav:not([hidden]) { transform-origin: top; animation: menu-enter 280ms var(--ease); }
+.btn-primary, .header-cta, .btn-light { transition: background 220ms, box-shadow 300ms, transform 300ms var(--ease); }
+.btn-primary > svg, .header-cta > svg, .studio-link > svg { transition: transform 300ms var(--ease); }
+.btn-primary:hover > svg, .header-cta:hover > svg, .studio-link:hover > svg { transform: translateX(2px); }
+.btn-primary:active, .header-cta:active { transform: scale(.98); }
+.blog-card-media img:not([data-depth]) { transition: transform 700ms var(--ease); }
+.chip { transition: color 200ms, background 250ms, border-color 250ms; }
+.studio-link:hover > [data-glyph='arrow-right'] { transform:translateX(2px); }
+@keyframes menu-enter { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+html[data-motion='reduced'] *, html[data-motion='reduced'] *::before, html[data-motion='reduced'] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+html[data-motion='reduced'] { scroll-behavior: auto; }
+/* The complete, static list is also the no-JS and failed-runtime fallback. */
+html:not([data-scroll-engine="gsap"]) .platform-track,
+.platform-inner[data-expanded="true"] .platform-track { display:block; width:auto; animation:none; }
+html:not([data-scroll-engine="gsap"]) .platform-list,
+.platform-inner[data-expanded="true"] .platform-list { width:100%; flex-wrap:wrap; padding:0; gap:1rem 2rem; }
+html:not([data-scroll-engine="gsap"]) .platform-copy,
+.platform-inner[data-expanded="true"] .platform-copy,
+html:not([data-scroll-engine="gsap"]) .toolkit-switch { display:none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+/* The photographic crop follows the hero out of view. No wheel interception or pinned content. */
+.platform-track { animation-play-state:paused; }
+.platform-window[data-running="true"] .platform-track { animation-play-state:running; }
+@media(hover:hover) { .platform-window[data-running="true"]:hover .platform-track { animation-play-state:paused; } }
+.reading-rail { position:absolute;inset:auto 0 -1px;height:2px;pointer-events:none; }
+.reading-rail i { display:block;width:100%;height:100%;background:var(--indigo);transform:scaleX(0);transform-origin:left; }
+/* The native disclosure owns focus and exclusivity. Animate its actual space,
+   including on close, so the next question travels with the answer. */
+.faq { --faq-duration:420ms; }
+.faq-answer-clip { min-height:0; overflow:hidden; }
+@supports selector(details::details-content) {
+  /* Keep the box in layout until the closing transition finishes in WebKit.
+     Visibility hides the closed answer from interaction and assistive technology. */
+  .faq-item::details-content { display:grid; grid-template-rows:0fr; content-visibility:visible; visibility:hidden; }
+  .faq-item[open]::details-content { grid-template-rows:1fr; visibility:visible; }
+  @media(prefers-reduced-motion:no-preference) {
+    html:not([data-motion="reduced"]) .faq-item::details-content {
+      transition:grid-template-rows var(--faq-duration) ease-in-out,
+        visibility 0s linear var(--faq-duration);
+    }
+    html:not([data-motion="reduced"]) .faq-item[open]::details-content { transition-delay:0s; }
+  }
+}
+@media(prefers-reduced-motion:no-preference) {
+  html:not([data-motion="reduced"]) .faq-icon::after { transition:transform var(--faq-duration) ease-in-out; }
+}
+@media(prefers-reduced-motion:reduce) { .reading-rail { display:none; } }
+html[data-motion="reduced"] .reading-rail { display:none; }
+
+/* The stroke and terminal echo the Heritage symbol. They sit on the existing hairline. */
+.engagement,.studio-note,.story-row,.cta-band { position:relative; }
+.chapter-rule { position:absolute;inset-block-start:-3px;inset-inline-start:0;width:36px;height:5px;pointer-events:none;color:var(--indigo); }
+.feature-spread > .chapter-rule,.cta-band > .chapter-rule { inset-inline-start:var(--gutter); }
+.feature-spread > .chapter-rule { inset-block-start:-2px; }
+.chapter-rule::before { content:"";position:absolute;left:0;right:3px;top:2px;height:1px;background:currentColor; }
+.chapter-rule::after { content:"";position:absolute;right:0;top:0;width:5px;height:5px;border:1px solid currentColor;border-radius:50%;background:var(--paper); }
+
+/* Reserve the full project-image travel inside its mount. */
+:root { --rv-mount:22px; }
+@media(max-width:760px){:root{--rv-mount:10px;}}
+[data-depth="atlas"] { transform-origin:center;transform-box:view-box; }
+[data-depth="route"] { transform-box:fill-box; }
+:is(a,summary,button):focus-visible [data-cue],
+main [data-cue]:has(:focus-visible) {transform:none!important;translate:none!important;opacity:1!important;clip-path:none!important;}
+@media print, (prefers-reduced-motion:reduce) {
+  :is([data-cue],[data-depth],[data-figure-stage],.cover-line > *,.cover-lens) {transform:none!important;translate:none!important;opacity:1!important;clip-path:none!important;}
+}
+
+/* Stationary frames separate the section's print, photo and copy planes. */
+.blog-featured-media picture,.article-media picture {display:block;width:100%;height:100%;}
+.article-head > .article-deck {margin:1.5rem 0 0;}
+.brief-panel[data-scroll-section="enquiry"] {position:relative;}
+.enquiry-trace {display:none;pointer-events:none;position:absolute;inset:1.25rem auto 1.25rem -1px;width:3px;overflow:hidden;border-radius:2px;}
+html[data-scroll-engine="gsap"] .enquiry-trace {display:block;}
+.enquiry-trace > i {display:block;width:100%;height:20%;background:var(--indigo);border-radius:inherit;}
+@media print, (prefers-reduced-motion:reduce) {html[data-scroll-engine] .enquiry-trace {display:none;}}
+
+.blog-card-body {display:flex;flex:1;flex-direction:column;}
+
+/* The prerendered site is visible. Only an active motion controller can arm a slide. */
+html[data-scroll-engine="gsap"] [data-slide="waiting"] { opacity:0!important; }
+html[data-scroll-engine="gsap"] .route-frame {overflow-x:clip;}
+html[data-scroll-engine="gsap"] .site-footer {overflow:clip;}
+html[data-scroll-engine="gsap"] [data-slide]:focus-within {opacity:1!important;}
+@media print, (prefers-reduced-motion:reduce) {
+  html[data-scroll-engine] [data-slide] {opacity:1!important;translate:none!important;clip-path:none!important;}
+}

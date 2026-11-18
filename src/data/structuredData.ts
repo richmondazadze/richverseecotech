@@ -106,15 +106,14 @@ export function servicesItemListSchema() {
 }
 
 export function articleSchema(post: BlogPost) {
-  const iso = new Date(post.date).toISOString().slice(0, 10);
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.summary,
     image: post.image.startsWith('http') ? post.image : `${SITE}${post.image}`,
-    datePublished: iso,
-    dateModified: iso,
+    datePublished: post.published,
+    dateModified: post.revised ?? post.published,
     author: { '@type': 'Organization', name: post.author, '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
     mainEntityOfPage: `${SITE}/blog/${post.slug}`,

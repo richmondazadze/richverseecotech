@@ -1,10 +1,10 @@
-import { aboutFaqs, cssVars, missionVision, process } from '../data/site';
+import StudioAtlas from '../components/StudioAtlas';
+import ChapterRule from '../components/ChapterRule';
+import Icon from '../components/Icon';
+import { Link } from 'react-router-dom';
+import { brand, aboutFaqs, team } from '../data/site';
 import Seo from '../components/Seo';
-import PageHead from '../components/PageHead';
-import ValueCards from '../components/ValueCards';
-import Stats from '../components/Stats';
-import TeamGrid from '../components/TeamGrid';
-import Partners from '../components/Partners';
+import TeamGrid, { ProfileLinks } from '../components/TeamGrid';
 import FAQ from '../components/FAQ';
 import SectionHead from '../components/SectionHead';
 import CTA from '../components/CTA';
@@ -12,104 +12,24 @@ import JsonLd from '../components/JsonLd';
 import { faqSchema, breadcrumbSchema } from '../data/structuredData';
 
 export default function About() {
-  return (
-    <div className="page section-pad-top">
-      <Seo
-        title="About — Richverseecotech"
-        description="Richverseecotech combines innovation and sustainability to transform the digital world — empowering businesses to build a sustainable future."
-        path="/about"
-      />
-      <JsonLd data={[
-        breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }]),
-        faqSchema(aboutFaqs),
-      ]} />
-      <div className="container">
-        <PageHead
-          eyebrow="[ About ]"
-          title={<>A studio for <em>living</em> systems.</>}
-          intro="RichverseEcotech combines innovation and sustainability to transform the digital world — empowering businesses to build a sustainable future."
-        />
-
-        {/* Mission & Vision */}
-        <section className="mv-grid">
-          <div className="mv-card reveal">
-            <p className="footer-label mv-label">[ Our Mission ]</p>
-            <p className="mv-text">{missionVision.mission}</p>
-          </div>
-          <div className="mv-card reveal" style={cssVars({ '--d': '100ms' })}>
-            <p className="footer-label mv-label">[ Our Vision ]</p>
-            <p className="mv-text">{missionVision.vision}</p>
-          </div>
-        </section>
-
-        {/* Values */}
-        <section className="section-pad">
-          <SectionHead
-            eyebrow="[ Our Values ]"
-            title={<>Guiding <em>principles</em>.</>}
-            intro="Six convictions that shape everything we design and build."
-          />
-          <ValueCards />
-        </section>
-
-        {/* How we work */}
-        <section className="section-pad">
-          <SectionHead
-            eyebrow="[ How We Work ]"
-            title={<>The way we <em>build</em>.</>}
-            intro="A living process — we sense, shape, grow, and sustain, shipping value continuously rather than in a single reveal."
-          />
-          <div className="process-grid">
-            {process.map((s, i) => (
-              <div className="process-card reveal" key={s.n} style={cssVars({ '--d': `${i * 80}ms` })}>
-                <span className="process-n">{s.n}</span>
-                <span className="meta-line" />
-                <h3 className="process-title">{s.title}</h3>
-                <p className="process-body">{s.body}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+  return <div className="page studio-page">
+    <Seo title="Our Studio & Team | Richverse Ecotech" description="Meet the people who lead Richverse Ecotech’s web, security, marketing, and energy work across Austin and Accra." path="/about"/>
+    <JsonLd data={[breadcrumbSchema([{name:'Home',path:'/'},{name:'About',path:'/about'}]),faqSchema(aboutFaqs)]}/>
+    <section className="container people-cover" aria-labelledby="people-title">
+      <div className="people-intro"><p className="eyebrow">Inside Richverse</p>
+        <h1 className="page-title" id="people-title">The people behind <em>your project.</em></h1>
+        <p className="page-intro">From the first technical decision to the final handover, here’s who takes responsibility for the work.</p>
+        <Link className="studio-link" to="/about#leadership">Meet the rest of the team<Icon name="arrow-right" size={18}/></Link>
       </div>
-
-      {/* Impact */}
-      <section className="stats-band section-pad container">
-        <SectionHead eyebrow="[ Our Impact ]" title={<>What we <em>stand for</em>.</>} align="center" />
-        <Stats />
-      </section>
-
-      {/* Partners */}
-      <section className="section-pad">
-        <div className="container">
-          <SectionHead
-            eyebrow="[ Our Stack ]"
-            title={<>Technologies we <em>build with</em>.</>}
-            align="center"
-          />
-        </div>
-        <Partners />
-      </section>
-
-      {/* Team */}
-      <section className="section-pad container">
-        <SectionHead
-          eyebrow="[ Our Leadership ]"
-          title={<>Meet the <em>team</em>.</>}
-          intro="Passionate professionals driving innovation and excellence in technology and sustainability."
-          align="center"
-        />
-        <TeamGrid />
-      </section>
-
-      {/* FAQ */}
-      <section className="section-pad container">
-        <SectionHead eyebrow="[ FAQ ]" title={<>Common <em>questions</em>.</>} align="center" />
-        <div className="faq-wrap">
-          <FAQ items={aboutFaqs} />
-        </div>
-      </section>
-
-      <CTA title={<>Ready to transform your <em>business</em>?</>} buttonLabel="Get in touch" />
-    </div>
-  );
+      <div className="people-leads"><p className="eyebrow">Studio leadership</p>
+        {team.slice(0,2).map(member => <div className="lead-line" key={member.name}><h2>{member.name}</h2><span>{member.role}</span><p>{member.bio}</p><ProfileLinks member={member}/></div>)}
+      </div>
+    </section>
+    <div className="container">
+      <section id="leadership" className="section-pad" tabIndex={-1}><SectionHead eyebrow="01 / Studio contacts" title="Security and new projects."/><TeamGrid members={team.slice(2)}/></section>
+      <section className="engagement"><ChapterRule/><div className="brief-lead"><p className="eyebrow">02 / Working practice</p><h2>How we run a project.</h2></div><div className="scope-list"><div><h3>Agree the brief</h3><p>Identify who the work serves, what must change, and which constraints matter.</p></div><div><h3>Review something tangible</h3><p>A prototype, campaign plan, risk register, or site assessment gives the team something concrete to discuss.</p></div><div><h3>Plan the handover</h3><p>Agree who will operate the result, maintain it, and decide what comes next.</p></div><Link className="studio-link" to="/services">Explore the disciplines<Icon name="arrow-right" size={18}/></Link></div></section>
+      <section className="engagement"><ChapterRule/><div className="brief-lead"><p className="eyebrow">03 / Our offices</p><h2>Two places to start a conversation.</h2></div><div className="office-details"><StudioAtlas/><div className="office-index">{brand.offices.map(o=><div key={o.city}><strong>{o.city}</strong><span>{o.country}</span><a href={'tel:'+o.phone.replace(/\s/g,'')}>{o.phone}</a></div>)}</div></div></section>
+      <section className="faq-wrap"><SectionHead eyebrow="Studio enquiries" title="Common questions."/><FAQ items={aboutFaqs}/></section></div>
+    <CTA title={<>Tell us about <em>your brief.</em></>} />
+  </div>;
 }

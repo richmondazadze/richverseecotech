@@ -1,9 +1,12 @@
 import { FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { brand, nav, cssVars } from '../data/site';
+import { Link, useLocation } from 'react-router-dom';
+import { brand, nav } from '../data/site';
 import SocialIcon from './SocialIcon';
+import Brand from './Brand';
+import Icon from './Icon';
 
 export default function Footer() {
+  const journal = useLocation().pathname.startsWith('/blog');
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -11,66 +14,73 @@ export default function Footer() {
 
   async function subscribe(e: FormEvent) {
     e.preventDefault();
-    if (!email) return;
+    if (!email || busy) return;
     setBusy(true);
     setError('');
+    const controller=new AbortController();
+    const timeout=window.setTimeout(()=>controller.abort(),20000);
     try {
       const res = await fetch('/api/newsletter', {
-        method: 'POST',
+        method: 'POST', signal:controller.signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error || 'Subscription failed. Please try again.');
+      const body = await res.json().catch(() => null);
+      if (!res.ok || !body?.message) {
+        throw new Error(body?.error || 'We couldn’t receive your signup. Please try again.');
       }
       setSubscribed(true);
       setEmail('');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Subscription failed.');
+      setError(err instanceof Error && err.name === 'AbortError' ? 'We couldn’t confirm the signup. Email us if you need to check.' : err instanceof Error ? err.message : 'We couldn’t receive your signup. Please try again.');
     } finally {
-      setBusy(false);
+      window.clearTimeout(timeout);setBusy(false);
     }
   }
 
   return (
     <footer className="site-footer" id="footer">
-      <div className="footer-glow" aria-hidden="true" />
       <div className="footer-inner">
-        {/* Newsletter */}
-        <div className="footer-news reveal">
+        {journal ? <div id="studio-updates" tabIndex={-1} className="footer-news" data-scroll-section="newsletter">
           <div>
-            <p className="footer-label">[ Newsletter ]</p>
-            <h2 className="footer-quote">
-              Let&rsquo;s build something that <em>grows</em>.
+            <p className="footer-label">Newsletter</p>
+            <h2 className="footer-quote" data-enter="heading">
+              Notes from the <em>studio.</em>
             </h2>
+            <p className="footer-news-copy">New guides on running a website, measuring a campaign, protecting an account, and planning for outages.</p>
           </div>
           {subscribed ? (
-            <p className="footer-news-success">◆ Subscribed — watch your inbox.</p>
+            <p className="footer-news-success" role="status">Thank you. We’ve received your signup request.</p>
           ) : (
             <div>
-              <form className="footer-news-form" onSubmit={subscribe}>
+              <noscript><a href={'mailto:'+brand.email+'?subject=Newsletter%20signup'}>Request updates by email</a></noscript>
+              <form className="footer-news-form" method="post" action="/api/newsletter" onSubmit={subscribe}>
+                <label className="newsletter-field">Email address
                 <input
                   type="email"
+                  name="email" autoComplete="email"
+                  maxLength={254}
                   placeholder="you@company.com"
-                  aria-label="Email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={busy}
                 />
+                </label>
                 <button type="submit" className="btn-light" disabled={busy}>
                   {busy ? 'Subscribing…' : 'Subscribe'}
                 </button>
               </form>
-              {error && <p className="footer-news-error">{error}</p>}
+              <p className="footer-consent">Sign up for email updates. <Link to="/privacy">Privacy policy</Link> · Opt out anytime by email.</p>
+              {error && <p className="footer-news-error" role="alert">{error}</p>}
             </div>
           )}
-        </div>
+        </div> : <div className="footer-news-line" data-scroll-section="newsletter"><span>Notes from the studio</span><Link to="/blog#studio-updates">Get email updates <Icon name="arrow-right" size={16}/></Link></div>}
 
-        <div className="footer-grid">
-          <div className="footer-col reveal" style={cssVars({ '--d': '40ms' })}>
-            <p className="footer-label">[ Navigate ]</p>
+        <div className="footer-grid" data-scroll-section="directory">
+          <div className="footer-brand"><Link to="/" className="logo" aria-label="Richverse Ecotech home"><Brand reversed /></Link><p>Technology and energy studio.<br />Austin &amp; Accra.</p></div>
+          <div className="footer-col">
+            <p className="footer-label">Navigate</p>
             <ul className="footer-links">
               <li><Link to="/">Home</Link></li>
               {nav.map((l) => (
@@ -79,24 +89,15 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="footer-col reveal" style={cssVars({ '--d': '100ms' })}>
-            <p className="footer-label">[ Offices ]</p>
-            {brand.offices.map((o) => (
-              <p className="footer-text" key={o.city}>
-                <strong>{o.city}, {o.country}</strong><br />
-                {o.phone}
-              </p>
-            ))}
-            <p className="footer-text">WhatsApp · {brand.whatsapp}</p>
+          <div className="footer-col footer-reach">
+            <p className="footer-label">Reach the studio</p>
+            <a className="footer-email" href={'mailto:'+brand.email}>{brand.email}</a>
+            <div className="footer-offices">{brand.offices.map(o => <div key={o.city}><strong>{o.city}</strong><a href={'tel:'+o.phone.replace(/\s/g,'')}>{o.phone}</a></div>)}</div>
+            <a className="footer-chat" href={'https://wa.me/'+brand.whatsapp.replace(/\D/g,'')}>WhatsApp · {brand.whatsapp}<Icon name="arrow-up-right" size={14}/></a>
+            <p className="footer-hours">{brand.hours}</p>
           </div>
-
-          <div className="footer-col reveal" style={cssVars({ '--d': '160ms' })}>
-            <p className="footer-label">[ Contact ]</p>
-            <p className="footer-text">
-              <a href={`mailto:${brand.email}`}>{brand.email}</a><br />
-              {brand.hours}
-            </p>
-            <p className="footer-label" style={{ marginTop: '1.5rem' }}>[ Social ]</p>
+          <div className="footer-col">
+            <p className="footer-label">Social</p>
             <div className="social-icons">
               {brand.socials.map((s) => (
                 <a
@@ -114,8 +115,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} {brand.name.toUpperCase()} · ALL RIGHTS RESERVED</span>
+        <div className="footer-bottom" data-scroll-section="credits">
+          <span>© {new Date().getFullYear()} Richverse Ecotech. All rights reserved.</span>
           <span className="footer-legal">
             <Link to="/privacy">Privacy</Link>
             <Link to="/terms">Terms</Link>

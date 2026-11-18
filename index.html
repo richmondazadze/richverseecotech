@@ -3,17 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>try{if(localStorage.getItem('richverse-motion')==='reduced')document.documentElement.dataset.motion='reduced'}catch{}</script>
+    <noscript><style>
+      html {scroll-behavior:auto!important} .platform-track{animation:none!important;width:auto!important}.platform-list{flex:1 1 100%!important;min-width:0!important;flex-wrap:wrap!important;width:100%!important;padding:0!important}.platform-copy,.menu-toggle,.footer-news-form,.contact-form{display:none!important}
+      @media(max-width:860px){.site-header{position:static!important}.header-inner{flex-wrap:wrap}.header-inner .header-cta{display:inline-flex}.header-inner .nav-center{display:flex;order:3;width:100%;justify-content:space-between;gap:.35rem}.nav-indicator{display:none}}
+    </style></noscript>
     <meta name="theme-color" content="#fcfbf9" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <!-- Fonts are self-hosted (see @font-face in index.css). Preload only the
-         two hero/LCP faces so the headline paints with zero swap flash. -->
+         primary text faces for a fast first render. -->
+    <link rel="preload" href="/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/playfair-display-400-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/playfair-display-400-italic.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- Without JS the scroll-reveal content stays hidden; force it visible. -->
-    <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
     <!-- Per-route title, meta, canonical, Open Graph & JSON-LD are injected here at build time (prerender.js) and managed by react-helmet-async on the client. -->
     <!--app-head-->
   </head>

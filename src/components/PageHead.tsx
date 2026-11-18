@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { cssVars } from '../data/site';
 
 type Props = {
   eyebrow: string;
@@ -10,13 +9,13 @@ type Props = {
 /** Editorial header used at the top of interior pages. */
 export default function PageHead({ eyebrow, title, intro }: Props) {
   return (
-    <header className="page-head">
-      <p className="eyebrow reveal">{eyebrow}</p>
-      <h1 className="page-title reveal" style={cssVars({ '--d': '80ms' })}>
+    <header className="page-head" data-scroll-section="intro">
+      <p className="eyebrow">{eyebrow}</p>
+      <h1 className="page-title">
         {title}
       </h1>
       {intro && (
-        <p className="page-intro reveal" style={cssVars({ '--d': '160ms' })}>
+        <p className="page-intro">
           {intro}
         </p>
       )}

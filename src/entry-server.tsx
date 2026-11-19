@@ -36,6 +36,15 @@ export const routes: string[] = [
   ...blogPosts.map((p) => `/blog/${p.slug}`),
 ];
 
+// The HTML, sitemap images and feed must describe the same public work.
+export const journalEntries = blogPosts.map(({slug,title,summary,category,published,image}) => ({
+  path: '/blog/' + slug, title, summary, category, published, image,
+}));
+export const sitemapImages = Object.fromEntries([
+  ...journalEntries.map(post => [post.path, post.image]),
+
+]);
+
 // Use editorial dates only where the content has a recorded revision.
 export const articleLastModified: Record<string, string> = Object.fromEntries(
   blogPosts.map(p => ['/blog/' + p.slug, p.revised ?? p.published])

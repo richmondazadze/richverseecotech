@@ -9,7 +9,7 @@ import FAQ from '../components/FAQ';
 import SectionHead from '../components/SectionHead';
 import JsonLd from '../components/JsonLd';
 import Icon from '../components/Icon';
-import { faqSchema, breadcrumbSchema } from '../data/structuredData';
+import { contactPageSchema, faqSchema, breadcrumbSchema } from '../data/structuredData';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 type FieldName = 'name' | 'email' | 'message';
@@ -81,7 +81,7 @@ export default function Contact() {
 
   return <div className="page section-pad-top">
     <Seo title="Contact Richverse Ecotech | Let’s Talk About Your Project" description="Tell us about your web, marketing, cybersecurity or renewable energy project. Contact our Austin and Accra team. We aim to reply within one business day." path="/contact" />
-    <JsonLd data={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]), faqSchema(contactFaqs)]} />
+    <JsonLd data={[contactPageSchema(),breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]), faqSchema(contactFaqs)]} />
     <div className="container">
       <div className="contact-head"><PageHead eyebrow="Let’s talk" title={<>Tell us about <em>your project.</em></>} intro={status === 'sent' ? undefined : "We aim to reply by email within one business day."} /><a className="studio-link contact-jump" href="#direct-contact">Prefer email or WhatsApp?<Icon name="arrow-right" size={16}/></a></div>
       <div className="contact-split">

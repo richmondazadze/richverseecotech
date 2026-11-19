@@ -116,10 +116,10 @@ export const partners = [
 
 /* --------------------------------------------------------------- Team */
 export const team = [
-  { name: 'Richmond Azadze', role: 'Chief Executive Officer & CTO', bio: "Sets the studio’s direction and makes the technical decisions behind its projects.", avatar: '/team/richmond.svg', linkedin: 'https://www.linkedin.com/in/richmond-azadze/', x: 'https://x.com/__richhimself' },
-  { name: 'Rapheal Asomani', role: 'Chief Operating Officer', bio: 'Coordinates project schedules, team responsibilities and handover.', avatar: '/team/rapheal.svg', linkedin: 'https://www.linkedin.com/in/younggem/' },
-  { name: 'Bernard Blay', role: 'Head of Cybersecurity', bio: 'Leads security reviews and helps teams turn technical findings into remediation priorities.', avatar: '/team/bernard.svg', linkedin: 'https://www.linkedin.com/in/bernard-blay-a65981317/' },
-  { name: 'Emmanuel Donkor', role: 'Head of Business Development', bio: 'Leads new project and partnership conversations, helping define fit and the next step.', avatar: '/team/emmanuel.svg', linkedin: 'https://www.linkedin.com/in/emmanuel-donkor-4347bb287/' },
+  { id: 'richmond-azadze', name: 'Richmond Azadze', role: 'Chief Executive Officer & CTO', bio: "Sets the studio’s direction and makes the technical decisions behind its projects.", avatar: '/team/richmond.svg', linkedin: 'https://www.linkedin.com/in/richmond-azadze/', x: 'https://x.com/__richhimself' },
+  { id: 'rapheal-asomani', name: 'Rapheal Asomani', role: 'Chief Operating Officer', bio: 'Coordinates project schedules, team responsibilities and handover.', avatar: '/team/rapheal.svg', linkedin: 'https://www.linkedin.com/in/younggem/' },
+  { id: 'bernard-blay', name: 'Bernard Blay', role: 'Head of Cybersecurity', bio: 'Leads security reviews and helps teams turn technical findings into remediation priorities.', avatar: '/team/bernard.svg', linkedin: 'https://www.linkedin.com/in/bernard-blay-a65981317/' },
+  { id: 'emmanuel-donkor', name: 'Emmanuel Donkor', role: 'Head of Business Development', bio: 'Leads new project and partnership conversations, helping define fit and the next step.', avatar: '/team/emmanuel.svg', linkedin: 'https://www.linkedin.com/in/emmanuel-donkor-4347bb287/' },
 ];
 
 export const aboutFaqs = [
@@ -128,7 +128,7 @@ export const aboutFaqs = [
 ];
 export const contactFaqs = [
   { q: 'Do I need to choose a service first?', a: 'No. Leave the service field on “I’d like your advice” and describe the problem in your own words.' },
-  { q: 'What information should I include in my message?', a: 'Your name and company, contact details, and a brief description of your inquiry or project.' },
-  { q: 'Can I schedule a call or meeting?', a: 'Absolutely — reach out and we will arrange a call at your convenience.' },
+  { q: 'What information should I include in my message?', a: 'Include your name, a reply email and the task you want help with. If you are replacing a website, a public URL and the first thing that needs to work better are useful. Company name and budget are optional.' },
+  { q: 'Can I schedule a call or meeting?', a: 'Yes. Mention that you would like a call and include your time zone. We will reply by email to agree a time.' },
   { q: 'Where are your offices located?', a: 'Austin, United States and Accra, Ghana.' },
 ];

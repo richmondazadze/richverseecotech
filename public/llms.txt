@@ -13,7 +13,7 @@
 - [Contact](https://richverseecotech.com/contact): Start a project or partnership. Email: richverseecotech@gmail.com
 
 ## Studio work
-- [Service-to-enquiry redesign](https://richverseecotech.com/work/richverse-studio-website): An in-house project with a working example.
+- [Service-to-enquiry redesign](https://richverseecotech.com/work/richverse-studio-website#acceptance-test): An in-house project with a working example.
 
 ## Worked examples
 - [Qualified enquiry rate](https://richverseecotech.com/services/digital-marketing#worked-example): Illustrative campaign report. Eight matched qualified enquiries from 200 eligible sessions is 4%; two unmatched enquiries are reported separately.
@@ -21,7 +21,10 @@
 - [Essential load worksheet](https://richverseecotech.com/services/renewable-energy#worked-example): Illustrative four-hour outage. The 400 Wh total is energy delivered to the devices, not a battery recommendation.
 
 ## Insights
+- [Website or web application?](https://richverseecotech.com/blog/website-or-web-application#compare-three-options): Compare a simple form, an existing provider and a shared approval workflow.
+- [Small-business access review](https://richverseecotech.com/blog/small-business-access-review#verify-closure): A blank register, an illustrative decision and a separate verification step.
 - [Website redesign brief and template](https://richverseecotech.com/blog/website-redesign-brief): Scope a customer task, constraints and acceptance checks before comparing development quotes. Includes an editable brief.
+- [Compare website quotes](https://richverseecotech.com/blog/website-redesign-brief#quote-comparison): A worksheet separates upfront and recurring costs. Its figures are examples, not studio prices.
 - [Repair, migrate, or rebuild?](https://richverseecotech.com/blog/repair-migrate-or-rebuild): How to scope changes to an existing website.
 - [Estimate office backup energy](https://richverseecotech.com/blog/estimate-office-backup-energy): Calculate watt-hours and see how a shorter lighting schedule changes the result.
 - [Studio guides](https://richverseecotech.com/blog): Practical reading on websites, campaign measurement, business security, and energy planning.

@@ -36,7 +36,7 @@ export default function Privacy() {
           <section>
             <h2>How we use your information</h2>
             <ul>
-              <li>To respond to your enquiries and provide requested services.</li>
+              <li>To respond to your enquiries and provide requested services. After our email provider accepts an enquiry, our server logs an event with the service category. That event does not include your name, email or message.</li>
               <li>To send newsletters you have opted into (you can unsubscribe at any time).</li>
               <li>To maintain, secure, and improve our website.</li>
             </ul>

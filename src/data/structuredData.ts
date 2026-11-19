@@ -17,7 +17,7 @@ const COUNTRY: Record<string, string> = { 'United States': 'US', Ghana: 'GH' };
 export function organizationSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
+    '@type': 'Organization',
     '@id': ORG_ID,
     name: brand.name,
     url: `${SITE}/`,
@@ -119,11 +119,13 @@ export function articleSchema(post: BlogPost) {
     image: post.image.startsWith('http') ? post.image : `${SITE}${post.image}`,
     datePublished: post.published,
     dateModified: post.revised ?? post.published,
-    author: { '@type': 'Organization', name: post.author, '@id': ORG_ID },
+    author: { '@type': 'Organization', name: post.author, url: SITE + '/about', '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
     mainEntityOfPage: url,
     keywords: post.tags.join(', '),
     articleSection: post.category,
+    isPartOf: { '@id': SITE + '/blog#collection' },
+    about: { '@id': SITE + '/services/' + services.find(s => s.name === post.category)!.slug + '#service' },
     inLanguage: 'en',
   };
 }
@@ -144,13 +146,20 @@ export function journalSchema(path: string, name: string, posts: BlogPost[]) {
   };
 }
 
+export function contactPageSchema() {
+  return {
+    '@context':'https://schema.org', '@type':'ContactPage', '@id':SITE+'/contact#page',
+    url:SITE+'/contact', name:'Contact Richverse Ecotech', isPartOf:{'@id':WEBSITE_ID}, about:{'@id':ORG_ID}, inLanguage:'en',
+  };
+}
+
 export function aboutPageSchema() {
   return {
     '@context': 'https://schema.org', '@type': 'AboutPage', '@id': SITE + '/about#page',
     url: SITE + '/about', name: 'Our studio and team', isPartOf: { '@id': WEBSITE_ID },
     mainEntity: { '@id': ORG_ID },
     mentions: team.map(person => ({
-      '@type': 'Person', name: person.name, jobTitle: person.role, description: person.bio,
+      '@type': 'Person', '@id': SITE + '/about#' + person.id, url: SITE + '/about#' + person.id, name: person.name, jobTitle: person.role, description: person.bio,
       worksFor: { '@id': ORG_ID }, sameAs: [person.linkedin, ...(person.x ? [person.x] : [])],
     })),
   };

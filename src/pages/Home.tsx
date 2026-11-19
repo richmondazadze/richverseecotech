@@ -20,8 +20,8 @@ export default function Home() {
     <JsonLd data={servicesItemListSchema()} />
     <PracticeCover/>
     <section className="container feature-spread" aria-labelledby="work-title">
-      <div className="feature-copy"><p className="eyebrow index-label">01 / In-house project</p><h2 id="work-title">{story.title}.</h2><p>{story.brief}</p><Link className="studio-link" to={storyPath(story.slug)}>Read the project story<Icon name="arrow-right" size={18}/></Link></div>
-      <EnquiryProof/>
+      <div className="feature-copy"><p className="eyebrow index-label">01 / In-house project</p><h2 id="work-title">{story.title}.</h2><p>{story.brief}</p><Link className="studio-link" to={storyPath(story.slug)}>See how we redesigned our enquiry form<Icon name="arrow-right" size={18}/></Link></div>
+      <EnquiryProof action={<> Planning a change? <Link to="/blog/repair-migrate-or-rebuild">Compare repair, migration and rebuild.</Link></>}/>
     </section>
     <Partners />
     <section id="expertise" className="section-pad container">

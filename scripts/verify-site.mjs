@@ -67,3 +67,5 @@ const pairs=[['171717','fcfbf9'],['4b4b4b','fcfbf9'],['4b4b4b','ffffff'],['4338c
 const contrasts=pairs.map(([a,b])=>{const x=luminance(a),y=luminance(b),ratio=(Math.max(x,y)+.05)/(Math.min(x,y)+.05);assert.ok(ratio>=4.5,`contrast ${a}/${b}`);return `${a}/${b}: ${ratio.toFixed(2)}:1`;});
 console.log(`Verified ${routes.length+1} rendered pages, ${indexed.length} sitemap URLs, metadata, JSON-LD, local links/assets, ${Object.keys(icons).length} icons, and scoped hero glass.`);
 console.log(`Text contrast: ${contrasts.join('; ')}`);
+
+await import('./verify-discovery.mjs');

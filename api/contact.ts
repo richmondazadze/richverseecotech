@@ -2,6 +2,12 @@ import { Resend } from 'resend';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { field, validEmail, objectBody } from '../server/forms.js';
 
+// Log only fixed service labels, never a free-text subject, message or identifier.
+const services = new Map([
+  ['Web Development','web-development'], ['Digital Marketing','digital-marketing'],
+  ['Cybersecurity','cybersecurity'], ['Renewable Energy','renewable-energy'],
+]);
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') {
@@ -31,6 +37,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       console.error('Contact notification rejected by email provider.');
       return res.status(502).json({ error: 'We couldn’t send your enquiry. Please try again or email us directly.' });
     }
+    console.info(JSON.stringify({event:'enquiry_accepted',service:services.get(subject) ?? 'general'}));
     // An acknowledgement failure must not invite a duplicate business enquiry.
     try {
       await resend.emails.send({ from, to: email, subject: 'Thanks for contacting Richverse Ecotech', text: `Hi ${name},\n\nThank you for getting in touch. We aim to reply to your enquiry within one business day.\n\nRichverse Ecotech\n${to}` });

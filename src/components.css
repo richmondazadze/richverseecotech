@@ -498,3 +498,23 @@
   .campaign-metrics dd { font-size:2.1rem; }
   .load-sheet table { font-size:.9rem; }
 }
+
+/* Editorial navigation stays in normal flow and works before hydration. */
+.journal-decisions {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1.5rem 3rem;margin:1rem 0 3rem;padding-block:1.4rem;border-block:1px solid var(--line);}
+.journal-decisions h2 {font:600 1.12rem/1.4 var(--body);letter-spacing:-.025em;}
+.journal-decisions p {max-width:55ch;color:var(--muted);line-height:1.65;margin:.55rem 0;}
+.article-contents {padding-block:1.1rem;border-block:1px solid var(--line);margin-block:1.75rem;}
+.article-contents ul {list-style:none;display:grid;gap:.2rem;margin:.6rem 0 0;padding:0;}
+.article-contents a {display:inline-block;padding:.3rem 0;color:var(--indigo);text-decoration:underline;text-underline-offset:.2em;}
+.article-body dt {font-weight:700;}
+.article-body dd {margin:0 0 1rem;}
+.enquiry-proof figcaption a,.story-row p a,.scope-list p a,.footer-news-copy a {text-decoration:underline;text-underline-offset:.15em;}
+.quote-tool {margin:2.5rem 0;padding:clamp(1.1rem,3vw,2rem);border:1px solid var(--line);border-radius:8px;}
+.quote-tool h2 {font:600 clamp(1.4rem,3vw,2rem)/1.2 var(--body);letter-spacing:-.04em;margin:.45rem 0 .7rem;}
+.quote-tool p:not(.eyebrow) {margin:.65rem 0;line-height:1.65;}
+.quote-inputs {margin:1.1rem 0;padding-block:1rem;border-block:1px solid var(--line);}
+.quote-pair {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:.7rem 1.4rem;}
+.quote-tool fieldset {min-width:0;border:0;padding:0;margin:0;}
+.quote-tool legend {font-weight:700;}
+.quote-tool label {display:grid;gap:.2rem;margin:.45rem 0;font-size:.9rem;}
+.quote-tool input {border:1px solid #88848c;border-radius:4px;padding:.55rem .7rem;min-width:0;width:100%;max-width:17rem;background:var(--paper);color:var(--ink);font:inherit;font-size:1rem;}

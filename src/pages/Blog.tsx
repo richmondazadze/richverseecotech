@@ -7,7 +7,7 @@ import JsonLd from '../components/JsonLd';
 import Icon from '../components/Icon';
 import BlogImage from '../components/BlogImage';
 import { breadcrumbSchema, journalSchema } from '../data/structuredData';
-import { readingPaths } from '../data/readingPaths';
+import { readingPaths, decisions } from '../data/readingPaths';
 
 
 export default function Blog() {
@@ -70,6 +70,7 @@ export default function Blog() {
           ))}
         </nav>
 
+        {category && editorial && <section className="journal-decisions" aria-label="Where to start">{decisions[category].map(d=><div key={d.href}><h2>{d.question}</h2><p>{d.answer}</p><Link className="studio-link" to={d.href}>{d.label}<Icon name="arrow-right" size={16}/></Link></div>)}</section>}
         {/* A lone archive result also gets the full editorial spread. */}
         {featured && (
           <Link to={`/blog/${featured.slug}`} className="blog-featured" data-scroll-section="feature">

@@ -10,11 +10,14 @@ type Props = {
   path?: string;
   image?: string;
   imageAlt?: string;
+  published?: string;
+  modified?: string;
+  section?: string;
   type?: 'website' | 'article';
 };
 
 /** Per-page metadata: title, description, canonical, Open Graph & Twitter cards. */
-export default function Seo({ title, description, path = '', image = OG_IMAGE, imageAlt = 'Richverse Ecotech studio wordmark and Heritage emblem', type = 'website', noindex = false }: Props) {
+export default function Seo({ title, description, path = '', image = OG_IMAGE, imageAlt = 'Richverse Ecotech studio wordmark and Heritage emblem', type = 'website', published, modified, section, noindex = false }: Props) {
   const url = `${SITE}${path}`;
   return (
     <Helmet prioritizeSeoTags>
@@ -24,6 +27,9 @@ export default function Seo({ title, description, path = '', image = OG_IMAGE, i
       <link rel="canonical" href={url} />
 
       <meta property="og:type" content={type} />
+      {published && <meta property="article:published_time" content={published} />}
+      {modified && <meta property="article:modified_time" content={modified} />}
+      {section && <meta property="article:section" content={section} />}
       <meta property="og:site_name" content="Richverse Ecotech" />
       <meta property="og:locale" content="en_US" />
       <meta property="og:title" content={title} />

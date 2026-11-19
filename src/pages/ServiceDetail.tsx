@@ -52,6 +52,8 @@ export default function ServiceDetail() {
         <div><ol className="milestone-list">{brief.stages.map(([title,detail],i)=><li key={title}><span aria-hidden="true">0{i+1}</span><div><h3>{title}</h3><p>{detail}</p></div></li>)}</ol><p className="support-note"><strong>After handover. </strong>{brief.support}</p></div></section>
       <section className="engagement" id="questions" tabIndex={-1}><ChapterRule/><div className="brief-lead"><h2>Before you decide.</h2><Link className="studio-link" to={'/blog/category/'+service.slug}>Read {service.name.toLowerCase()} insights<Icon name="arrow-right" size={18}/></Link></div>
         <div><dl className="scope-list">{brief.decisions.map(d=><div key={d.q}><dt>{d.q}</dt><dd>{d.a}</dd></div>)}</dl>
+          {service.slug==='web-development' && <p className="support-note"><Link className="studio-link" to="/blog/website-or-web-application">Website or web application: which fits your business?</Link></p>}
+          {service.slug==='web-development' && <p className="support-note"><Link className="studio-link" to="/blog/website-redesign-brief#quote-comparison">Compare the cost of two website quotes</Link></p>}
           {guide && <p className="support-note">Studio guide: <Link className="studio-link" to={'/blog/'+guide.slug}>{guide.title}</Link></p>}</div></section>
     </div><CTA title={<>Talk to us about <em>{service.name.toLowerCase()}.</em></>} to={contact}/>
   </div>;

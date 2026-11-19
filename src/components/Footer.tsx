@@ -47,7 +47,7 @@ export default function Footer() {
             <h2 className="footer-quote" data-enter="heading">
               Notes from the <em>studio.</em>
             </h2>
-            <p className="footer-news-copy">New guides on running a website, measuring a campaign, protecting an account, and planning for outages.</p>
+            <p className="footer-news-copy">New guides on running a website, measuring a campaign, protecting an account, and planning for outages. <a href="/feed.xml">Read via RSS</a>.</p>
           </div>
           {subscribed ? (
             <p className="footer-news-success" role="status">Thank you. We’ve received your signup request.</p>

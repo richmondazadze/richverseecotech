@@ -30,9 +30,9 @@ export default function Layout() {
     const chapter = !!anchor?.matches('[data-reading] > .engagement[id]');
     if ('scrollRestoration' in window.history) {
       nativeRestoration.current ??= window.history.scrollRestoration;
-      // Restoration is per history entry. Let our anchor scroll stand when
-      // returning to a chapter; preserve native behavior on other entries.
-      window.history.scrollRestoration = chapter ? 'manual' : nativeRestoration.current;
+      // A hash names the destination. WebKit can otherwise restore a stale offset
+      // after pageshow, undoing a correct initial jump made during hydration.
+      window.history.scrollRestoration = anchor ? 'manual' : nativeRestoration.current;
     }
     if (previous.current.key !== key || (initial.current && hash)) {
       // Within a brief, Back should reopen the chapter, not the position of

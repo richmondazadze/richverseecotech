@@ -24,7 +24,10 @@ for(const w of [320,390,1440]){
  await tool.getByLabel(/Months to compare/).fill('12');await fit();
  await go(p.getByRole('link',{name:'discuss your website with Richverse'}));await p.waitForFunction(()=>document.querySelector('#topic')?.textContent.includes('Web Development'));
  assert.equal(await p.locator('link[rel=canonical]').getAttribute('href'),'https://richverseecotech.com/contact'); await fit();
- await p.goto(base+'/blog/category/cybersecurity');await go(p.getByRole('link',{name:'Use the access review register'}));await p.waitForURL('**/small-business-access-review#record-the-decision');await p.reload();await p.locator('.article-media img').evaluate(im=>im.decode());await fit();
+ await p.goto(base+'/blog/category/cybersecurity');await go(p.getByRole('link',{name:'Use the access review register'}));await p.waitForURL('**/small-business-access-review#record-the-decision');
+ // Ensure hydration can run before load, as it does on a cold production visit.
+ await p.route('**/editorial/access-review.*',async route=>{await new Promise(r=>setTimeout(r,250)); await route.continue();});
+ await p.reload();await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));await p.locator('.article-media img').evaluate(im=>im.decode());await fit();
  const loc=await p.locator('#record-the-decision').boundingBox(); assert(loc && loc.y>=0 && loc.y<400,'anchor positioning '+JSON.stringify(loc));
  const down=await p.getByRole('link',{name:/Download the blank/}).getAttribute('href');let csv=await p.request.get(base+down);assert.equal(csv.status(),200);assert.match(await csv.text(),/Authorized owner,Due date/);
  await p.goto(base+'/blog/website-or-web-application#compare-three-options');await p.locator('.article-media img').evaluate(im=>im.decode());await fit();

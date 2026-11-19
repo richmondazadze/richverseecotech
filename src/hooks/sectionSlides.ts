@@ -31,7 +31,7 @@ const leftColumn =
   '.brief-lead,.feature-copy,.brief-hero > div:first-child,.brief-panel,.footer-news > div:first-child';
 const rightColumn =
   '.work-sample,.practice-figure,.feature-spread .work-print,.next-steps,.office-details > figure';
-const extraBands = '.practice-key,.blog-filters,.article-tags';
+const extraBands = '.blog-filters,.article-tags';
 const formRows = '.contact-form > :is(.field-row,.field,.brief-send)';
 const staticController = {
   measure: (_replay: boolean) => {},

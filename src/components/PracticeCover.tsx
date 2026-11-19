@@ -1,8 +1,21 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { services } from '../data/site';
 import Icon from './Icon';
 
 export default function PracticeCover() {
+  const key = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const nav = key.current;
+    if (!nav || typeof IntersectionObserver === 'undefined') return;
+    // The first paint owns the entrance. Re-arm only offscreen, so hydration,
+    // font loads and focus changes never pull a visible strip back to its start.
+    const observer = new IntersectionObserver(([entry]) => {
+      nav.toggleAttribute('data-offscreen', !entry.isIntersecting);
+    });
+    observer.observe(nav);
+    return () => observer.disconnect();
+  }, []);
   return (
     <>
       <section
@@ -67,15 +80,15 @@ export default function PracticeCover() {
           </div>
         </div>
       </section>
-      <nav className="practice-key" aria-label="Explore the four services">
+      <nav ref={key} className="practice-key" aria-label="Explore the four services">
         <div className="container">
           {services.map((service, i) => (
             <Link key={service.slug} to={'/services/' + service.slug}>
-              <span className="key-number" aria-hidden="true">
-                0{i + 1}
+              <span className="practice-key-entry">
+                <span className="key-number" aria-hidden="true">0{i + 1}</span>
+                {service.name}
+                <Icon name="arrow-right" size={15} />
               </span>
-              {service.name}
-              <Icon name="arrow-right" size={15} />
             </Link>
           ))}
         </div>

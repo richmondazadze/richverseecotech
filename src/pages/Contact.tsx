@@ -1,5 +1,5 @@
 import { useEnquiryDraft } from '../hooks/useEnquiryDraft';
-import Select from '../components/Select';
+import ContactTopic from '../components/ContactTopic';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { brand, contactFaqs, services } from '../data/site';
@@ -97,7 +97,7 @@ export default function Contact() {
               <div className="field"><label htmlFor="name">Your name</label><input ref={nameInput} id="name" name="name" autoComplete="name" placeholder="Full name" required maxLength={100} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? 'name-error' : undefined} defaultValue={draft.current.name} onChange={e => editField('name', e.target.value)} />{errors.name && <span className="field-error" id="name-error">{errors.name}</span>}</div>
               <div className="field"><label htmlFor="email">Email address</label><input id="email" name="email" type="email" autoComplete="email" inputMode="email" placeholder="you@company.com" required maxLength={254} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? 'email-error' : undefined} defaultValue={draft.current.email} onChange={e => editField('email', e.target.value)} />{errors.email && <span className="field-error" id="email-error">{errors.email}</span>}</div>
             </div>
-            <div className="field"><label htmlFor="topic">What can we help with?<small>(optional)</small></label><Select id="topic" name="subject" value={topic} onChange={e => { setTopic(e.target.value); draft.current = { ...draft.current, from: selectedService, topic: e.target.value }; }}><option value="">I’d like your advice</option>{services.map(s => <option key={s.slug}>{s.name}</option>)}<option>Something else</option></Select></div>
+            <div className="field"><label htmlFor="topic" id="topic-label">What can we help with?<small>(optional)</small></label><ContactTopic value={topic} onChange={value => { setTopic(value); draft.current = { ...draft.current, from: selectedService, topic: value }; }}/></div>
             <div className="field"><label htmlFor="message">A little about your project</label><p className="field-hint" id="brief-hint">Your goal, your timeline, or the problem you’d like to solve.</p><textarea id="message" name="message" rows={5} placeholder="We’re looking to…" required maxLength={5000} aria-invalid={Boolean(errors.message)} aria-describedby={`brief-hint${errors.message ? ' message-error' : ''}`} defaultValue={draft.current.message} onChange={e => editField('message', e.target.value)} />{errors.message && <span className="field-error" id="message-error">{errors.message}</span>}</div>
             <div className="hp-field" aria-hidden="true"><label htmlFor="website">Leave this field empty</label><input id="website" name="website" tabIndex={-1} autoComplete="off" /></div>
             {status === 'error' && <div role="alert" className="form-error"><p>{errorMsg} Your draft is still here.</p><a href={`mailto:${brand.email}`}>Email us directly</a></div>}

@@ -26,7 +26,13 @@ async function run(engine, driver) {
           }else target=p.locator(source==='header'?'.header-cta':source==='hero'?'.service-hero-cta':'.cta-action a');
           if(phone)await target.tap();else await target.click();
           await p.waitForFunction(topic=>document.querySelector('#topic')?.value===topic,topic,{timeout:3000});
-          if(source==='header') { await p.locator('#topic').selectOption('Something else');assert.equal(await p.locator('#topic').inputValue(),'Something else'); }
+          if(source==='header') {
+            const picker=p.getByRole('combobox',{name:/what can we help with/i}).and(p.locator('button'));
+            if(phone)await picker.tap();else await picker.click();
+            const option=p.getByRole('option',{name:'Something else',exact:true});
+            if(phone)await option.tap();else await option.click();
+            assert.equal(await p.locator('.contact-form').evaluate(form=>new FormData(form).get('subject')),'Something else');
+          }
         }
         await p.goto(url);
         const evidence=p.locator('.brief-actions .studio-link');

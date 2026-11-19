@@ -57,8 +57,7 @@ html[data-motion="reduced"] .reading-rail { display:none; }
 /* The stroke and terminal echo the Heritage symbol. They sit on the existing hairline. */
 .engagement,.studio-note,.story-row,.cta-band { position:relative; }
 .chapter-rule { position:absolute;inset-block-start:-3px;inset-inline-start:0;width:36px;height:5px;pointer-events:none;color:var(--indigo); }
-.feature-spread > .chapter-rule,.cta-band > .chapter-rule { inset-inline-start:var(--gutter); }
-.feature-spread > .chapter-rule { inset-block-start:-2px; }
+.cta-band > .chapter-rule { inset-inline-start:var(--gutter); }
 .chapter-rule::before { content:"";position:absolute;left:0;right:3px;top:2px;height:1px;background:currentColor; }
 .chapter-rule::after { content:"";position:absolute;right:0;top:0;width:5px;height:5px;border:1px solid currentColor;border-radius:50%;background:var(--paper); }
 
@@ -83,6 +82,24 @@ html[data-scroll-engine="gsap"] .enquiry-trace {display:block;}
 @media print, (prefers-reduced-motion:reduce) {html[data-scroll-engine] .enquiry-trace {display:none;}}
 
 .blog-card-body {display:flex;flex:1;flex-direction:column;}
+
+/* The links stay under the pointer. Only their contents descend from the cover;
+   the last beat inks the single divider in the same direction as reading. */
+@media screen and (prefers-reduced-motion:no-preference) {
+  html:not([data-motion="reduced"]) .practice-key:not([data-offscreen]) .practice-key-entry {
+    animation:key-settle 380ms var(--ease) var(--key-delay,80ms) backwards;
+  }
+  .practice-key a:nth-child(2) { --key-delay:125ms; }
+  .practice-key a:nth-child(3) { --key-delay:170ms; }
+  .practice-key a:nth-child(4) { --key-delay:215ms; }
+  html:not([data-motion="reduced"]) .practice-key:not([data-offscreen]) .container::after {
+    animation:key-rule 480ms var(--ease) 155ms backwards;
+  }
+  .practice-key:focus-within .practice-key-entry,
+  .practice-key:focus-within .container::after {opacity:1!important;transform:none!important;}
+}
+@keyframes key-settle { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:none; } }
+@keyframes key-rule { from { transform:scaleX(0); } to { transform:scaleX(1); } }
 
 /* The prerendered site is visible. Only an active motion controller can arm a slide. */
 html[data-scroll-engine="gsap"] [data-slide="waiting"] { opacity:0!important; }

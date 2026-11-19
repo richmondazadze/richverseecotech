@@ -6,7 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const { render, routes } = await import('./dist-ssr/entry-server.js');
+const { render, routes, articleLastModified } = await import('./dist-ssr/entry-server.js');
 const template = fs.readFileSync('dist/index.html', 'utf-8');
 
 let count = 0;
@@ -38,5 +38,5 @@ console.log(`✓ Prerendered ${count} routes`);
 const indexed = routes.filter(route => !route.startsWith('/blog/tag/') && route !== '/studio/components');
 fs.writeFileSync('dist/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  indexed.map(route => `  <url><loc>https://richverseecotech.com${route}</loc></url>`).join('\n') +
+  indexed.map(route => `  <url><loc>https://richverseecotech.com${route}</loc>${articleLastModified[route] ? '<lastmod>'+articleLastModified[route]+'</lastmod>' : ''}</url>`).join('\n') +
   '\n</urlset>\n');

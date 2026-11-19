@@ -16,7 +16,7 @@ import { servicesItemListSchema } from '../data/structuredData';
 export default function Home() {
   const story = stories[0];
   return <>
-    <Seo title="Richverse Ecotech | Technology & Energy Studio" description="Web development, digital marketing, cybersecurity and renewable energy. Meet the Richverse Ecotech studio in Austin and Accra and discuss your project." path="/" />
+    <Seo title="Richverse Ecotech | Web Development, Technology & Energy" description="We build websites and web apps around the tasks your customers need to finish. Explore our work in web development, digital marketing, cybersecurity and energy." path="/" />
     <JsonLd data={servicesItemListSchema()} />
     <PracticeCover/>
     <section className="container feature-spread" aria-labelledby="work-title">

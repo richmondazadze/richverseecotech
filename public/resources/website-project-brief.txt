@@ -1,0 +1,26 @@
+WEBSITE PROJECT BRIEF — Richverse Ecotech
+Copy this into a document or email. One or two sentences per prompt are enough.
+
+1. Current site and owner:
+   Public URL (if any); who edits it today?
+2. Customer and task:
+   Who comes to the site? What do they need to finish?
+3. Where the task breaks:
+   How do they start? Where do they stop? Describe one example without personal data.
+4. Keep, change, or investigate:
+   Existing URLs, content, booking/payment tools, languages, integrations or operating constraints.
+5. What success looks like:
+   Starting from __________, the visitor can __________. If __________ fails, the site should __________.
+6. Ownership after handover:
+   Who will hold the domain, hosting and publishing accounts, and who will check delivery?
+7. Commercial constraints:
+   Desired launch window, reason for the date, budget range if known, who can approve trade-offs.
+8. Ask each studio for:
+   Included work, exclusions, dependencies, one-time and recurring costs, acceptance checks and support.
+
+Example from our own website:
+   Starting on a service page, the visitor can open the enquiry form with that service selected.
+   On a delivery failure, the visitor keeps the draft and can retry or use direct email.
+
+Guide: https://richverseecotech.com/blog/website-redesign-brief
+Start a web project: https://richverseecotech.com/contact?service=web-development

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <title>Four hours of essential office loads</title>
+  <rect width="1200" height="750" fill="#f0eee5"/>
+  <g font-family="Helvetica, Arial, sans-serif" fill="#27251f">
+    <text x="86" y="113" font-size="24" letter-spacing="2">RICHVERSE  /  LOAD WORKSHEET</text>
+    <path d="M86 147h1028M86 555h1028" fill="none" stroke="#aaa590" stroke-width="2"/>
+    <text x="86" y="242" font-size="66">100 W for four hours</text>
+    <g fill="#4338ca"><path d="M86 315h238v66H86zM346 315h238v66H346zM606 315h238v66H606zM866 315h238v66H866z"/></g>
+    <g fill="#bdb7e6"><path d="M86 381h238v22H86zM346 381h238v22H346zM606 381h238v22H606zM866 381h238v22H866z"/></g>
+    <g font-size="29" text-anchor="middle"><text x="205" y="448">Hour 1</text><text x="465" y="448">Hour 2</text><text x="725" y="448">Hour 3</text><text x="985" y="448">Hour 4</text></g>
+    <rect x="86" y="497" width="19" height="19" fill="#4338ca"/><text x="120" y="514" font-size="24">Network · 75 W</text>
+    <rect x="414" y="497" width="19" height="19" fill="#bdb7e6"/><text x="448" y="514" font-size="24">Lighting · 25 W</text>
+    <text x="86" y="636" font-size="43">400 Wh at the loads</text><text x="1114" y="633" text-anchor="end" font-size="24">Before losses and reserve</text>
+  </g>
+</svg>

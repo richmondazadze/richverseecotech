@@ -9,12 +9,12 @@ import FAQ from '../components/FAQ';
 import SectionHead from '../components/SectionHead';
 import CTA from '../components/CTA';
 import JsonLd from '../components/JsonLd';
-import { faqSchema, breadcrumbSchema } from '../data/structuredData';
+import { aboutPageSchema, faqSchema, breadcrumbSchema } from '../data/structuredData';
 
 export default function About() {
   return <div className="page studio-page">
     <Seo title="Our Studio & Team | Richverse Ecotech" description="Meet the people who lead Richverse Ecotech’s web, security, marketing, and energy work across Austin and Accra." path="/about"/>
-    <JsonLd data={[breadcrumbSchema([{name:'Home',path:'/'},{name:'About',path:'/about'}]),faqSchema(aboutFaqs)]}/>
+    <JsonLd data={[aboutPageSchema(),breadcrumbSchema([{name:'Home',path:'/'},{name:'About',path:'/about'}]),faqSchema(aboutFaqs)]}/>
     <section className="container people-cover" aria-labelledby="people-title">
       <div className="people-intro"><p className="eyebrow">Inside Richverse</p>
         <h1 className="page-title" id="people-title">The people behind <em>your project.</em></h1>

@@ -2,6 +2,8 @@ import ChapterRule from '../components/ChapterRule';
 import { Link, useParams } from 'react-router-dom';
 import { enquiryPath, services } from '../data/site';
 import { practice } from '../data/practice';
+import { getPostBySlug } from '../data/blog';
+import { readingPaths } from '../data/readingPaths';
 import { storyPath, stories } from '../data/stories';
 import Seo from '../components/Seo';
 import Icon from '../components/Icon';
@@ -19,8 +21,9 @@ export default function ServiceDetail() {
   const brief = practice[service.slug], path = '/services/'+service.slug, contact = enquiryPath(service.slug);
   const story = stories.find(s => s.service === service.slug);
   const sample = brief.sample;
+  const reading = readingPaths[service.slug], guide = getPostBySlug(reading.guide);
   return <div className="page section-pad-top">
-    <Seo title={service.name+' Services | Richverse Ecotech'} description={service.short} path={path}/>
+    <Seo title={reading.serviceTitle+' | Richverse Ecotech'} description={service.short} path={path}/>
     <JsonLd data={[serviceSchema(service),breadcrumbSchema([{name:'Home',path:'/'},{name:'Services',path:'/services'},{name:service.name,path}])]}/>
     <div className="container" data-reading>
       <header className="service-hero brief-hero" data-scroll-section="brief">
@@ -42,12 +45,14 @@ export default function ServiceDetail() {
         </div>
         <ServiceExample contact={contact} sample={sample}/>
       </section>
-      <section className="engagement" id="deliverables" tabIndex={-1}><ChapterRule/><div className="brief-lead"><p className="eyebrow">Deliverables</p><h2>{brief.outcome}</h2><p>{brief.handoff}</p></div>
+      <section className="engagement" id="deliverables" tabIndex={-1}><ChapterRule/><div className="brief-lead"><p className="eyebrow">Deliverables</p><h2>{brief.outcome}</h2><p>{brief.handoff}</p>
+        {service.slug==='web-development' && <Link className="studio-link" to="/blog/website-redesign-brief">Use the website brief template<Icon name="arrow-right" size={16}/></Link>}</div>
         <dl className="scope-list">{service.offerings.map(o=><div key={o.title}><dt>{o.title}</dt><dd>{o.body}</dd></div>)}</dl></section>
       <section className="engagement" id="process" tabIndex={-1}><ChapterRule/><div className="brief-lead"><p className="eyebrow">Working together</p><h2>{brief.processTitle}</h2><p>{brief.inputs}</p></div>
         <div><ol className="milestone-list">{brief.stages.map(([title,detail],i)=><li key={title}><span aria-hidden="true">0{i+1}</span><div><h3>{title}</h3><p>{detail}</p></div></li>)}</ol><p className="support-note"><strong>After handover. </strong>{brief.support}</p></div></section>
       <section className="engagement" id="questions" tabIndex={-1}><ChapterRule/><div className="brief-lead"><h2>Before you decide.</h2><Link className="studio-link" to={'/blog/category/'+service.slug}>Read {service.name.toLowerCase()} insights<Icon name="arrow-right" size={18}/></Link></div>
-        <dl className="scope-list">{brief.decisions.map(d=><div key={d.q}><dt>{d.q}</dt><dd>{d.a}</dd></div>)}</dl></section>
+        <div><dl className="scope-list">{brief.decisions.map(d=><div key={d.q}><dt>{d.q}</dt><dd>{d.a}</dd></div>)}</dl>
+          {guide && <p className="support-note">Studio guide: <Link className="studio-link" to={'/blog/'+guide.slug}>{guide.title}</Link></p>}</div></section>
     </div><CTA title={<>Talk to us about <em>{service.name.toLowerCase()}.</em></>} to={contact}/>
   </div>;
 }

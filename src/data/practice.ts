@@ -31,7 +31,7 @@ export const practice: Record<string, Practice> = {
       ['Lose the connection','The draft stays on screen with a way to retry.']]},
     inputs:'Bring a URL, a sketch, or a task that currently involves a workaround. Tell us who uses it and who will update it after launch.',
     stages:[['Map the journey','Identify the user, entry point, information needed, and what counts as completion.'],['Test the difficult step','Use a prototype to check keyboard use, narrow screens, and error recovery before the full build.'],['Release and hand over','Review the acceptance checks together, then document access, content changes, and recovery.']],
-    handoff:'Agree the journeys, integrations, and editorial responsibilities first. Those choices determine the scope of the build.',
+    handoff:'A useful quote separates design and development from migration, integration work and ongoing support. Agree who supplies content, who owns the accounts, and which tests the site must pass before handover.',
     support:'We agree who owns hosting, updates, and monitoring, and who handles a failed integration.',
     decisions:[{q:'Do we need a custom application?',a:'If the main job is publishing information, a content-managed site may be enough. Custom software becomes useful when roles, approvals, or data must move between systems.'},{q:'Can we keep our existing site?',a:'Often. We check which pages attract visitors, who edits the content, and what breaks today. That can lead to a targeted repair, a phased migration, or a rebuild with redirects.'}],
   },

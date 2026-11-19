@@ -8,14 +8,14 @@ import CTA from '../components/CTA';
 import NotFound from './NotFound';
 import { stories, storyPath } from '../data/stories';
 import { services } from '../data/site';
-import { breadcrumbSchema } from '../data/structuredData';
+import { breadcrumbSchema, studioWorkSchema } from '../data/structuredData';
 
 export default function ProjectStory(){
   const {slug} = useParams(), story = stories.find(s => s.slug === slug);
   if (!story) return <NotFound/>;
   const path = storyPath(story.slug), service = services.find(s => s.slug === story.service)!;
   return <div className="page section-pad-top"><Seo title={story.title+' | Richverse Studio Work'} description={story.brief} path={path} image={story.image} imageAlt={story.alt}/>
-    <JsonLd data={breadcrumbSchema([{name:'Home',path:'/'},{name:story.title,path}])}/>
+    <JsonLd data={[studioWorkSchema(path, story), breadcrumbSchema([{name:'Home',path:'/'},{name:story.title,path}])]}/>
     <article className="container story-article" data-reading>
       <header className="page-head" data-scroll-section="intro"><p className="eyebrow">Project story / {story.kind}</p><h1 className="page-title">{story.title}.</h1><p className="page-intro">{story.brief}</p></header>
       <EnquiryProof/>

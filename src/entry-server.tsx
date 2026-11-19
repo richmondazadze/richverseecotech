@@ -35,3 +35,8 @@ export const routes: string[] = [
   ...blogTags.map(t => `/blog/tag/${archiveSlug(t)}`),
   ...blogPosts.map((p) => `/blog/${p.slug}`),
 ];
+
+// Use editorial dates only where the content has a recorded revision.
+export const articleLastModified: Record<string, string> = Object.fromEntries(
+  blogPosts.map(p => ['/blog/' + p.slug, p.revised ?? p.published])
+);

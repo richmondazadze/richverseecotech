@@ -15,9 +15,16 @@
 ## Studio work
 - [Service-to-enquiry redesign](https://richverseecotech.com/work/richverse-studio-website): An in-house project with a working example.
 
+## Worked examples
+- [Qualified enquiry rate](https://richverseecotech.com/services/digital-marketing#worked-example): Illustrative campaign report. Eight matched qualified enquiries from 200 eligible sessions is 4%; two unmatched enquiries are reported separately.
+- [Access review closure](https://richverseecotech.com/services/cybersecurity#worked-example): Illustrative review record showing the owner, change and independent check.
+- [Essential load worksheet](https://richverseecotech.com/services/renewable-energy#worked-example): Illustrative four-hour outage. The 400 Wh total is energy delivered to the devices, not a battery recommendation.
+
 ## Insights
+- [Website redesign brief and template](https://richverseecotech.com/blog/website-redesign-brief): Scope a customer task, constraints and acceptance checks before comparing development quotes. Includes an editable brief.
 - [Repair, migrate, or rebuild?](https://richverseecotech.com/blog/repair-migrate-or-rebuild): How to scope changes to an existing website.
-- [Blog](https://richverseecotech.com/blog): Perspectives on sustainable technology, security, growth, and the systems shaping tomorrow.
+- [Estimate office backup energy](https://richverseecotech.com/blog/estimate-office-backup-energy): Calculate watt-hours and see how a shorter lighting schedule changes the result.
+- [Studio guides](https://richverseecotech.com/blog): Practical reading on websites, campaign measurement, business security, and energy planning.
 
 ## Policies
 - [Privacy Policy](https://richverseecotech.com/privacy)

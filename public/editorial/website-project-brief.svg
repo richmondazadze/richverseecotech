@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <title>Website project brief: task, constraint, acceptance</title>
+  <rect width="1200" height="750" fill="#eae8f1"/>
+  <g font-family="Helvetica, Arial, sans-serif" fill="#292640">
+    <text x="88" y="130" font-size="24" letter-spacing="2">RICHVERSE  /  WEBSITE WORKSHEET</text>
+    <text x="88" y="247" font-size="72">A brief you can test.</text>
+    <path d="M88 299h1024M88 559h1024M429 299v260M770 299v260" fill="none" stroke="#a8a4b9" stroke-width="2"/>
+    <g font-size="24" fill="#4338ca"><text x="88" y="361">01</text><text x="460" y="361">02</text><text x="801" y="361">03</text></g>
+    <g font-size="39"><text x="88" y="434">Customer task</text><text x="460" y="434">Constraint</text><text x="801" y="434">Acceptance</text></g>
+    <g font-size="25"><text x="88" y="489">What must work?</text><text x="460" y="489">What must stay?</text><text x="801" y="489">What will you test?</text></g>
+    <text x="88" y="631" font-size="28">Use the same scope to compare proposals.</text>
+  </g>
+</svg>

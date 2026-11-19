@@ -10,7 +10,7 @@ export const brand = {
   tagline: 'We Build What Moves You Forward',
   subtagline: 'Tech. Security. Growth. Impact.',
   blurb:
-    'A technology and energy studio in Austin and Accra. We build websites, plan campaigns, review security controls, and design energy systems.',
+    'Richverse Ecotech builds websites and web applications, plans digital campaigns, reviews business security controls, and helps teams plan solar and backup power.',
   email: 'richverseecotech@gmail.com',
   hours: 'Enquiry hours: Mon–Fri, 8 am–5 pm US Eastern Time',
   offices: [

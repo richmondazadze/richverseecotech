@@ -19,6 +19,25 @@ export interface BlogPost {
 
 const articles: Omit<BlogPost, 'readTime' | 'date'>[] = [
   {
+    id: '7', title: 'How to write a website redesign brief', slug: 'website-redesign-brief',
+    author: 'Richverse Ecotech', published: '2026-11-18', category: 'Web Development', featured: true,
+    tags: ['Web Development'],
+    summary: 'Give every developer the same task, constraints and acceptance test. A one-page brief makes it easier to compare what each quote includes.',
+    image: '/editorial/website-project-brief.jpg', imageAlt: 'Website brief worksheet with three columns: customer task, constraint, and acceptance test.',
+    content: `
+      <p>“Redesign our website” could mean a visual refresh, a move to another publishing platform, or a new booking system. Two estimates can be far apart because they price different jobs. Start with one customer action and what happens to it today. <a href="/resources/website-project-brief.txt" download>Download the editable website brief (plain text)</a> or use the prompts below.</p>
+      <section><h2>1. Describe one task in the customer’s words</h2>
+      <p>For the Richverse site, the task was “ask about the service I’m reading.” A visitor can arrive directly on a service page from search. Sending them to a blank form asks them to explain a choice they just made. The acceptance test is short: start on Web Development, choose “Discuss your project,” and check that Web Development is selected. You can <a href="/work/richverse-studio-website">inspect that in-house project</a> without submitting anything.</p></section>
+      <section><h2>2. Put hard constraints next to the task</h2>
+      <p>List the pages people already find, the system that receives the enquiry, and who edits the content. Separate what must stay from what could change. For example, keeping your existing booking provider is a constraint; making the booking page look different is a preference. If you do not yet know which platform is suitable, say so and ask each studio to explain its choice.</p></section>
+      <section><h2>3. Define how you will accept the work</h2>
+      <p>Write an observable check instead of “make the form intuitive.” For example: a visitor on a phone can correct an invalid email address without losing the message. Add the failure case: the form must not confirm delivery if sending fails. Name the person who will run these checks and the accounts, documentation and training they need after launch.</p></section>
+      <section><h2>What should two quotes let you compare?</h2>
+      <ul><li><strong>Scope:</strong> which journeys and integrations are included, and what is excluded?</li><li><strong>Migration:</strong> who inventories existing URLs, preserves useful content and checks redirects?</li><li><strong>Cost and timing:</strong> which costs recur, which assumptions affect the estimate, and which decisions could delay launch?</li><li><strong>Ownership:</strong> who holds the domain, hosting and publishing accounts after handover?</li></ul>
+      <p>If the current platform already supports the task, a repair may be sufficient. Use the <a href="/blog/repair-migrate-or-rebuild">repair, migrate or rebuild guide</a> before asking for a full replacement. For a scoped enquiry, bring the existing URL, your most important task and one constraint to <a href="/contact?service=web-development">discuss your website with Richverse</a>.</p></section>
+    `,
+  },
+  {
     id: '5', title: 'Repair, migrate, or rebuild your website?', slug: 'repair-migrate-or-rebuild',
     author: 'Richverse Ecotech', published: '2026-11-18', category: 'Web Development',
     summary: 'A broken enquiry journey does not always call for a new website. Trace one real task to decide which parts need to change and which are worth keeping.',
@@ -29,7 +48,7 @@ const articles: Omit<BlogPost, 'readTime' | 'date'>[] = [
       <section>
         <h2>Repair a task that already has a home</h2>
       <p>If the page is easy to find, the platform is supported, and the team can edit it, isolate the failure. On our own website, for example, a visitor coming from a service page should not have to select that service again. Passing the choice into the form is a small change with a clear acceptance check: open the service, follow the link, and read the selected topic.</p>
-      <p>Give a repair a boundary. Name the screens involved, the people affected, and the behavior that will show the change worked. Keep the rest of the journey stable while you test it.</p>
+      <p>Give a repair a boundary. In <a href="/work/richverse-studio-website">our in-house enquiry project</a>, the test is whether a visitor can choose a service and keep that choice through the form. For the error and success states, the <a href="https://www.w3.org/WAI/tutorials/forms/notifications/">W3C guide to form notifications</a> explains how to make the next step clear.</p>
       </section>
       <section>
         <h2>Migrate when the publishing system is the constraint</h2>
@@ -44,6 +63,27 @@ const articles: Omit<BlogPost, 'readTime' | 'date'>[] = [
         <h2>What to put in the brief</h2>
       <p>Bring the current URL, one task that fails, a real constraint such as an existing booking system, and the name of the person who will maintain the result. Ask for the smallest change that solves the problem, the reason for choosing it, and a test you can repeat before accepting delivery.</p>
       </section>
+    `,
+  },
+  {
+    id: '6', title: 'How much backup energy does a small office need?',
+    slug: 'estimate-office-backup-energy', author: 'Richverse Ecotech', published: '2026-11-18',
+    category: 'Renewable Energy', featured: false, tags: ['Clean Energy'],
+    summary: 'Multiply the watts each essential device draws by the hours it must run, then add the watt-hours. That gives demand at the devices, before losses or reserve.',
+    image: '/editorial/office-backup-energy.jpg',
+    imageAlt: 'Four one-hour intervals, each made up of 25 Wh of lighting and 75 Wh of network equipment, total 400 Wh.',
+    content: `
+      <p>Imagine the power goes out just before the afternoon shift. Staff need the lights and network for four hours, but printing can wait. What should you ask a supplier to keep running? Write down the load before asking for a battery quote.</p>
+      <section><h2>Start with what has to stay on</h2>
+      <p>Make one row per device: quantity, running watts per unit, and hours needed during the outage. Use measured running power when available. Mark a nameplate rating as an estimate; equipment may draw less in normal use or more for a moment at startup.</p></section>
+      <section><h2>Worked example: 100 watts for four hours</h2>
+      <p>In this illustrative office, lighting draws 25 W and the network draws 75 W. The lighting needs 25 W × 4 h = 100 Wh. The network needs 75 W × 4 h = 300 Wh. Together that is <strong>400 Wh, or 0.4 kWh, delivered to the devices</strong>. It is not a measured client result.</p>
+      <p>Now change one assumption: if daylight means the lights only run for two hours, lighting drops to 50 Wh and the total drops to 350 Wh. During the hours both loads run, they still draw 100 W together. Reducing operating time changes the energy requirement without changing that simultaneous load.</p></section>
+      <section><h2>Why 400 Wh is not a battery specification</h2>
+      <p>Watts describe power at a moment; watt-hours describe energy over time. The <a href="https://www.eia.gov/energyexplained/electricity/measuring-electricity.php">U.S. Energy Information Administration explains the distinction</a>. A battery’s nameplate energy is not the energy delivered to your devices. Usable capacity, conversion losses and the reserve you want to keep all affect runtime.</p>
+      <p>A separate question is whether the inverter can supply the running and startup loads at the same time. A daily electricity bill cannot answer either question on its own.</p></section>
+      <section><h2>What to bring to a site assessment</h2>
+      <p>Bring the load list, typical outage duration, any measurements, and which equipment can wait. Ask the assessor to state the usable capacity, conversion assumptions and peak power behind the proposal. Compare alternatives against the same list. The <a href="/services/renewable-energy#worked-example">studio’s essential-load worksheet</a> shows the figures row by row.</p></section>
     `,
   },
   {
@@ -76,7 +116,7 @@ const articles: Omit<BlogPost, 'readTime' | 'date'>[] = [
       </section>
       <section>
         <h2>For a building, start with the load</h2>
-      <p>If a shop needs lights and a router during a four-hour outage, list their running watts and hours before discussing a source. The resulting watt-hours are a demand estimate. Equipment losses, startup requirements and the usable battery capacity still need a separate check.</p>
+      <p>If a shop needs lights and a router during a four-hour outage, list their running watts and hours before discussing a source. Follow the <a href="/blog/estimate-office-backup-energy">worked office backup calculation</a> to see why watt-hours at the load are not the same as battery capacity.</p>
       </section>
     `
   },
@@ -106,7 +146,7 @@ const articles: Omit<BlogPost, 'readTime' | 'date'>[] = [
       </section>
       <section>
         <h2>Agree on a useful result</h2>
-      <p>Before launch, define what counts as a qualified request, who will review it, and how the source will be recorded with appropriate consent. A form submission from outside the service area is a response, but it does not fill an appointment.</p>
+      <p>Before launch, define what counts as a qualified request, who will review it, and how the source will be recorded with appropriate consent. A form submission from outside the service area is a response, but it does not fill an appointment. Our <a href="/services/digital-marketing#worked-example">illustrative campaign report</a> keeps unmatched enquiries separate so the rate uses a consistent denominator.</p>
       </section>
       <section>
         <h2>Use the first review to make one decision</h2>
@@ -176,7 +216,7 @@ const articles: Omit<BlogPost, 'readTime' | 'date'>[] = [
       </section>
       <section>
         <h2>Make verification ordinary</h2>
-      <p>Require a separate check for changes to payment details, even when the message looks routine. A clear approval rule gives staff permission to pause a request without having to prove it is malicious first.</p>
+      <p>Require a separate check for changes to payment details, even when the message looks routine. A clear approval rule gives staff permission to pause a request without having to prove it is malicious first. For a staff briefing, <a href="https://www.cisa.gov/secure-our-world/recognize-and-report-phishing">CISA’s phishing guidance</a> covers recognizing and reporting suspicious requests.</p>
       </section>
     `
   },

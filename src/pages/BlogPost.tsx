@@ -3,6 +3,7 @@ import { archiveSlug as toSlug, formatArticleDate, getPostBySlug } from '../data
 import Seo from '../components/Seo';
 import NotFound from './NotFound';
 import JsonLd from '../components/JsonLd';
+import QuoteComparison from '../components/QuoteComparison';
 import BlogImage from '../components/BlogImage';
 import { services } from '../data/site';
 import Icon from '../components/Icon';
@@ -23,7 +24,7 @@ export default function BlogPost() {
         description={post.summary}
         path={`/blog/${post.slug}`}
         image={post.image} imageAlt={post.imageAlt}
-        type="article"
+        type="article" published={post.published} modified={post.revised ?? post.published} section={post.category}
       />
       <JsonLd data={[
         articleSchema(post),
@@ -55,8 +56,10 @@ export default function BlogPost() {
           <BlogImage src={post.image} alt={post.imageAlt || post.title} loading="eager" />
         </div>
 
+        <nav className="article-contents" aria-label="In this guide"><p className="eyebrow">In this guide</p><ul>{post.sections.map(s=><li key={s.id}><a href={'#'+s.id}>{s.title}</a></li>)}</ul></nav>
         <div className="article-body" data-scroll-section="reading" dangerouslySetInnerHTML={{ __html: post.content }} />
 
+        {post.slug === 'website-redesign-brief' && <QuoteComparison/>}
         {service && <aside className="article-next" data-scroll-section="next-read"><p className="eyebrow">Put the ideas to work</p><h2>Thinking about {service.name.toLowerCase()}?</h2><p>{service.short}</p><Link to={`/services/${service.slug}`} className="studio-link">Explore our {service.name.toLowerCase()} services<Icon name="arrow-right" size={18} /></Link></aside>}
 
       </article>

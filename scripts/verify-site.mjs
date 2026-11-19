@@ -17,18 +17,34 @@ for (const route of [...routes,'/404']) {
   assert.ok(!titles.has(title),`${route}: unique title`); titles.add(title);
   assert.equal([...html.matchAll(/<h1(?:\s|>)/g)].length,1,`${route}: one H1`);
   assert.equal([...html.matchAll(/<link[^>]+rel="canonical"/g)].length,1,`${route}: one canonical`);
-  assert.ok(html.includes(`href="https://richverseecotech.com${route}"`),`${route}: canonical URL`);
+  const canonical=html.match(/<link\b(?=[^>]*\brel="canonical")[^>]*\bhref="([^"]+)"/)?.[1];
+  assert.equal(canonical,`https://richverseecotech.com${route}`,`${route}: canonical URL`);
   assert.match(html,/<meta[^>]+name="description"[^>]+content="[^"]+"/,`${route}: description`);
   assert.match(html,/<meta[^>]+property="og:image"[^>]+content="https:\/\//,`${route}: absolute sharing image`);
   const shouldNoindex=route==='/404'||route==='/studio/components'||route.startsWith('/blog/tag/');
   assert.equal(/name="robots" content="noindex/.test(html),shouldNoindex,`${route}: robots policy`);
-  for (const script of html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)) JSON.parse(script[1]);
+  const nodes=[...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)].map(m=>JSON.parse(m[1]));
+  if (route==='/blog'||route.startsWith('/blog/category/')||route.startsWith('/blog/tag/')) {
+    const list=nodes.find(n=>n['@type']==='CollectionPage')?.mainEntity;
+    assert.equal(list?.['@type'],'ItemList',`${route}: journal listing`);
+    const displayed=[...html.matchAll(/<a\b(?=[^>]*\bclass="blog-(?:featured|card)")(?=[^>]*\bhref="([^"]+)")[^>]*>/g)].map(m=>new URL(m[1],canonical).href);
+    assert.ok(displayed.length>0,`${route}: visible article links`);
+    assert.deepEqual(list.itemListElement.map(item=>item.url),displayed,`${route}: article order must match visible cards`);
+    for (const item of list.itemListElement) {
+      const page=fs.readFileSync(path.join('dist',new URL(item.url).pathname+'.html'),'utf8');
+      assert.ok(page.includes('"@id":'+JSON.stringify(item.item['@id'])),`${route}: referenced article exists`);
+    }
+  }
   for (const match of html.matchAll(/(?:href|src)="(\/[^"?#]*)[^\"]*"/g)) {
     const url=match[1];
     if(url.startsWith('//')) continue;
     assert.ok(url==='/'||routes.includes(url)||fs.existsSync(path.join('dist',url)),`${route}: local target ${url}`);
   }
   assert.ok(!html.includes('<!--app-html-->'),`${route}: prerendered content`);
+}
+for (const [,href] of fs.readFileSync('dist/llms.txt','utf8').matchAll(/\]\((https:\/\/richverseecotech\.com[^)]*)\)/g)) {
+  const u=new URL(href); assert.ok(indexed.includes(u.origin+u.pathname),`llms.txt: canonical page ${href}`);
+  if(u.hash) assert.ok(fs.readFileSync(path.join('dist',u.pathname+'.html'),'utf8').includes('id="'+u.hash.slice(1)+'"'),`llms.txt: section exists ${href}`);
 }
 const css=fs.readdirSync('dist/assets').filter(f=>f.endsWith('.css')).map(f=>fs.readFileSync(`dist/assets/${f}`,'utf8')).join('');
 postcss.parse(css).walkDecls(decl=>{
@@ -51,3 +67,5 @@ const pairs=[['171717','fcfbf9'],['4b4b4b','fcfbf9'],['4b4b4b','ffffff'],['4338c
 const contrasts=pairs.map(([a,b])=>{const x=luminance(a),y=luminance(b),ratio=(Math.max(x,y)+.05)/(Math.min(x,y)+.05);assert.ok(ratio>=4.5,`contrast ${a}/${b}`);return `${a}/${b}: ${ratio.toFixed(2)}:1`;});
 console.log(`Verified ${routes.length+1} rendered pages, ${indexed.length} sitemap URLs, metadata, JSON-LD, local links/assets, ${Object.keys(icons).length} icons, and scoped hero glass.`);
 console.log(`Text contrast: ${contrasts.join('; ')}`);
+
+await import('./verify-discovery.mjs');

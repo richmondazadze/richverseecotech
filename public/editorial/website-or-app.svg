@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+<title>Who owns the booking?</title><rect width="1200" height="750" fill="#f4f1e9"/>
+<g font-family="Helvetica,Arial,sans-serif" fill="#292837">
+<text x="85" y="100" font-size="23" letter-spacing="3">RICHVERSE  /  BUILD DECISIONS</text><text x="82" y="216" font-size="70">Who owns the booking?</text>
+<path d="M85 280H1115M85 435H1115M85 590H1115" stroke="#b1ac9f" fill="none"/>
+<g font-size="28"><text x="85" y="364">Website</text><text x="85" y="522">Application</text></g>
+<g stroke="#51459b" fill="none" stroke-width="3"><path d="M342 354H631"/><circle cx="332" cy="354" r="10"/><rect x="631" y="322" width="415" height="64" rx="32"/>
+<path d="M342 511H668M690 511H972"/><circle cx="332" cy="511" r="10"/><circle cx="679" cy="511" r="10"/><circle cx="983" cy="511" r="10"/></g>
+<g font-size="24" fill="#40348b"><text x="690" y="363">Booking provider</text><text x="310" y="563">Request</text><text x="626" y="563">Approve</text><text x="936" y="563">Confirm</text></g>
+<text x="85" y="674" font-size="27">Follow the request to the person who acts on it next.</text></g></svg>

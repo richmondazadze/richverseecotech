@@ -8,7 +8,7 @@ export function ProfileLinks({ member }: { member: Member }) {
 }
 export default function TeamGrid({ members }: { members: Member[] }) {
   return <ul className="studio-directory">{members.map(m=>
-    <li key={m.name}>
+    <li key={m.id} id={m.id} tabIndex={-1}>
       <div><h3 className="directory-name" data-enter="detail">{m.name}</h3><p className="directory-role">{m.role}</p></div>
       <p className="directory-bio">{m.bio}</p><ProfileLinks member={m}/>
     </li>)}</ul>;

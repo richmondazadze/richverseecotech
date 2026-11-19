@@ -6,7 +6,8 @@ import PageHead from '../components/PageHead';
 import JsonLd from '../components/JsonLd';
 import Icon from '../components/Icon';
 import BlogImage from '../components/BlogImage';
-import { breadcrumbSchema } from '../data/structuredData';
+import { breadcrumbSchema, journalSchema } from '../data/structuredData';
+import { readingPaths, decisions } from '../data/readingPaths';
 
 
 export default function Blog() {
@@ -30,24 +31,28 @@ export default function Blog() {
 
   if (isFiltered && !filtered.length) return <NotFound />;
 
+  const path = category ? `/blog/category/${category}` : tag ? `/blog/tag/${tag}` : '/blog';
+  const editorial = category ? readingPaths[category] : undefined;
+  const name = editorial?.archiveTitle ?? (activeLabel ? activeLabel + ' Topics' : 'Technology & Energy Insights');
+  const intro = editorial?.archiveIntro ?? (activeLabel ? undefined : 'Practical guides to websites, campaigns, security, and the energy decisions behind a business.');
+
   return (
     <div className="page section-pad-top">
       <Seo
-        title={activeLabel ? `${activeLabel} ${tag ? "Topics" : "Articles"} | Richverse Ecotech` : 'Insights on Technology & Sustainability | Richverse Ecotech'}
+        title={name+' | Richverse Ecotech'}
         noindex={Boolean(tag)}
-        description={activeLabel ? `Articles on ${activeLabel} from the Richverse Ecotech team.` : "Guides to web development, marketing measurement, security reviews, and energy planning from Richverse Ecotech."}
-        path={category ? `/blog/category/${category}` : tag ? `/blog/tag/${tag}` : '/blog'}
+        description={intro ?? `Articles on ${activeLabel} from the Richverse Ecotech team.`}
+        path={path}
       />
-      <JsonLd data={breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Insights', path: '/blog' }, ...(activeLabel ? [{ name: activeLabel, path: category ? `/blog/category/${category}` : `/blog/tag/${tag}` }] : [])])} />
+      <JsonLd data={[
+        breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Insights', path: '/blog' }, ...(activeLabel ? [{ name: activeLabel, path }] : [])]),
+        journalSchema(path, name, featured ? [featured, ...list] : list),
+      ]} />
       <div className="container">
         <PageHead
           eyebrow={tag ? 'Topic archive' : category ? 'Discipline archive' : 'Studio journal'}
           title={activeLabel ? <><em>{activeLabel}</em>.</> : <>Notes from <em>the studio.</em></>}
-          intro={
-            activeLabel
-              ? undefined
-              : 'Practical guides to websites, campaigns, security, and the energy decisions behind a business.'
-          }
+          intro={intro}
         />
 
         {/* Category filters (deep-linkable) */}
@@ -65,6 +70,7 @@ export default function Blog() {
           ))}
         </nav>
 
+        {category && editorial && <section className="journal-decisions" aria-label="Where to start">{decisions[category].map(d=><div key={d.href}><h2>{d.question}</h2><p>{d.answer}</p><Link className="studio-link" to={d.href}>{d.label}<Icon name="arrow-right" size={16}/></Link></div>)}</section>}
         {/* A lone archive result also gets the full editorial spread. */}
         {featured && (
           <Link to={`/blog/${featured.slug}`} className="blog-featured" data-scroll-section="feature">

@@ -42,6 +42,17 @@ test('newsletter validates input and acknowledges the existing signup-request wo
   for(const email of ['',{},'invalid','x'.repeat(255)+'@example.com']) assert.equal((await invoke('newsletter',{email})).code,400);
   const result=await invoke('newsletter',{email:valid.email}); assert.equal(result.code,200); assert.equal(result.messages.length,1); assert.equal(result.body.message,'Signup request received.');
 });
+test('accepted enquiry measurement uses only fixed service labels and excludes rejected deliveries', async () => {
+  const entries = [], original = console.info;
+  try {
+    console.info = line => entries.push(JSON.parse(line));
+    await invoke('contact',valid);
+    await invoke('contact',{...valid,subject:'Private free-text detail'},async (_,n)=>{if(n===2)throw Error();return {data:{id:'accepted'}}});
+    await invoke('contact',valid,async()=>({error:{message:'rejected'}}));
+    await invoke('contact',{...valid,email:'bad'});
+    assert.deepEqual(entries,[{event:'enquiry_accepted',service:'web-development'},{event:'enquiry_accepted',service:'general'}]);
+  } finally { console.info = original; }
+});
 test('unconfigured delivery and unsupported methods fail clearly', async () => {
   delete process.env.RESEND_API_KEY;
   for(const name of ['contact','newsletter']) {

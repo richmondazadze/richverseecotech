@@ -50,15 +50,15 @@ export default function PracticeCover() {
               <h1 id="cover-title">
                 <span className="cover-line">
                   <span>
-                    Get found online.
+                    Websites that work
                   </span>
                 </span>{' '}
                 <span className="cover-line">
-                  <em>Plan for outages.</em>
+                  <em>for your business.</em>
                 </span>
               </h1>
               <p className="cover-deck">
-                We build websites, measure campaigns, review security and plan backup power for essential equipment.
+                Richverse Ecotech builds websites and web apps for the way your customers buy and your team works. We also plan campaigns, review security and help businesses choose backup power.
               </p>
             </div>
             <div className="cover-actions">
@@ -71,9 +71,9 @@ export default function PracticeCover() {
               </Link>
               <Link
                 className="studio-link"
-                to="/services"
+                to="/services/web-development"
               >
-                Compare services
+                Explore web development
                 <Icon name="arrow-right" size={17} />
               </Link>
             </div>

@@ -1,8 +1,28 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build && node scripts/verify-site.mjs",
   "outputDirectory": "dist",
   "redirects": [
+    {
+      "source": "/exploring_ocean_energy",
+      "destination": "/blog/exploring-ocean-energy",
+      "permanent": true
+    },
+    {
+      "source": "/digital-marketing-power-2024",
+      "destination": "/blog/digital-marketing-power",
+      "permanent": true
+    },
+    {
+      "source": "/social-media-analytics-marketing-success-2024",
+      "destination": "/blog/social-media-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/phishing_attacks",
+      "destination": "/blog/preventing-phishing-attacks",
+      "permanent": true
+    },
     {
       "source": "/blog/exploring_ocean_energy",
       "destination": "/blog/exploring-ocean-energy",
